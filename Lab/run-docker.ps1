@@ -75,7 +75,7 @@ choco install virtualbox -y
 docker-machine ls 
 
 #if no default create one
-docker-machine create --driver virtualbox default
+docker-machine create -d virtualbox --virtualbox-no-vtx-check test
 
 # Let's use docker-machine to start this VM so we can work with it:
-docker-machine start default
+docker-machine start test
