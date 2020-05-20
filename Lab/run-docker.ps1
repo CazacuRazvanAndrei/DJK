@@ -64,4 +64,18 @@ For more examples and ideas, visit:
 # install Docker Toolbox
 choco install docker-toolbox -y
 
-docker-machine 
+
+docker-compose --version
+docker-machine --version
+
+# Install virtualbox
+choco install virtualbox -y
+
+#List of all Docker-ready VMs
+docker-machine ls 
+
+#if no default create one
+docker-machine create --driver virtualbox default
+
+# Let's use docker-machine to start this VM so we can work with it:
+docker-machine start default
