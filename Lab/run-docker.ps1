@@ -1,5 +1,9 @@
 #Instal Choco
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+#If TLS is old 
+# Fix 
+#[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+
 
 # 
 choco --version
@@ -19,7 +23,6 @@ code .
 # install extension
 code --install-extension docsmsft.docs-markdown
 code --install-extension ms-vscode.PowerShell
-code --install-extension vscjava.vscode-java-pack
 code --install-extension ms-vscode.csharp
 code --install-extension ms-python.python
 code --install-extension ms-azuretools.vscode-docker
@@ -62,20 +65,32 @@ For more examples and ideas, visit:
 
 
 # install Docker Toolbox
-choco install docker-toolbox -y
-
+choco install docker-toolbox -y --force 
 
 docker-compose --version
 docker-machine --version
-
-# Install virtualbox
-choco install virtualbox -y
 
 #List of all Docker-ready VMs
 docker-machine ls 
 
 #if no default create one
-docker-machine create -d virtualbox --virtualbox-no-vtx-check test
+
+# Check if Virtual Switch "Private" exist
+$private = Get-VMSwitch | Where-Object name -like "Private"
+if ($private.name -like "Private") {"Virtual Switch Private exist"}
+else {New-VMSwitch -Name "Private" -SwitchType "Private" -Confirm:$false}
+
+
+#Or Hyperv Driver
+docker-machine create -d hyperv --hyperv-virtual-switch "Private" vmtest 
 
 # Let's use docker-machine to start this VM so we can work with it:
-docker-machine start test
+docker-machine start vmtest
+
+docker-machine  regenerate-certs vmtest
+
+docker-machine restart vmtest
+docker-machine rm vmtest
+
+#o see how to connect your Docker client to the Docker Engine running on this virtual machine, run the following command:
+docker-machine env vmtest
