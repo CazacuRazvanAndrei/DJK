@@ -1,5 +1,8 @@
 Docker Toolbox is a great addition even when you normally use Docker for Desktop for your development with Docker. Docker Toolbox allows you to create multiple Docker hosts (or VMs) in VirtualBox and connect them to a cluster, on top of which you can run Docker Swarm or Kubernetes.
 
+### Prerequisite Instal Choco, Git, VSCode 
+
+
 # Install Docker Toolbox
 
 ```powershell
