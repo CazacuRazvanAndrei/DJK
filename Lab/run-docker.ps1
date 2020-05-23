@@ -9,9 +9,6 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 # Install Git
 choco install git -y
 
-
-
-
 # Install Visual studio code
 choco install vscode -y
 
@@ -34,6 +31,9 @@ code --install-extension eamodio.gitlens
 choco --version
 git --version
 docker --version
+
+# Add Repository
+git remote add origin https://github.com/Fredy-SSA/djk
 
 #Run Hello World
 docker run hello-world
@@ -98,7 +98,15 @@ docker-machine rm vmtest
 #o see how to connect your Docker client to the Docker Engine running on this virtual machine, run the following command:
 docker-machine env vmtest
 
-#We can execute the command listed on the last line in the preceding code snippet to configure our Docker CLI to use Docker running on the default VM:
+# DockerCLI Basic
+# ! Do not Run on Powershell ISE
+
+docker image ls
+docker container ls --all
+docker --help
+docker container --help
+docker container ls --help
+docker run --help
 
 $ eval $(docker-machine env vmtest)
 $ docker version
