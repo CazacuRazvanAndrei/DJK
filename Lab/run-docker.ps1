@@ -83,7 +83,7 @@ New-VMSwitch -name External  -NetAdapterName "Ethernet 2" -AllowManagementOS $tr
 #Or Hyperv Driver
 # -D debug 
 # hyperv Hypervisor
-docker-machine create -d hyperv --hyperv-virtual-switch "Private" vmtest 
+docker-machine create -d hyperv --hyperv-virtual-switch "External" vmtest 
 
 # Let's use docker-machine to start this VM so we can work with it:
 docker-machine -D start vmtest
