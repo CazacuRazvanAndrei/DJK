@@ -5,13 +5,11 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 #[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 
-# 
-choco --version
 
 # Install Git
 choco install git -y
 
-git --version
+
 
 
 # Install Visual studio code
@@ -33,6 +31,8 @@ code --install-extension eamodio.gitlens
 # https://www.docker.com/get-started
 
 #Version
+choco --version
+git --version
 docker --version
 
 #Run Hello World
@@ -76,9 +76,9 @@ docker-machine ls
 #if no default create one
 
 # Check if Virtual Switch "Private" exist
-$private = Get-VMSwitch | Where-Object name -like "Private"
-if ($private.name -like "Private") {"Virtual Switch Private exist"}
-else {New-VMSwitch -Name "Private" -SwitchType "Private" -Confirm:$false}
+$private = Get-VMSwitch | Where-Object name -like "External"
+if ($private.name -like "External") {"Virtual Switch External exist"}
+else {New-VMSwitch -Name "External" -SwitchType "External" -Confirm:$false}
 
 
 #Or Hyperv Driver
