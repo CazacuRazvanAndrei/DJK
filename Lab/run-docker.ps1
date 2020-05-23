@@ -82,15 +82,19 @@ else {New-VMSwitch -Name "External" -SwitchType "External" -Confirm:$false}
 
 
 #Or Hyperv Driver
+# -D debug 
+# hyperv Hypervisor
 docker-machine create -d hyperv --hyperv-virtual-switch "Private" vmtest 
 
 # Let's use docker-machine to start this VM so we can work with it:
-docker-machine start vmtest
+docker-machine -D start vmtest
 
-docker-machine  regenerate-certs vmtest
-
+<#
+Fix Issue
+docker-machine --help
+docker-machine regenerate-certs vmtest
 docker-machine restart vmtest
 docker-machine rm vmtest
-
+#>
 #o see how to connect your Docker client to the Docker Engine running on this virtual machine, run the following command:
 docker-machine env vmtest
