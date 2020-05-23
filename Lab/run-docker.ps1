@@ -98,16 +98,3 @@ docker-machine rm vmtest
 #o see how to connect your Docker client to the Docker Engine running on this virtual machine, run the following command:
 docker-machine env vmtest
 
-# DockerCLI Basic
-# ! Do not Run on Powershell ISE
-
-docker image ls
-docker container ls --all
-docker --help
-docker container --help
-docker container ls --help
-docker run --help
-
-$ eval $(docker-machine env vmtest)
-$ docker version
-
