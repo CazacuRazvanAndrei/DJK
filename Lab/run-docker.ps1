@@ -76,7 +76,7 @@ docker-machine ls
 #if no default create one
 
 # Check if Virtual Switch "Private" exist
-$private = Get-VMSwitch | Where-Object name -like "External"
+$External = Get-VMSwitch | Where-Object name -like "External"
 if ($private.name -like "External") {"Virtual Switch External exist"}
 else {New-VMSwitch -Name "External" -SwitchType "External" -Confirm:$false}
 
@@ -98,3 +98,5 @@ docker-machine rm vmtest
 #>
 #o see how to connect your Docker client to the Docker Engine running on this virtual machine, run the following command:
 docker-machine env vmtest
+
+#We can execute the command listed on the last line in the preceding code snippet to configure our Docker CLI to use Docker running on the default VM:
