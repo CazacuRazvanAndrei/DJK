@@ -75,10 +75,9 @@ docker-machine ls
 
 #if no default create one
 
-# Check if Virtual Switch "Private" exist
-$External = Get-VMSwitch | Where-Object name -like "External"
-if ($private.name -like "External") {"Virtual Switch External exist"}
-else {New-VMSwitch -Name "External" -SwitchType "External" -Confirm:$false}
+# CReate external Virtual Switch 
+New-VMSwitch -name External  -NetAdapterName "Ethernet 2" -AllowManagementOS $true 
+
 
 
 #Or Hyperv Driver
@@ -100,3 +99,7 @@ docker-machine rm vmtest
 docker-machine env vmtest
 
 #We can execute the command listed on the last line in the preceding code snippet to configure our Docker CLI to use Docker running on the default VM:
+
+$ eval $(docker-machine env vmtest)
+$ docker version
+
