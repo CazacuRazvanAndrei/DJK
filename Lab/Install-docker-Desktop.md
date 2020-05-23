@@ -1,44 +1,69 @@
-#Instal Choco
+# Instal Choco
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-#If TLS is old 
-# Fix 
-#[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
+#### If TLS is old 
+Fix  run in Powershell
 
+```powershell
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+```
 
 # Install Git
+
+
+```powershell
 choco install git -y
+```
 
 # Install Visual studio code
+
+```powershell
 choco install vscode -y
+```
 
-#Start VSCode
+## Start VSCode
+
+```powershell
 code .
+```
 
-# install extension
+## Install extension VSCode
+
+
+```powershell
 code --install-extension docsmsft.docs-markdown
 code --install-extension ms-vscode.PowerShell
 code --install-extension ms-vscode.csharp
 code --install-extension ms-python.python
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension eamodio.gitlens
-
+```
 
 # Download Docker Desktop WIndows 10
-# https://www.docker.com/get-started
+ https://www.docker.com/get-started
 
-#Version
+# Check Version
+
+
+```powershell
 choco --version
 git --version
 docker --version
+```
 
-# Add Repository
-git remote add origin https://github.com/Fredy-SSA/djk
+# Get Code
 
-#Run Hello World
+```powershell
+git pull https://github.com/Fredy-SSA/djk
+```
+
+# Run Hello World
+```powershell
 docker run hello-world
+```
 
-<#
+
+```dockerfile
 Corect output ...
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
@@ -60,41 +85,6 @@ Share images, automate workflows, and more with a free Docker ID:
 
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
+```
 
-#>
-
-
-# install Docker Toolbox
-choco install docker-toolbox -y --force 
-
-docker-compose --version
-docker-machine --version
-
-#List of all Docker-ready VMs
-docker-machine ls 
-
-#if no default create one
-
-# CReate external Virtual Switch 
-New-VMSwitch -name External  -NetAdapterName "Ethernet 2" -AllowManagementOS $true 
-
-
-
-#Or Hyperv Driver
-# -D debug 
-# hyperv Hypervisor
-docker-machine create -d hyperv --hyperv-virtual-switch "External" vmtest 
-
-# Let's use docker-machine to start this VM so we can work with it:
-docker-machine -D start vmtest
-
-<#
-Fix Issue
-docker-machine --help
-docker-machine regenerate-certs vmtest
-docker-machine restart vmtest
-docker-machine rm vmtest
-#>
-#o see how to connect your Docker client to the Docker Engine running on this virtual machine, run the following command:
-docker-machine env vmtest
 
