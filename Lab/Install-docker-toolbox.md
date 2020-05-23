@@ -38,7 +38,7 @@ docker-machine -D start vmtest
 
 ```dockerfile
 docker-machine --help
-docker-machine regenerate-certs vmtest
+docker-machine -D regenerate-certs vmtest
 docker-machine restart vmtest
 docker-machine rm vmtest
 ```
