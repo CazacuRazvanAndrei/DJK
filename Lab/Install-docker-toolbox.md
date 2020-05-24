@@ -6,20 +6,11 @@ If Hyper-V was previosly installed
 bcdedit /set hypervisorlaunchtype off
 ```
 
-### Prerequisite Instal Choco, Git, VSCode 
-
-##  Install  VirtualBox
-
-choco install virtualbox -y
-
-
 # Install Docker Toolbox
 
 https://github.com/docker/toolbox/releases
 
 ```powershell
-choco install docker-toolbox -y --force 
-
 docker-compose --version
 docker-machine --version
 ```
