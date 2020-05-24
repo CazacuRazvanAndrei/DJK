@@ -33,7 +33,6 @@ code .
 ```powershell
 code --install-extension docsmsft.docs-markdown
 code --install-extension ms-vscode.PowerShell
-code --install-extension ms-vscode.csharp
 code --install-extension ms-python.python
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension eamodio.gitlens

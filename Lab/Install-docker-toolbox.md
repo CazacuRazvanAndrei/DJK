@@ -2,6 +2,10 @@ Docker Toolbox is a great addition even when you normally use Docker for Desktop
 
 ### Prerequisite Instal Choco, Git, VSCode 
 
+##  Install  VirtualBox
+
+choco install virtualbox -y
+
 
 # Install Docker Toolbox
 
@@ -29,6 +33,8 @@ New-VMSwitch -name External  -NetAdapterName "Ethernet 2" -AllowManagementOS $tr
 ```dockerfile
 docker-machine --help
 docker-machine create -d hyperv --hyperv-virtual-switch "External" vmtest
+
+docker-machine create --driver virtualbox default
 ```
 
 ## Let's use docker-machine to start this VM so we can work with it:
