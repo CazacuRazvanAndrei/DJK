@@ -11,3 +11,4 @@
 - Install Docker Toolbox on Windows: https://dockr.ly/2nuZUkU
 - Run Docker on Hyper-V with Docker Machine at http://bit.ly/2HGMPiI
 - Developing inside a Container at https://code.visualstudio.com/docs/remote/containers
+- Docker Get Started: https://docs.docker.com/get-started/

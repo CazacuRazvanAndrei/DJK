@@ -23,18 +23,11 @@ docker-machine --version
 docker-machine ls
 ```
 
-##  Create external Virtual Switch 
-
-```powershell
-New-VMSwitch -name External  -NetAdapterName "Ethernet 2" -AllowManagementOS $true
-```
 ## Create new docker VM
 
 ```dockerfile
-docker-machine --help
-docker-machine create -d hyperv --hyperv-virtual-switch "External" vmtest
 
-docker-machine create --driver virtualbox default
+docker-machine -D create --driver virtualbox vmtest
 ```
 
 ## Let's use docker-machine to start this VM so we can work with it:
