@@ -9,6 +9,8 @@ choco install virtualbox -y
 
 # Install Docker Toolbox
 
+https://github.com/docker/toolbox/releases
+
 ```powershell
 choco install docker-toolbox -y --force 
 
@@ -40,6 +42,7 @@ docker-machine -D start vmtest
 
 ```dockerfile
 docker-machine --help
+docker-machine inspect vmtest
 docker-machine -D regenerate-certs vmtest
 docker-machine restart vmtest
 docker-machine rm vmtest
