@@ -7,7 +7,7 @@
 
 
 # Links :
-- hocolatey - The Package Manager for Windows at https://chocolatey.org/
+- Chocolatey - The Package Manager for Windows at https://chocolatey.org/
 - Install Docker Toolbox on Windows: https://dockr.ly/2nuZUkU
 - Run Docker on Hyper-V with Docker Machine at http://bit.ly/2HGMPiI
 - Developing inside a Container at https://code.visualstudio.com/docs/remote/containers
