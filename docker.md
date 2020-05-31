@@ -46,3 +46,9 @@ It is also possible to follow along with this book if you have a Linux distribut
 ## Links 
 - Linux Command Line Cheat Sheet by Dave Child at http://bit.ly/2mTQr8l
 - PowerShell Basic Cheat Sheet at http://bit.ly/2EPHxze
+
+# Docker cleanup all unused local images
+
+```bash
+docker system prune -a
+```
