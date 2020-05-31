@@ -1,15 +1,15 @@
 {
-  "name": "ch06",
+  "name": "jenkins-pipeline",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node --inspect=0.0.0.0 index.js"
+    "start": "node server.js",
+    "test": "jasmine"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "jaeger-client": "^3.15.0"
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jasmine": "^3.4.0"
   }
 }
