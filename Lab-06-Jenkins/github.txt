@@ -1,0 +1,3 @@
+07312607-692c-4a47-ab52-c12c47f3b3c1
+docker login --username fredysa
+https://api.github.com/users/fredysa

@@ -257,9 +257,11 @@ docker image build -t fredysa/node-docker .
 
 docker image ls
 
-docker container run --rm -it node-docker /bin/sh
+docker container run --rm -it fredysa/node-docker /bin/sh
 
-docker commit -m "Added Node Server" -a "node-docker" fredysa/node-docker fredysa/node-docker:latest
+docker container run --rm -it fredysa/sample:1.5 /bin/sh
+
+docker commit -m "Added Node Server" -a "node" node fredysa/node:latest
 
 docker push fredysa/node-docker:latest
 
@@ -272,3 +274,4 @@ Once the code is pushed to GitHub, go back to Jenkins.
 Select your sample-pipeline project and click Build now in the main menu. Jenkins will start to build the pipeline. If everything goes well, you should see something like this:
 
 
+ 
