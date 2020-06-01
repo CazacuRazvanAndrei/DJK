@@ -1,7 +1,7 @@
 # *** Sample script to build, test and push containerized Node JS applications ***
 $USER = "fredysa"
-$REPO = "sample"
-$TagV = "1.5"
+$REPO = "nodejstest"
+$TagV = "latest"
 
 <#
 
