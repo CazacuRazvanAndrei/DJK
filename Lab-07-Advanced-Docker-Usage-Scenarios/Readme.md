@@ -261,3 +261,62 @@ cat: /secrets/top-secret.txt: Permission denied
 And as you can see on the last line, the application running inside the container runs with restricted permissions and cannot access resources that need root-level access. By the way, what do you think would happen if I ran the container as root? Try it out!
 
 **These have been a few tips and tricks for pros that are useful in the day-to-day usage of containers. There are many more. Google them. It is worth it.**
+
+# Remote Development 
+
+
+Containers are awesome and genius engineers have come up with solutions for exactly this kind of problem.
+
+1. Let's try this for a Python application:
+
+We will be using Visual Studio Code, our favorite code editor, to show how to run a complete Python development environment inside a container. But first, we need to install the necessary Visual Studio Code extension. Open Visual StudioCode and install the extension called Remote Development:
+
+![RM](./img/l7-rd_01.png)
+
+```powershell
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
+```
+2. Then, click the green quick actions status bar item in the lower-left of the Visual Studio Code window. 
+
+In the popup, select Remote-Containers: **Open Folder in Container...**: 
+
+![RM](./img/l7-rd_02.png)
+
+3. Select the project folder you want to work with in the container. In our case, we selected the **~/remote-app** folder. 
+
+Visual StudioCode will start preparing the environment, which, the very first time, can take a couple of minutes or so. 
+
+You will see a message like this while this is happening:
+
+![RM](./img/l7-rd_03.png)
+
+![RM](./img/l7-rd_04.png)
+
+Visual Studio Code preparing the development container
+By default, this development container runs as a non-root user—called python in our case. We learned, in a prior section, that this is a highly recommended best practice. You can change though, and run as root by commenting out the line with "runArgs": [ "-u", "python" ], in the .devcontainer/devcontainer.json file.
+
+Open a Terminal inside Visual Studio Code with Shift + Ctrl + ` and run the Flask app with the env FLASK_APP=main.py flask run command. You should see output like this:
+
+![RM](./img/l7-rd_05.png)
+
+Starting a Python Flask app from Visual Studio Code running inside a container 
+The python@df86dceaed3d:/workspaces/remote-app$ prompt indicates that we are not running directly on our Docker host but from within a development container that Visual Studio Code spun up for us. The remote part of Visual Studio Code itself also runs inside that container.
+
+![RM](./img/l7-rd_06.png)
+
+ Only the client part of Visual Studio Code—the UI—continues to run on our host.
+
+Open another Terminal window inside Visual Studio Code by pressing Shift+Ctrl+`. Then, use curl to test the application:
+
+
+```bash
+curl localhost:5000
+```
+
+![RM](./img/l7-rd_07.png)
+
+- Using Docker in Docker at http://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
+- Shell in a Box at https://github.com/shellinabox/shellinabox
+- Remote development using SSH at https://code.visualstudio.com/docs/remote/ssh
+- Developing inside a container at https://code.visualstudio.com/docs/remote/containers
+
