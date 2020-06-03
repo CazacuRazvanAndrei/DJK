@@ -36,7 +36,7 @@ code --install-extension ms-vscode.PowerShell
 code --install-extension ms-python.python
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension eamodio.gitlens
-code --install-extension lizebang.bash-extension-pack
+code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 ```
 
 # Download Docker Desktop WIndows 10
