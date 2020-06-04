@@ -2,18 +2,19 @@
 
 In most cases, applications do not consist of only one monolithic block, but rather of several application services that work together. When using Docker containers, each application service runs in its own container. When we want to run such a multi-service application, we can, of course, start all the participating containers with the well-known docker container run command, and we have done this in previous chapters. But this is inefficient at best. With the Docker Compose tool, we are given a way to define the application in a declarative way in a file that uses the YAML format.
 
+
 Let's have a look at the content of a simple **docker-compose.yml** file:
 
 ```
 version: "2.4"
 services:
  web:
-    image: fundamentalsofdocker/ch11-web:2.0
+    image: fredysa/web:1.0
     build: web
     ports:
     - 80:3000
  db:
-    image: fundamentalsofdocker/ch11-db:2.0
+    image: fredysa/db:1.0
     build: db
     volumes:
     - pets-data:/var/lib/postgresql/data
@@ -26,8 +27,8 @@ The lines in the file are explained as follows:
 
 - **version**: In this line, we specify the version of the Docker Compose format we want to use. At the time of writing, this is version 2.4.
 - **services**: In this section, we specify the services that make up our application in the services block. In our sample, we have two application services and we call them web and **db**:
-**web**: The web service is using an image called **fundamentalsofdocker/ch11-web:2.0**, which, if not already in the image cache, is built from the Dockerfile found in the web folder . The service is also publishing container **port 3000**to the host port **80**.
-- **db**: The db service, on the other hand, is using the image name **fundamentalsofdocker/ch11-db:2.0**, which is a customized **PostgreSQL database**. Once again, if the image is not already in the cache, it is built from the Dockerfile found in the **db** folder . We are mounting a volume called **pets-data** into the container of the db service.
+**web**: The web service is using an image called **fredysa/web:2.0**, which, if not already in the image cache, is built from the Dockerfile found in the web folder . The service is also publishing container **port 3000**to the host port **80**.
+- **db**: The db service, on the other hand, is using the image name **fredysa/db:1.0**, which is a customized **PostgreSQL database**. Once again, if the image is not already in the cache, it is built from the Dockerfile found in the **db** folder . We are mounting a volume called **pets-data** into the container of the db service.
 - **volumes**: The volumes used by any of the services have to be declared in this section. In our sample, this is the last section of the file. The first time the application is run, a volume called **pets-data**will be created by Docker and then, in subsequent runs, if the volume is still there, it will be reused. This could be important when the application, for some reason, crashes and has to be restarted. Then, the previous data is still around and ready to be used by the restarted database service.
 
 Note that we are using **version 2.x** of the Docker Compose file syntax. This is the one targeted toward deployments on a single **Docker host**. There exists also a **version 3.x** of the Docker Compose file syntax. This version is used when you want to define an application that is targeted either at **Docker Swarm or Kubernetes**. We will discuss this in more detail starting with, Orchestrators.
@@ -49,12 +50,12 @@ In your Terminal window, you should see an output similar to this:
 
 Building the Docker image for the web service
 
-In the preceding screenshot, you can see that **docker-compose**first downloads the base image **node:12.12-alpine**, for the web image we're building from Docker Hub. Subsequently, it uses the **Dockerfile** found in the **web** folder to build the image and names it **fundamentalsofdocker/ch11-web:2.0**. But this is only the first part; the second part of the output should look similar to this:
+In the preceding screenshot, you can see that **docker-compose**first downloads the base image **node:12.12-alpine**, for the web image we're building from Docker Hub. Subsequently, it uses the **Dockerfile** found in the **web** folder to build the image and names it **fredysa/web:2.0**. But this is only the first part; the second part of the output should look similar to this:
 
 ![ams](./img/l10_ams1.png)
 
 Building the Docker image for the db service
-Here, once again, **docker-compose** pulls the base image, **postgres:12.0-alpine**, from Docker Hub and then uses the Dockerfile found in the **db** folder to build the image we call **fundamentalsofdocker/ch11-db:2.0**.
+Here, once again, **docker-compose** pulls the base image, **postgres:12.0-alpine**, from Docker Hub and then uses the Dockerfile found in the **db** folder to build the image we call **fredysa/db:1.0**.
 
 # Running an application with Docker Compose
 
@@ -188,12 +189,12 @@ $ docker-compose down
 version: "2.4"
 services:
   web:
-    image: fundamentalsofdocker/ch11-web:2.0
+    image: fredysa/web:2.0
     build: web
     ports:
       - 3000
   db:
-    image: fundamentalsofdocker/ch11-db:2.0
+    image: fredysa/db:1.0
     build: db
     volumes:
       - pets-data:/var/lib/postgresql/data
