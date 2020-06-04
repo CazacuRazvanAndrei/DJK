@@ -106,11 +106,12 @@ services:
 
 After testing run :
 ```
- docker-compose down
+docker-compose stop
+docker-compose down
  ```
  In :
 ```
  ~/site1
  ~/site2
- ~/reverse-prozy
+ ~/reverse-proxy
 ```
