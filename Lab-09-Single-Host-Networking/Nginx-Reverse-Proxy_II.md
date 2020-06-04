@@ -2,6 +2,9 @@
 
 Here is another example for a reverse proxy. We'll have two servers (site1 and site2) behind the proxy:
 
+![proxy2](./img/l9_drph-1.png)
+
+
 ![proxy2](./img/tree-reverse.png)
 
 ```
