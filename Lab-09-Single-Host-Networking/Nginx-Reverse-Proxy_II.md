@@ -99,3 +99,15 @@ services:
     expose:
       - "80"
 ```
+
+
+After testing run :
+```
+ docker-compose down
+ ```
+ In :
+```
+ ~/site1
+ ~/site2
+ ~/reverse-prozy
+```
