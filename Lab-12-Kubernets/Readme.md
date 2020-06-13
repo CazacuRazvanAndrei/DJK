@@ -6,8 +6,8 @@ In this chapter, we're going to introduce Kubernetes. Kubernetes is currently th
 
 - [Kubernetes architecture](Kubernetes-architecture.md)
 - [Kubernetes master nodes](Kubernetes-master-nodes.md)
-- Cluster nodes
-- Introduction to MiniKube
+- [Cluster nodes](Cluster-nodes.md)
+- [Introduction to MiniKube](Introduction-to-Minikube.md)
 - Kubernetes support in Docker for Desktop
 - Introduction to pods
 - Kubernetes ReplicaSet
