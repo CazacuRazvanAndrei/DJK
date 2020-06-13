@@ -60,7 +60,7 @@ There are also containers that have the word **compose** in them. These are Dock
 
 Normally, we don't want to clutter our list of containers with these system containers. Therefore, we can uncheck the Show system containers (advanced) checkbox in the settings for Kubernetes.
 
-Now, let's try to deploy a Docker Compose application to Kubernetes. Navigate to the ch15 subfolder of our **~/scripts** folder. We deploy the app as a stack using the **docker-compose.yml** file:
+Now, let's try to deploy a Docker Compose application to Kubernetes. Navigate to the ch15 subfolder of our **~/Lab-12-Kubernets/Sample ** folder. We deploy the app as a stack using the **docker-compose.yml** file:
 
 ```
 $ docker stack deploy -c docker-compose.yml app
