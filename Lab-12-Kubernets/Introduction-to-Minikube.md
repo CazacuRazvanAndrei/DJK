@@ -17,10 +17,10 @@ Follow the instructions carefully. If you have Docker Toolbox installed, then yo
 If you have Docker for macOS or Windows installed, then you already have kubectl installed with it, so you can skip that step too. Otherwise, follow the instructions on the site.
 
 **Note:** Hyper-V can run on three versions of Windows 10: Windows 10 Enterprise, Windows 10 Professional, and Windows 10 Education.
-Install Minikube using Chocolatey
+- Install Minikube using Chocolatey
 The easiest way to install Minikube on Windows is using Chocolatey (run as an administrator):
 ```
-choco install minikube
+choco install minikube -y
 ```
 After Minikube has finished installing, close the current CLI session and restart. Minikube should have been added to your path automatically.
 
@@ -47,5 +47,33 @@ Once Minikube is ready, we can access its single node cluster using kubectl. We 
 
 ![m12](./img/m12-k4.png)
 
-Listing all nodes in Minikube
-As we mentioned previously, we have a single-node cluster with a node called minikube. The...
+- **Note**, your output may look slightly different. In my case, I am running Minikube on a Windows 10 Pro computer. On a Mac notifications are quite different, but this doesn't matter here.
+Now, enter kubectl version and hit Enter to see something like the following screenshot:
+
+![m12](./img/m12-k5.png)
+
+## Determining the version of the Kubernetes client and server
+If the preceding command fails, for example, by timing out, then it could be that your kubectl is not configured for the right context. kubectl can be used to work with many different Kubernetes clusters. Each cluster is called a context. To find out which context kubectl is currently configured for, use the following command:
+
+```
+$ kubectl config current-context
+```
+minikube
+The answer should be minikube, as shown in the preceding output. If this is not the case, use kubectl config get-contexts to list all contexts that are defined on your system and then set the current context to minikube, as follows:
+
+```
+$ kubectl config use-context minikube
+```
+The configuration for kubectl, where it stores the contexts, is normally found in **~/.kube/config**, but this can be overridden by defining an environment variable called KUBECONFIG. You might need to unset this variable if it is set on your computer.
+
+For more in-depth information about how to configure and use Kubernetes contexts, consult the link at **https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/**.
+
+Assuming Minikube and kubectl work as expected, we can now use kubectl to get information about the Kubernetes cluster. Enter the following command:
+
+```
+$ kubectl get nodes
+NAME STATUS ROLES AGE VERSION
+minikube Ready master 47d v1.17.3
+```
+
+Evidently, we have a cluster of one node, which in my case has Kubernetes v1.17.3 installed on it.
