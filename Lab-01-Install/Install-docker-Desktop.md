@@ -1,6 +1,7 @@
 # Instal Choco
+```
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-
+```
 #### If TLS is old 
 Fix  run in Powershell
 
@@ -38,6 +39,17 @@ code --install-extension ms-azuretools.vscode-docker
 code --install-extension eamodio.gitlens
 code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 ```
+
+# Install WSL
+
+- https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+```
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --set-default-version 2
+```
+
 
 # Download Docker Desktop WIndows 10
  https://www.docker.com/get-started
