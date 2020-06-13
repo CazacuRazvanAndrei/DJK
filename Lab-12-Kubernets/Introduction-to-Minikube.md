@@ -51,7 +51,9 @@ kubectl get nodes
 
 - **Note**, your output may look slightly different. In my case, I am running Minikube on a Windows 10 Pro computer. On a Mac notifications are quite different, but this doesn't matter here.
 Now, enter kubectl version and hit Enter to see something like the following screenshot:
-
+```
+kubectl version
+```
 ![m12](./img/m12-k5.png)
 
 ## Determining the version of the Kubernetes client and server
