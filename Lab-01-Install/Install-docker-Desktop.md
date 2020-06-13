@@ -49,7 +49,20 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 wsl --set-default-version 2
 ```
+## Install your Linux distribution of choice
 
+- Ubuntu 16.04 LTS
+- Ubuntu 18.04 LTS
+- Ubuntu 20.04 LTS
+- openSUSE Leap 15.1
+- SUSE Linux Enterprise Server 12 SP5
+- SUSE Linux Enterprise Server 15 SP1
+- Kali Linux
+- Debian GNU/Linux
+- Fedora Remix for WSL
+- Pengwin
+- Pengwin Enterprise
+- Alpine WSL
 
 # Download Docker Desktop WIndows 10
  https://www.docker.com/get-started
