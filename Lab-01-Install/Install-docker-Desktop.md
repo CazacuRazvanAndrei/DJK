@@ -67,6 +67,9 @@ wsl --set-default-version 2
 # Download Docker Desktop WIndows 10
  https://www.docker.com/get-started
 
+## Install Wsl2 Kernel
+- https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel
+
 # Check Version
 
 
