@@ -16,6 +16,22 @@ Follow the instructions carefully. If you have Docker Toolbox installed, then yo
 
 If you have Docker for macOS or Windows installed, then you already have kubectl installed with it, so you can skip that step too. Otherwise, follow the instructions on the site.
 
+**Note:** Hyper-V can run on three versions of Windows 10: Windows 10 Enterprise, Windows 10 Professional, and Windows 10 Education.
+Install Minikube using Chocolatey
+The easiest way to install Minikube on Windows is using Chocolatey (run as an administrator):
+```
+choco install minikube
+```
+After Minikube has finished installing, close the current CLI session and restart. Minikube should have been added to your path automatically.
+
+- Install Minikube using an installer executable
+To install Minikube manually on Windows using Windows Installer, download minikube-installer.exe and execute the installer.
+
+- Install Minikube via direct download
+To install Minikube manually on Windows, download minikube-windows-amd64, rename it to minikube.exe, and add it to your path.
+
+
+
 # Testing Minikube and kubectl
 
 Once Minikube is successfully installed on your workstation, open a Terminal and test the installation. First, we need to start Minikube. Enter minikube start at the command line. This command may take a few minutes or so to complete. The output should look similar to the following:
