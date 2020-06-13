@@ -16,8 +16,6 @@ Set-VMProcessor $NameVM -ExposeVirtualizationExtensions $True
 ```
 
 ### Start VM
-
-
 ```powershell
 Get-VM
 Get-VMProcessor $NameVM
@@ -26,7 +24,6 @@ Start-VM $NameVM
 
 
 # Server
-
 ```powershell
 New-VHD “c:\Program Files\Microsoft Learning\Drives\TM-SVR1\TM-SVR1.vhd” -ParentPath “c:\Program Files\Microsoft Learning\Base\Base19D-WS19-1809.vhd”
 New-VM –Name TM-SVR1 –MemoryStartupBytes 2048MB –VHDPath “c:\Program Files\Microsoft Learning\Drives\TM-SVR1\TM-SVR1.vhd” –SwitchName “Internet”

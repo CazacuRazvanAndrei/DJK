@@ -49,7 +49,7 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 wsl --set-default-version 2
 ```
-## Install your Linux distribution of choice
+## Install your Linux distribution of choice from Microsoft store
 
 - Ubuntu 16.04 LTS
 - Ubuntu 18.04 LTS
