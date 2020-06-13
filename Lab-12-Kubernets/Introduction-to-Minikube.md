@@ -44,7 +44,9 @@ Let's make sure that Minikube is running with the following command:
  minikube start
 ```
 Once Minikube is ready, we can access its single node cluster using kubectl. We should see something similar to the following:
-
+```
+kubectl get nodes
+```
 ![m12](./img/m12-k4.png)
 
 - **Note**, your output may look slightly different. In my case, I am running Minikube on a Windows 10 Pro computer. On a Mac notifications are quite different, but this doesn't matter here.
