@@ -339,11 +339,12 @@ If we are right, then the data in this container must persist beyond the life cy
 
 ```
 kubectl delete po/web-pod
-
+pod "web-pod" deleted
 kubectl create -f pod-with-vol.yaml
-
-kubectl exec -it webpod -- /bin/sh
+pod/web-pod created
+kubectl exec -it web-pod -- /bin/sh
 cat /data/sample.txt
+Hello world!
 ```
 
 Data stored in volume survives pod recreation
