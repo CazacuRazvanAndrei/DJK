@@ -65,7 +65,7 @@ Since pause and the sample container are both parts of the same network namespac
 $ docker exec -it main /bin/sh
 ```
 
-Now, we can test the connection to Nginx running in the pause container and listening on port 80. The following what we get if we use the wget utility to do so:
+Now, we can test the connection to Nginx running in the **pause**container and listening on port **80**. The following what we get if we use the **wget**utility to do so:
 ```
 wget -q0 - localhost
 ```
