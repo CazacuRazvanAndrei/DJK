@@ -81,7 +81,7 @@ If we want to test this deployment, we need to find out what IP address Minikube
 
 
 ```
-PS
+PS ???
 $ip = minikube ip
 curl -4 $ip:31331/
 Pets Demo Application
@@ -145,7 +145,7 @@ Other solutions that lie outside of the scope of this book would include the use
 
 If we have an application consisting of many Kubernetes objects such as Deployment and Service objects, then we can keep them all in one single file and separate the individual object definitions by three dashes. For example, if we wanted to have the Deployment and the Service definition for the web component in a single file, this would look as follows:
 
-Copy
+```
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -163,7 +163,7 @@ spec:
         service: web
     spec:
       containers:
-      - image: fundamentalsofdocker/ch11-web:2.0
+      - image: fredysa/web:2.0
         name: web
         ports:
         - containerPort: 3000
@@ -181,11 +181,13 @@ spec:
   selector:
     app: pets
     service: web
-Here, we have collected all four object definitions for the pets application in the ~/fod/ch16/pets.yaml file, and we can deploy the application in one go:
+```
+
+Here, we have collected all four object definitions for the pets application in the ~/Lab-13-.../pets.yaml file, and we can deploy the application in one go:
 
 
 Using a single script to deploy the pets application
-Similarly, we have created a script called ~/fod/ch16/remove-pets.sh to remove all the artifacts of the pets application from the Kubernetes cluster:
+Similarly, we have created a script called ~/Lab-13-...//remove-pets.sh to remove all the artifacts of the pets application from the Kubernetes cluster:
 
 
 Removing pets from the Kubernetes cluster

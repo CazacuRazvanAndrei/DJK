@@ -16,6 +16,8 @@ In this chapter, we're going to use Minikube on our local computer.  Setting Up 
 
 ```
 kubectl config use-context minikube
+
+minikube start
 ```
 
 The code for this chapter can be found here: cd .\Lab-13-Kubernets-Deploying-Updating-and-Securing-an-Application\sample
