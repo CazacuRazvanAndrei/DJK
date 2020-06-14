@@ -102,14 +102,25 @@ The output shows that we can indeed access Nginx on **localhost**. This is proof
 
 ```
 ip a show eth0
-```
 
+/ # ip a show eth0
+34: eth0@if35: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP 
+    link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
+       valid_lft forever preferred_lft forever
+
+```
 Displaying the properties of eth0 with the ip tool
 
-If we inspect the bridge network, we can see that only the pause container is listed. The other container didn't get an entry in the Containers list since it is reusing the pause container's endpoint:
 
+If we inspect the **bridge** network, we can see that only the **pause container** is listed. The other container didn't get an entry in the **Containers**list since it is reusing the pause container's endpoint:
+
+```
+docker network inspect bridge
+```
 
 Inspecting the Docker default bridge network
+
 Next, we will be looking at the pod life cycle.
 
 Pod life cycle
