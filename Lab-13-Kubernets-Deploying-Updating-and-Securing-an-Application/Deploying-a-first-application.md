@@ -69,17 +69,22 @@ We can list all the services to see the result of the preceding command:
 
 ```
 kubectl get services
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP          24h
+web          NodePort    10.97.252.130   <none>        3000:31058/TCP   6s
 ```
 
 The Service object created for the web component
-In the preceding output, we can see that a service called web has been created. A unique clusterIP of 10.99.99.133 has been assigned to this service, and the container port 3000 has been published on port 31331 on all cluster nodes.
+In the preceding output, we can see that a service called **web** has been created. A unique clusterIP of **10.97.252.130** has been assigned to this service, and the container port **3000** has been published on port **31058** on all cluster nodes.
 
 If we want to test this deployment, we need to find out what IP address Minikube has, and then use this IP address to access our web service. The following is the command that we can use to do this:
 
-Copy
+```
 $ IP=$(minikube ip)
 $ curl -4 $IP:31331/
 Pets Demo Application
+```
+
 OK, the response is Pets Demo Application, which is what we expected. The web service is up and running in the Kubernetes cluster. Next, we want to deploy the database.
 
 Deploying the database
