@@ -241,9 +241,14 @@ kubectl create -f pets.yaml
 Using a single script to deploy the pets application
 
 Similarly, we have created a script called ~/Lab-13-...//remove-pets.sh to remove all the artifacts of the pets application from the Kubernetes cluster:
-
-![dfa](./img/m13-ausa-p7.png)
-
+```
+.\remove-pets.ps1
+service "web" deleted
+service "db" deleted
+deployment.apps "web" deleted
+statefulset.apps "db" deleted
+persistentvolumeclaim "pets-data-db-0" deleted
+```
 Removing pets from the Kubernetes cluster
 
 With this, we have taken our pets application we introduced in Docker Compose, and defined all the Kubernetes objects that are necessary to deploy this application into a Kubernetes cluster. In each step, we have made sure that we got the expected result, and once all the artifacts existed in the cluster, we showed the running application. 

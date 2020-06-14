@@ -1,7 +1,7 @@
 version: "2.4"
 services:
     probe-demo:
-        image: fundamentalsofdocker/probes-demo:2.0
+        image: fredysa/demo:1.0
         build: .
         healthcheck:
             test: cat /app/healthy
