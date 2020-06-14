@@ -200,22 +200,72 @@ web-pod   1/1     Running   0          2m
 As expected, we have one of one pods in the running status. The pod is called **web-pod**, as defined. We can get more detailed information about the running pod by using the **describe** command:
 
 ```
-kubectl describe /pod/web-pod
+kubectl describe pod/web-pod
+
+
+Name:         web-pod
+Namespace:    default
+Priority:     0
+Node:         docker-desktop/192.168.65.3
+Start Time:   Sun, 14 Jun 2020 08:42:16 +0300
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           10.1.0.35
+IPs:
+  IP:  10.1.0.35
+Containers:
+  web:
+    Container ID:   docker://a3b3a3798149f405bf5ef019dcbc0c1d0c5428f14d26cebcf930f72565ac7a92
+    Image:          nginx:alpine
+    Image ID:       docker-pullable://nginx@sha256:b89a6ccbda39576ad23fd079978c967cecc6b170db6e7ff8a769bf2259a71912
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sun, 14 Jun 2020 08:42:16 +0300
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-7j7kl (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  default-token-7j7kl:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-7j7kl
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type    Reason     Age    From                     Message
+  ----    ------     ----   ----                     -------
+  Normal  Scheduled  3m39s  default-scheduler        Successfully assigned default/web-pod to docker-desktop
+  Normal  Pulled     3m39s  kubelet, docker-desktop  Container image "nginx:alpine" already present on machine
+  Normal  Created    3m39s  kubelet, docker-desktop  Created container web
+  Normal  Started    3m39s  kubelet, docker-desktop  Started container web
 ```
 
 Describing a pod running in the cluster
-Please note the pod/web-pod notation in the previous describe command. Other variants are possible; for example, pods/web-pod, po/web-pod. pod and po are aliases of pods. The kubectl tool defines many aliases to make our lives a bit easier.
 
-The describe command gives us a plethora of valuable information about the pod, not the least of which is a list of events that happened and affected this pod. The list is shown at the end of the output.
+Please note the **pod/web-pod** notation in the previous **describe** command. Other variants are possible; for example, **pods/web-pod**, **po/web-pod**. **pod** and **po** are aliases of pods. The **kubectl** tool defines many aliases to make our lives a bit easier.
 
-The information in the Containers section is very similar to what we find in a docker container inspect output.
+The **describe** command gives us a plethora of valuable information about the pod, not the least of which is a list of events that happened and affected this pod. The list is shown at the end of the output.
 
-We can also see a Volumes section with an entry of the Secret type. We will discuss Kubernetes secrets in the next chapter. Volumes, on the other hand, will be discussed next.
+The information in the **Containers** section is very similar to what we find in a **docker container inspect** output.
 
-Pods and volumes
-In Chapter 5, Data Volumes and Configuration, we learned about volumes and their purpose: accessing and storing persistent data. Since containers can mount volumes, pods can do so as well. In reality, it is really the containers inside the pod that mount the volumes, but that is just a semantic detail. First, let's see how we can define a volume in Kubernetes. Kubernetes supports a plethora of volume types, so we won't delve into too much detail about this. Let's just create a local volume implicitly by defining a PersistentVolumeClaim called my-data-claim:
+We can also see a **Volumes** section with an entry of the **Secret** type. We will discuss Kubernetes secrets in the next chapter. Volumes, on the other hand, will be discussed next.
 
-Copy
+# Pods and volumes
+ Since containers can mount volumes, pods can do so as well. In reality, it is really the containers inside the pod that mount the volumes, but that is just a semantic detail. First, let's see how we can define a volume in Kubernetes. Kubernetes supports a plethora of volume types, so we won't delve into too much detail about this. Let's just create a local volume implicitly by defining a **PersistentVolumeClaim** called **my-data-claim**:
+
+```
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -226,10 +276,13 @@ spec:
   resources:
     requests:
       storage: 2Gi
-We have defined a claim that requests 2 GB of data. Let's create this claim:
+```
+We have defined a claim that requests 2 GB of data. Let's create this 
 
-Copy
+```
 $ kubectl create -f volume-claim.yaml
+```
+
 We can list the claim using kubectl (pvc is a shortcut for PersistentVolumeClaim):
 
 
