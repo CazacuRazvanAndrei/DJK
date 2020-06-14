@@ -13,4 +13,11 @@ In this chapter, we're going to introduce Kubernetes. Kubernetes is currently th
 - [Kubernetes ReplicaSet](Kubernetes-ReplicaSet.md)
 - [Kubernetes deployment](Kubernetes-deployment.md)
 - [Kubernetes service](Kubernetes-service.md)
-- Context-based routing
+- [Context-based routing](Context-based-routing.md)
+
+# Further reading
+Here is a list of articles that contain more detailed information about the various topics that we discussed in this chapter:
+
+- The Raft Consensus Algorithm: https://raft.github.io/
+- Docker Compose and Kubernetes with Docker for Desktop: https://dockr.ly/2G8Iqb9
+- Kubernetes Documentation: https://kubernetes.io/docs/home/
