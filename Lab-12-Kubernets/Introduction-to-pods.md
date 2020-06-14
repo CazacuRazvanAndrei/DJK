@@ -326,7 +326,7 @@ $ kubectl create -f pod-with-vol.yaml
 Then, we can **exec** into the container to double-check that the volume has mounted by navigating to the **/data** folder, creating a file there, and exiting the container:
 
 ```
-$ kubectl exec -it web-pod -- /bin/sh
+$ kubectl exec -it web2-pod -- /bin/sh
 / # cd /data
 /data # echo "Hello world!" > sample.txt
 /data # exit
