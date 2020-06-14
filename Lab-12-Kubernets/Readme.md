@@ -12,5 +12,5 @@ In this chapter, we're going to introduce Kubernetes. Kubernetes is currently th
 - [Introduction to pods](Introduction-to-pods.md)
 - [Kubernetes ReplicaSet](Kubernetes-ReplicaSet.md)
 - [Kubernetes deployment](Kubernetes-deployment.md)
-- Kubernetes service
+- [Kubernetes service](Kubernetes-service.md)
 - Context-based routing
