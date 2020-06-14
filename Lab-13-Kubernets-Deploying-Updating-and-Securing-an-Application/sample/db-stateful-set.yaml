@@ -15,7 +15,7 @@ spec:
         service: db
     spec:
       containers:
-      - image: fundamentalsofdocker/ch11-db:2.0
+      - image: fredysa/db:2.0
         name: db
         ports:
         - containerPort: 5432

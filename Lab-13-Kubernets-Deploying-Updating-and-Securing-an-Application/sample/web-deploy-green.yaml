@@ -17,7 +17,7 @@ spec:
         color: green
     spec:
       containers:
-      - image: fundamentalsofdocker/ch16-web:2.1
+      - image: fredysa/web:2.1
         name: web
         ports:
         - containerPort: 3000

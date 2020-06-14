@@ -6,8 +6,14 @@ In this chapter, we will learn how to deploy, update, and scale applications int
 
 # This chapter covers the following topics:
 
-- Deploying a first application
+- [Deploying a first application](Deploying-a-first-application.md)
 - Defining liveness and readiness
 - Zero downtime deployments
 - Kubernetes secrets
 
+# Technical requirements
+In this chapter, we're going to use Minikube on our local computer.  Setting Up a Working Environment, for more information on how to install and use Minikube.
+
+The code for this chapter can be found here: cd .\Lab-13-Kubernets-Deploying-Updating-and-Securing-an-Application\sample
+
+In your Terminal, navigate to the **~/Lab-13-Kubernets-Deploying-Updating-and-Securing-an-Application/sample** folder.
