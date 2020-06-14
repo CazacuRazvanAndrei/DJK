@@ -233,10 +233,17 @@ spec:
 
 Here, we have collected all four object definitions for the pets application in the ~/Lab-13-.../pets.yaml file, and we can deploy the application in one go:
 
+```
+kubectl create -f pets.yaml
+```
+![dfa](./img/m13-ausa-p6.png)
 
 Using a single script to deploy the pets application
+
 Similarly, we have created a script called ~/Lab-13-...//remove-pets.sh to remove all the artifacts of the pets application from the Kubernetes cluster:
 
+![dfa](./img/m13-ausa-p7.png)
 
 Removing pets from the Kubernetes cluster
-With this, we have taken our pets application we introduced in Chapter 11, Docker Compose, and defined all the Kubernetes objects that are necessary to deploy this application into a Kubernetes cluster. In each step, we have made sure that we got the expected result, and once all the artifacts existed in the cluster, we showed the running application. 
+
+With this, we have taken our pets application we introduced in Docker Compose, and defined all the Kubernetes objects that are necessary to deploy this application into a Kubernetes cluster. In each step, we have made sure that we got the expected result, and once all the artifacts existed in the cluster, we showed the running application. 
