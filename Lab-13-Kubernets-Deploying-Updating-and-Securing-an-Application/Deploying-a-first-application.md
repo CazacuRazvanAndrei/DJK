@@ -27,7 +27,20 @@ $ kubectl create -f web-deployment.yaml
 We can double-check that the deployment has been created again using our Kubernetes CLI. We should see the following output:
 ```
 kubectl get all
+
+NAME                      READY   STATUS             RESTARTS   AGE      
+pod/web-f795fc765-2b64d   0/1     ImagePullBackOff   0          5m35s    
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   24h
+
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/web   0/1     1            0           5m35s
+
+NAME                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/web-f795fc765   1         1         0       5m35s     
 ```
+
 Listing all resources running in Minikube
 In the preceding output, we can see that Kubernetes created three objects – the deployment, a pertaining ReplicaSet, and a single pod (remember that we specified that we want one replica only). The current state corresponds to the desired state for all three objects, so we are fine so far.
 

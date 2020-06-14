@@ -129,3 +129,13 @@ Events:
 ```
 Describe the ReplicaSet
 And indeed, we find an entry under **Events** that tells us that the **ReplicaSet** created the new pod called **rs-web-67spk** .
+
+## Clean Up
+```
+kubectl delete -f .\replicaset.yaml
+kubectl delete -f .\pod-with-vol.yaml
+
+kubectl get all
+
+kubectl get pods
+```
