@@ -93,9 +93,39 @@ List of pods after killing a pod of the ReplicaSet
 OK; evidently, the second pod in the list has been recreated, as we can see from the **AGE** column. This is auto-healing in action. Let's see what we discover if we describe the ReplicaSet:
 
 
-Describe the ReplicaSet
-And indeed, we find an entry under Events that tells us that the ReplicaSet created the new pod called rs-web-67spk .
+
 
 ```
 kubectl describe rs/rs-web
+
+kubectl describe rs/rs-web
+Name:         rs-web
+Namespace:    default
+Selector:     app=web
+Labels:       <none>
+Annotations:  <none>
+Replicas:     3 current / 3 desired
+Pods Status:  3 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=web
+  Containers:
+   nginx:
+    Image:        nginx:alpine
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                   Message
+  ----    ------            ----   ----                   -------
+  Normal  SuccessfulCreate  6m31s  replicaset-controller  Created pod: rs-web-tszzv
+  Normal  SuccessfulCreate  6m31s  replicaset-controller  Created pod: rs-web-zpf5r
+  Normal  SuccessfulCreate  6m31s  replicaset-controller  Created pod: rs-web-j7rm4
+  Normal  SuccessfulCreate  5m29s  replicaset-controller  Created pod: rs-web-6kcbz
+  ---------------------------------------------------------------------------------
+  Normal  SuccessfulCreate  4m28s  replicaset-controller  Created pod: rs-web-67spk
+  ---------------------------------------------------------------------------------
 ```
+Describe the ReplicaSet
+And indeed, we find an entry under **Events** that tells us that the **ReplicaSet** created the new pod called **rs-web-67spk** .

@@ -11,6 +11,6 @@ In this chapter, we're going to introduce Kubernetes. Kubernetes is currently th
 - [Kubernetes support in Docker for Desktop](Kubernetes-support-in-Docker-for-Desktop.md)
 - [Introduction to pods](Introduction-to-pods.md)
 - [Kubernetes ReplicaSet](Kubernetes-ReplicaSet.md)
-- Kubernetes deployment
+- [Kubernetes deployment](Kubernetes-deployment.md)
 - Kubernetes service
 - Context-based routing
