@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: web2-pod
+  name: web-pod
 spec:
   containers:
-  - name: web2
+  - name: web
     image: nginx:alpine
     ports:
     - containerPort: 80

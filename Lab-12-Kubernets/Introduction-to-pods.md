@@ -292,17 +292,20 @@ kubectl get pvc
 
 List of PersistentStorageClaim objects in the cluster
 
-
+```
+kubectl get pods
+kubectl delete po/web-pod
+```
 In the output, we can see that the claim has implicitly created a volume called **pvc-<ID>**. We are now ready to use the volume created by the claim in a pod. Let's use a modified version of the pod specification that we used previously. We can find this updated specification in the **pod-with-vol.yaml** file in the **~\sample** folder. Let's look at this specification in detail:
 
 ```
 apiVersion: v1
 kind: Pod
 metadata:
-  name: web2-pod
+  name: web-pod
 spec:
   containers:
-  - name: web2
+  - name: web
     image: nginx:alpine
     ports:
     - containerPort: 80
@@ -326,7 +329,7 @@ $ kubectl create -f pod-with-vol.yaml
 Then, we can **exec** into the container to double-check that the volume has mounted by navigating to the **/data** folder, creating a file there, and exiting the container:
 
 ```
-$ kubectl exec -it web2-pod -- /bin/sh
+$ kubectl exec -it web-pod -- /bin/sh
 / # cd /data
 /data # echo "Hello world!" > sample.txt
 /data # exit
