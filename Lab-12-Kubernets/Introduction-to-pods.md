@@ -117,34 +117,58 @@ If we inspect the **bridge** network, we can see that only the **pause container
 
 ```
 docker network inspect bridge
+
+[
+....
+        "Containers": {
+            "2f02c801c6378316042a73f310edb88831a5a01ff2985ce1a5b3a023a38f22e4": {
+                "Name": "pause",
+                "EndpointID": "95867c23829c3d20bd8536d2e5dc442eb07d5eed01dd9d4b7cd9ae9ebb9b4e03",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+....
+]
+
 ```
 
 Inspecting the Docker default bridge network
 
 Next, we will be looking at the pod life cycle.
 
-Pod life cycle
+# Pod life cycle
+
 Earlier in this book, we learned that containers have a life cycle. A container is initialized, run, and ultimately exited. When a container exits, it can do this gracefully with an exit code zero or it can terminate with an error, which is equivalent to a nonzero exit code.
 
 Similarly, a pod has a life cycle. Due to the fact that a pod can contain more than one container, this life cycle is slightly more complicated than that of a single container. The life cycle of a pod can be seen in the following diagram:
 
 
+![ITP](./img/m12-k-itp_4.png)
+
 The life cycle of Kubernetes pods
-When a Pod is created on a cluster node, it first enters into the pending status. Once all the containers of the pod are up and running, the pod enters into the running status. The pod only enters into this state if all its containers run successfully. If the pod is asked to terminate, it will request all its containers to terminate. If all containers terminate with exit code zero, then the pod enters into the succeeded status. This is the happy path.
 
-Now, let's look at some scenarios that lead to the pod being in the failed state. There are three possible scenarios:
+When a **Pod** is created on a cluster node, it first enters into the **pending** status. Once all the containers of the pod are up and running, the pod enters into the **running**status. The pod only enters into this state if all its containers run successfully. If the pod is asked to terminate, it will request all its containers to terminate. If all containers terminate with exit code zero, then the pod enters into the **succeeded** status. This is the happy path.
 
-If, during the startup of the pod, at least one container is not able to run and fails (that is, it exits with a nonzero exit code), the pod goes from the pending state into the failed state.
-If the pod is in the running status and one of the containers suddenly crashes or exits with a nonzero exit code, then the pod transitions from the running state into the failed state.
-If the pod is asked to terminate and, during the shutdown at least one of the containers, exits with a nonzero exit code, then the pod also enters into the failed state.
+Now, let's look at some scenarios that lead to the pod being in the **failed**state. There are three possible scenarios:
+
+- If, during the startup of the pod, at least one container is not able to run and fails (that is, it exits with a nonzero exit code), the pod goes from the **pending** state into the **failed** state.
+
+- If the pod is in the running status and one of the containers suddenly crashes or exits with a nonzero exit code, then the pod transitions from the **running** state into the **failed** state.
+
+- If the pod is asked to terminate and, during the shutdown at least one of the containers, exits with a nonzero exit code, then the pod also enters into the **failed**state.
+
 Now, let's look at the specifications for a pod.
 
-Pod specifications
-When creating a pod in a Kubernetes cluster, we can use either an imperative or a declarative approach. We discussed the difference between the two approaches earlier in this book but, to rephrase the most important aspect, using a declarative approach signifies that we write a manifest that describes the end state we want to achieve. We'll leave out the details of the orchestrator. The end state that we want to achieve is also called the desired state. In general, the declarative approach is strongly preferred in all established orchestrators, and Kubernetes is no exception.
+# Pod specifications
 
-Thus, in this chapter, we will exclusively concentrate on the declarative approach. Manifests or specifications for a pod can be written using either the YAML or JSON formats. In this chapter, we will concentrate on YAML since it is easier to read for us humans. Let's look at a sample specification. Here is the content of the pod.yaml file, which can be found in the ch12 subfolder of our labs folder:
+When creating a pod in a Kubernetes cluster, we can use either an imperative or a declarative approach. We discussed the difference between the two approaches earlier in this book but, to rephrase the most important aspect, using a declarative approach signifies that we write a manifest that describes the end state we want to achieve. We'll leave out the details of the orchestrator. The end state that we want to achieve is also called the **desired state**. In general, the declarative approach is strongly preferred in all established orchestrators, and Kubernetes is no exception.
 
-Copy
+Thus, in this chapter, we will exclusively concentrate on the declarative approach. Manifests or specifications for a pod can be written using either the YAML or JSON formats. In this chapter, we will concentrate on YAML since it is easier to read for us humans. 
+
+Let's look at a sample specification. Here is the content of the **pod.yaml** file, which can be found in the **~/lab-12-../sample** subfolder of our labs folder:
+
+```
 apiVersion: v1
 kind: Pod
 metadata:
@@ -155,19 +179,25 @@ spec:
     image: nginx:alpine
     ports:
     - containerPort: 80
-Each specification in Kubernetes starts with the version information. Pods have been around for quite some time and thus the API version is v1. The second line specifies the type of Kubernetes object or resource we want to define. Obviously, in this case, we want to specify a Pod. Next follows a block containing metadata. At a bare minimum, we need to give the pod a name. Here, we call it web-pod. The next block that follows is the spec block, which contains the specification of the pod. The most important part (and the only one in this simple sample) is a list of all containers that are part of this pod. We only have one container here, but multiple containers are possible. The name we choose for our container is web and the container image is nginx:alpine. Finally, we define a list of ports the container is exposing.
+```
 
-Once we have authored such a specification, we can apply it to the cluster using the Kubernetes CLI, kubectl. In a Terminal, navigate to the ch15 subfolder and execute the following command:
+Each specification in Kubernetes starts with the version information. Pods have been around for quite some time and thus the API version is **v1**. The second line specifies the type of Kubernetes object or resource we want to define. Obviously, in this case, we want to specify a **Pod**. Next follows a block containing metadata. At a bare minimum, we need to give the pod a name. Here, we call it **web-pod**. The next block that follows is the spec block, which contains the specification of the pod. The most important part (and the only one in this simple sample) is a list of all containers that are part of this pod. We only have one container here, but multiple containers are possible. The name we choose for our container is **web** and the container image is **nginx:alpine**. Finally, we define a list of ports the container is exposing.
 
-Copy
-$ kubectl create -f pod.yaml
-This will respond with pod "web-pod" created. We can then list all the pods in the cluster with kubectl get pods:
+Once we have authored such a specification, we can apply it to the cluster using the Kubernetes CLI, **kubectl**. In a Terminal, navigate to the ~\sample subfolder and execute the following command:
 
-Copy
+```
+kubectl create -f pod.yaml
+```
+
+This will respond with **pod "web-pod" created**. We can then list all the pods in the cluster with **kubectl get pods**:
+
+```
 $ kubectl get pods
 NAME      READY   STATUS    RESTARTS   AGE
 web-pod   1/1     Running   0          2m
-As expected, we have one of one pods in the running status. The pod is called web-pod, as defined. We can get more detailed information about the running pod by using the describe command:
+```
+
+As expected, we have one of one pods in the running status. The pod is called **web-pod**, as defined. We can get more detailed information about the running pod by using the **describe** command:
 
 
 Describing a pod running in the cluster
