@@ -283,10 +283,15 @@ We have defined a claim that requests 2 GB of data. Let's create this
 $ kubectl create -f volume-claim.yaml
 ```
 
-We can list the claim using kubectl (pvc is a shortcut for PersistentVolumeClaim):
+We can list the claim using **kubectl** (**pvc** is a shortcut for **PersistentVolumeClaim**):
 
+```
+kubectl get pvc
+```
 
 List of PersistentStorageClaim objects in the cluster
+
+
 In the output, we can see that the claim has implicitly created a volume called pvc-<ID>. We are now ready to use the volume created by the claim in a pod. Let's use a modified version of the pod specification that we used previously. We can find this updated specification in the pod-with-vol.yaml file in the ch12 folder. Let's look at this specification in detail:
 
 Copy
