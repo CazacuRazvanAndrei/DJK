@@ -292,9 +292,9 @@ kubectl get pvc
 List of PersistentStorageClaim objects in the cluster
 
 
-In the output, we can see that the claim has implicitly created a volume called pvc-<ID>. We are now ready to use the volume created by the claim in a pod. Let's use a modified version of the pod specification that we used previously. We can find this updated specification in the pod-with-vol.yaml file in the ch12 folder. Let's look at this specification in detail:
+In the output, we can see that the claim has implicitly created a volume called **pvc-<ID>**. We are now ready to use the volume created by the claim in a pod. Let's use a modified version of the pod specification that we used previously. We can find this updated specification in the **pod-with-vol.yaml** file in the **~\sample** folder. Let's look at this specification in detail:
 
-Copy
+```
 apiVersion: v1
 kind: Pod
 metadata:
@@ -312,19 +312,35 @@ spec:
   - name: my-data
     persistentVolumeClaim:
       claimName: my-data-claim
-In the last four lines, in the volumes block, we define a list of volumes we want to use for this pod. The volumes that we list here can be used by any of the containers of the pod. In our particular case, we only have one volume. We specify that we have a volume called my-data, which is a persistent volume claim whose claim name is the one we just created. Then, in the container specification, we have the volumeMounts block, which is where we define the volume we want to use and the (absolute) path inside the container where the volume will be mounted. In our case, we mount the volume to the /data folder of the container filesystem. Let's create this pod:
+```
 
-Copy
+In the last four lines, in the **volumes**block, we define a list of volumes we want to use for this pod. The volumes that we list here can be used by any of the containers of the pod. In our particular case, we only have one volume. We specify that we have a volume called **my-data**, which is a persistent volume claim whose claim name is the one we just created. Then, in the container specification, we have the **volumeMounts** block, which is where we define the volume we want to use and the (absolute) path inside the container where the volume will be mounted. In our case, we mount the volume to the **/data** folder of the container filesystem. 
+
+Let's create this pod:
+
+```
 $ kubectl create -f pod-with-vol.yaml
-Then, we can exec into the container to double-check that the volume has mounted by navigating to the /data folder, creating a file there, and exiting the container:
+```
 
-Copy
+Then, we can **exec** into the container to double-check that the volume has mounted by navigating to the **/data** folder, creating a file there, and exiting the container:
+
+```
 $ kubectl exec -it web-pod -- /bin/sh
 / # cd /data
 /data # echo "Hello world!" > sample.txt
 /data # exit
+```
+
 If we are right, then the data in this container must persist beyond the life cycle of the pod. Thus, let's delete the pod and then recreate it and exec into it to make sure the data is still there. This is the result:
 
+```
+kubectl delete po/web-pod
+
+kubectl create -f pod-with-vol.yaml
+
+kubectl exec -it webpod -- /bin/sh
+cat /data/sample.txt
+```
 
 Data stored in volume survives pod recreation
 Now that we have a good understanding of pods, let's look into how those pods are managed with the help of ReplicaSets.
