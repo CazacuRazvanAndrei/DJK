@@ -63,24 +63,77 @@ Normally, we don't want to clutter our list of containers with these system cont
 Now, let's try to deploy a Docker Compose application to Kubernetes. Navigate to the ch15 subfolder of our **~/Lab-12-Kubernets/Sample ** folder. We deploy the app as a stack using the **docker-compose.yml** file:
 
 ```
-$ docker stack deploy -c docker-compose.yml app
+$ docker stack deploy -c docker-compose.yml stackdemo
 ```
 We should see the following:
 
-![Docker Kubernets](./img/m12-k-DD7.png)
+```
+Waiting for the stack to be stable and running...
+redis: Ready            [pod status: 1/1 ready, 0/1 pending, 0/1 failed]
+web: Ready              [pod status: 1/1 ready, 0/1 pending, 0/1 failed]
+
+Stack stackdemo is stable and running
+```
+
 
 
 Deploying the stack to Kubernetes
 
 We can test the application, for example, using **curl**, and we will see that it is running as expected:
 
-![Docker Kubernets](./img/m12-k-DD8.png)
+```
+curl http://localhost:8000
+
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : Hello World! I have been seen 8 times.
+
+RawContent        : HTTP/1.0 200 OK
+                    Content-Length: 39
+                    Content-Type: text/html; charset=utf-8
+                    Date: Sun, 14 Jun 2020 04:53:22 GMT
+                    Server: Werkzeug/1.0.1 Python/3.8.3
+
+                    Hello World! I have been seen 8 times.
+
+Forms             : {}
+Headers           : {[Content-Length, 39], [Content-Type, text/html; charset=utf-8], [Date, Sun, 14 Jun 2020 04:53:22
+                    GMT], [Server, Werkzeug/1.0.1 Python/3.8.3]}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : mshtml.HTMLDocumentClass
+RawContentLength  : 39
+```
+
 
 Pets application running in Kubernetes on Docker for Desktop
 
 Now, let's see exactly what Docker did when we executed the **docker stack deploy** command. We can use **kubectl** to find out:
 
-![Docker Kubernets](./img/m12-k-DD9.png)
+```
+kubectl get all
+
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/redis-64f9c45dfb-sgwwm   1/1     Running   0          8m9s
+pod/web-854cfdfc8-x9vbt      1/1     Running   0          8m9s
+
+NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/kubernetes      ClusterIP      10.96.0.1        <none>        443/TCP          21h
+service/redis           ClusterIP      None             <none>        55555/TCP        8m9s
+service/web             ClusterIP      None             <none>        55555/TCP        8m9s
+service/web-published   LoadBalancer   10.100.125.210   localhost     8000:30658/TCP   8m9s
+
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/redis   1/1     1            1           8m9s
+deployment.apps/web     1/1     1            1           8m9s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/redis-64f9c45dfb   1         1         1       8m9s
+replicaset.apps/web-854cfdfc8      1         1         1       8m9s
+```
+
 
 Listing all Kubernetes objects created by docker stack deploy
 
@@ -92,7 +145,7 @@ This is pretty cool, to say the least, and tremendously decreases friction in th
 Before you continue, please remove the stack from the cluster:
 
 ```
-$ docker stack rm app
+$ docker stack rm stackdemo
 ```
 Also, make sure you reset the context for **kubectl** back to Minikube, as we will be using Minikube for all our samples in this chapter:
 
