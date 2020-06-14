@@ -48,8 +48,14 @@ $ docker container run -d --name pause nginx:alpine
 Now, we add a second container called main, attaching it to the same network namespace as the pause container:
 
 ```
+Bash
 $ docker container run --name main -dit \
     --net container:pause \
+    alpine:latest /bin/sh
+
+Ps
+$ docker container run --name main -dit `
+    --net container:pause `
     alpine:latest /bin/sh
 ```
 
