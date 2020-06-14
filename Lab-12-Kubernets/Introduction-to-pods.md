@@ -288,6 +288,7 @@ We can list the claim using **kubectl** (**pvc** is a shortcut for **PersistentV
 ```
 kubectl get pvc
 ```
+![itp](./img/m12-k-itp_5.png)
 
 List of PersistentStorageClaim objects in the cluster
 
