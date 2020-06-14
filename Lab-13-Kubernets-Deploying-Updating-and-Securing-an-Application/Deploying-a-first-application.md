@@ -6,6 +6,7 @@ We will take our pets application, which we first introduced in Chapter, Docker 
 Just as a reminder, our application consists of two application services: the Node-based web component and the backing PostgreSQL database. In the previous chapter, we learned that we need to define a Kubernetes Deployment object for each application service we want to deploy. Let's do this first for the web component. As always in this book, we will choose the declarative way of defining our objects. Here is the YAML defining a Deployment object for the web component:
 
 ![ausa](./img/m13-ausa-p1.png)
+
 Kubernetes deployment definition for the web component 
 The preceding deployment definition can be found in the **web-deployment.yaml** file in the **~/lab-13-../sample** folder. The lines of code are as follows:
 
@@ -42,24 +43,33 @@ replicaset.apps/web-f795fc765   1         1         0       5m35s
 ```
 
 Listing all resources running in Minikube
+
 In the preceding output, we can see that Kubernetes created three objects – the deployment, a pertaining ReplicaSet, and a single pod (remember that we specified that we want one replica only). The current state corresponds to the desired state for all three objects, so we are fine so far.
 
-Now, the web service needs to be exposed to the public. For this, we need to define a Kubernetes Service object of the NodePort type. Here is the definition, which can be found in the web-service.yaml file in the ~/fod/ch16 folder:
+Now, the web service needs to be exposed to the public. For this, we need to define a Kubernetes Service object of the NodePort type. Here is the definition, which can be found in the web-service.yaml file in the ~/lab-13-../sample folder:
+
+![ausa](./img/m13-ausa-p2.png)
 
 
 Definition of the Service object for our web component
+
 The preceding lines of codes are as follows:
 
-On line 4: We set the name of this Service object to web.
-On line 6: We define the type of Service object we're using. Since the web component has to be accessible from outside of the cluster, this cannot be a Service object of the ClusterIP type and must be either of the NodePort or LoadBalancer type. We discussed the various types of Kubernetes services in the previous chapter, so will not go into further detail about this. In our sample, we're using a NodePort type of service.
-On lines 8 and 9: We specify that we want to expose port 3000 for access through the TCP protocol. Kubernetes will map container port 3000 automatically to a free host port in the range of 30,000 to 32,768. Which port Kubernetes effectively chooses can be determined using the kubectl get service or kubectl describe command for the service after it has been created. 
-From line 10 to 12: We define the filter criteria for the pods that this service will be a stable endpoint for. In this case, it is all the pods that have the app and service labels with the pets and web values, respectively.
+- On line 4: We set the name of this Service object to web.
+- On line 6: We define the type of Service object we're using. Since the web component has to be accessible from outside of the cluster, this cannot be a Service object of the ClusterIP type and must be either of the NodePort or LoadBalancer type. We discussed the various types of Kubernetes services in the previous chapter, so will not go into further detail about this. In our sample, we're using a NodePort type of service.
+- On lines 8 and 9: We specify that we want to expose port 3000 for access through the TCP protocol. Kubernetes will map container port 3000 automatically to a free host port in the range of 30,000 to 32,768. Which port Kubernetes effectively chooses can be determined using the kubectl get service or kubectl describe command for the service after it has been created. 
+- From line 10 to 12: We define the filter criteria for the pods that this service will be a stable endpoint for. In this case, it is all the pods that have the app and service labels with the pets and web values, respectively.
 Now that we have this specification for a Service object, we can create it using kubectl:
 
-Copy
+```
 $ kubectl create -f web-service.yaml
+```
+
 We can list all the services to see the result of the preceding command:
 
+```
+kubectl get services
+```
 
 The Service object created for the web component
 In the preceding output, we can see that a service called web has been created. A unique clusterIP of 10.99.99.133 has been assigned to this service, and the container port 3000 has been published on port 31331 on all cluster nodes.
