@@ -199,6 +199,9 @@ web-pod   1/1     Running   0          2m
 
 As expected, we have one of one pods in the running status. The pod is called **web-pod**, as defined. We can get more detailed information about the running pod by using the **describe** command:
 
+```
+kubectl describe /pod/web-pod
+```
 
 Describing a pod running in the cluster
 Please note the pod/web-pod notation in the previous describe command. Other variants are possible; for example, pods/web-pod, po/web-pod. pod and po are aliases of pods. The kubectl tool defines many aliases to make our lives a bit easier.
