@@ -66,7 +66,9 @@ $ docker exec -it main /bin/sh
 ```
 
 Now, we can test the connection to Nginx running in the pause container and listening on port 80. The following what we get if we use the wget utility to do so:
-
+```
+wget -q0 - localhost
+```
 
 Two containers sharing the same network namespace
 The output shows that we can indeed access Nginx on localhost. This is proof that the two containers share the same namespace. If that is not enough, we can use the ip tool to show eth0 inside both containers and we will get the exact same result, specifically, the same IP address, which is one of the characteristics of a pod where all its containers share the same IP address:
