@@ -131,11 +131,12 @@ A Deployment and a Service object for the web component
 A StatefulSet and a Service object for the database component
 To remove the application from the cluster, we can use the following small script:
 
-Copy
+```
 kubectl delete svc/web
 kubectl delete deploy/web
 kubectl delete svc/db
 kubectl delete statefulset/db
+```
 Next, we will be streamlining the deployment.
 
 Streamlining the deployment

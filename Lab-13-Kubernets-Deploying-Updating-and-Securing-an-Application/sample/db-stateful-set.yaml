@@ -15,7 +15,7 @@ spec:
         service: db
     spec:
       containers:
-      - image: fredysa/db:2.0
+      - image: fredysa/db:1.0
         name: db
         ports:
         - containerPort: 5432
