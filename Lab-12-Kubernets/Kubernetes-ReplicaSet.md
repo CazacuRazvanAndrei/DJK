@@ -72,15 +72,30 @@ Here, we can see our three expected pods. The names of the pods use the name of 
 # Self-healing
 Now, let's test the magic powers of the self-healing ReplicaSet by randomly killing one of its pods and observing what happens. Let's delete the first pod from the previous list:
 
-Copy
-$ kubectl delete po/rs-web-6qzld
-pod "rs-web-6qzld" deleted
-Now, let's list all the pods again. We expect to see only two pods, right? Wrong:
+```
+$  kubectl delete po/rs-web-j7rm4 
+pod "rs-web-j7rm4" deleted
 
+ 
+```
+
+Now, let's list all the pods again. We expect to see only two pods, right? Wrong:
+```
+kubectl get pods
+NAME           READY   STATUS    RESTARTS   AGE
+rs-web-67spk   1/1     Running   0          12s
+rs-web-tszzv   1/1     Running   0          2m15s
+rs-web-zpf5r   1/1     Running   0          2m15s
+web-pod        1/1     Running   0          19m
+```
 
 List of pods after killing a pod of the ReplicaSet
-OK; evidently, the second pod in the list has been recreated, as we can see from the AGE column. This is auto-healing in action. Let's see what we discover if we describe the ReplicaSet:
+OK; evidently, the second pod in the list has been recreated, as we can see from the **AGE** column. This is auto-healing in action. Let's see what we discover if we describe the ReplicaSet:
 
 
 Describe the ReplicaSet
-And indeed, we find an entry under Events that tells us that the ReplicaSet created the new pod called rs-web-q6cr7.
+And indeed, we find an entry under Events that tells us that the ReplicaSet created the new pod called rs-web-67spk .
+
+```
+kubectl describe rs/rs-web
+```
