@@ -79,9 +79,11 @@ In the preceding output, we can see that a service called **web** has been creat
 
 If we want to test this deployment, we need to find out what IP address Minikube has, and then use this IP address to access our web service. The following is the command that we can use to do this:
 
+
 ```
-$ IP=$(minikube ip)
-$ curl -4 $IP:31331/
+PS
+$ip = minikube ip
+curl -4 $ip:31331/
 Pets Demo Application
 ```
 
