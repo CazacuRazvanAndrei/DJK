@@ -65,16 +65,47 @@ Since pause and the sample container are both parts of the same network namespac
 $ docker exec -it main /bin/sh
 ```
 
-Now, we can test the connection to Nginx running in the **pause**container and listening on port **80**. The following what we get if we use the **wget**utility to do so:
+Now, we can test the connection to Nginx running in the **pause**container and listening on port **80**. The following what we get if we use the **wget** utility to do so:
+
 ```
-wget -qO - localhost1
+/ # wget -qO - localhost
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
 ```
 
 Two containers sharing the same network namespace
-The output shows that we can indeed access Nginx on localhost. This is proof that the two containers share the same namespace. If that is not enough, we can use the ip tool to show eth0 inside both containers and we will get the exact same result, specifically, the same IP address, which is one of the characteristics of a pod where all its containers share the same IP address:
 
+The output shows that we can indeed access Nginx on **localhost**. This is proof that the two containers share the same namespace. If that is not enough, we can use the **ip** tool to show **eth0**inside both containers and we will get the exact same result, specifically, the same IP address, which is one of the characteristics of a pod where all its containers share the same IP address:
+
+```
+ip a show eth0
+```
 
 Displaying the properties of eth0 with the ip tool
+
 If we inspect the bridge network, we can see that only the pause container is listed. The other container didn't get an entry in the Containers list since it is reusing the pause container's endpoint:
 
 
