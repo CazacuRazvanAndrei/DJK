@@ -71,7 +71,7 @@ We can list all the services to see the result of the preceding command:
 kubectl get services
 NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP          24h
-web          NodePort    10.97.252.130   <none>        3000:31058/TCP   6s
+web          NodePort    10.97.252.130   <none>        3000:30284/TCP   6s
 ```
 
 The Service object created for the web component
@@ -81,54 +81,101 @@ If we want to test this deployment, we need to find out what IP address Minikube
 
 
 ```
-PS ???
 $ip = minikube ip
-curl -4 $ip:31331/
-Pets Demo Application
+curl http://$($ip):30284
+
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : Pets Demo Application
+RawContent        : HTTP/1.1 200 OK
+                    Connection: keep-alive
+                    Content-Length: 21
+                    Content-Type: text/html; charset=utf-8
+                    Date: Sun, 14 Jun 2020 09:44:45 GMT
+                    ETag: W/"15-ufiShH1pxfs9SzrR7nrlwC+H7eA"
+                    X-Powered-By: Expres...
+Forms             : {}
+Headers           : {[Connection, keep-alive], [Content-Length, 21], [Content-Type, text/html; charset=utf-8], [Date, Sun, 14 Jun 2020 09:44:45 GMT]...}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : mshtml.HTMLDocumentClass
+RawContentLength  : 21
 ```
 
-OK, the response is Pets Demo Application, which is what we expected. The web service is up and running in the Kubernetes cluster. Next, we want to deploy the database.
+OK, the response is **Pets Demo Application**, which is what we expected. The web service is up and running in the Kubernetes cluster. Next, we want to deploy the database.
 
-Deploying the database
-A database is a stateful component and has to be treated differently to stateless components, such as our web component. We discussed the difference between stateful and stateless components in a distributed application architecture in detail in Chapter 9, Distributed Application Architecture, and Chapter 12, Orchestrators.
+# Deploying the database
+A database is a stateful component and has to be treated differently to stateless components, such as our web component. We discussed the difference between stateful and stateless components in a distributed application architecture in detail in , Distributed Application Architecture, and , Orchestrators.
 
-Kubernetes has defined a special type of ReplicaSet object for stateful components. The object is called a StatefulSet. Let's use this kind of object to deploy our database. The definition can be found in the ~fod/ch16/db-stateful-set.yaml file. The details are as follows:
+Kubernetes has defined a special type of **ReplicaSet** object for stateful components. The object is called a **StatefulSet**. Let's use this kind of object to deploy our database. The definition can be found in the **~Lab-13-.../sample/db-stateful-set.yaml** file. The details are as follows:
 
+![dsa](./img/m13-ausa-p3.png)
 
 A StatefulSet for the DB component
-OK, this looks a bit scary, but it isn't. It is a bit longer than the definition of the deployment for the web component due to the fact that we also need to define a volume where the PostgreSQL database can store the data. The volume claim definition is on lines 25 to 33. We want to create a volume with the name pets-data that has a maximum size equal to 100 MB. On lines 22 to 24, we use this volume and mount it into the container at /var/lib/postgresql/data, where PostgreSQL expects it. On line 21, we also declare that PostgreSQL is listening at port 5432.
+
+OK, this looks a bit scary, but it isn't. It is a bit longer than the definition of the deployment for the **web** component due to the fact that we also need to define a volume where the PostgreSQL database can store the data. The volume claim definition is on lines **25** to **33**. We want to create a volume with the name **pets-data** that has a maximum size equal to **100 MB**. On lines 22 to 24, we use this volume and mount it into the container at /var/lib/postgresql/data, where PostgreSQL expects it. On line 21, we also declare that PostgreSQL is listening at port 5432.
 
 As always, we use kubectl to deploy the StatefulSet:
 
-Copy
+```
 $ kubectl create -f db-stateful-set.yaml
+```
+
 Now, if we list all the resources in the cluster, we will be able to see the additional objects that were created:
 
+```
+kubectl get all
+NAME                       READY   STATUS    RESTARTS   AGE
+pod/db-0                   1/1     Running   0          12m
+pod/web-65b854c76b-v6wjg   1/1     Running   0          12m
 
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/db           ClusterIP   10.97.141.101    <none>        5432/TCP         12m
+service/kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          60m
+service/web          NodePort    10.101.218.194   <none>        3000:30284/TCP   12m
+
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/web   1/1     1            1           12m
+
+NAME                             DESIRED   CURRENT   READY   AGE
+replicaset.apps/web-65b854c76b   1         1         1       12m
+
+NAME                  READY   AGE
+statefulset.apps/db   1/1     12m
+```
 
 The StatefulSet and its pod
-Here, we can see that a StatefulSet and a pod have been created. For both, the current state corresponds to the desired state and thus the system is healthy. But that doesn't mean that the web component can access the database at this time. Service discovery won't work so far. Remember that the web component wants to access the db service under the name db.
 
-To make service discovery work inside the cluster, we have to define a Kubernetes Service object for the database component too. Since the database should only ever be accessible from within the cluster, the type of Service object we need is ClusterIP. Here is the specification, which can be found in the ~/fod/ch16/db-service.yaml file:
+Here, we can see that a **StatefulSet** and a pod have been created. For both, the current state corresponds to the desired state and thus the system is healthy. But that doesn't mean that the web component can access the database at this time. Service discovery won't work so far. Remember that the web component wants to access the **db** service under the name **db**.
 
+To make service discovery work inside the cluster, we have to define a Kubernetes Service object for the database component too. Since the database should only ever be accessible from within the cluster, the type of Service object we need is ClusterIP. Here is the specification, which can be found in the **~/Lab-13-.../sample/db-service.yaml** file:
+
+![dfa](./img/m13-ausa-p4.png)
 
 Definition of the Kubernetes Service object for the database
-The database component will be represented by this Service object and it can be reached by the name db, which is the name of the service, as defined on line 4. The database component does not have to be publicly accessible, so we decided to use a Service object of the ClusterIP type. The selector on lines 10 to 12 defines that this service represents a stable endpoint for all the pods that have the according labels defined, that is, app: pets and service: db.
+
+The database component will be represented by this Service object and it can be reached by the name **db**, which is the name of the service, as defined on line 4. The database component does not have to be publicly accessible, so we decided to use a Service object of the **ClusterIP**type. The selector on lines **10** to **12** defines that this service represents a stable endpoint for all the pods that have the according labels defined, that is, **app: pets** and service: **db**.
 
 Let's deploy this service with the following command:
 
-Copy
+```
 $ kubectl create -f db-service.yaml
+```
+
 Now, we should be ready to test the application. We can use the browser this time to enjoy the beautiful animal images:
 
+![dfa](./img/m13-ausa-p5.png)
 
 Testing the pets application running in Kubernetes
-29.64.78 is the IP address of my Minikube. Verify your address using the minikube ip command. Port number 32722 is the number that Kubernetes automatically selected for my web Service object. Replace this number with the port that Kubernetes assigned to your service. You can get the number by using the kubectl get services command.
+
+172.24.110.159  is the IP address of my Minikube. Verify your address using the **minikube ip** command. Port number 32722 is the number that Kubernetes automatically selected for my web Service object . Replace this number with the port that Kubernetes assigned to your service. You can get the number by using the **kubectl get services** command.
 
 Now, we have successfully deployed the pets application to Minikube, which is a single-node Kubernetes cluster. We had to define four artifacts to do so, which are as follows:
 
-A Deployment and a Service object for the web component 
-A StatefulSet and a Service object for the database component
+- A Deployment and a Service object for the web component 
+- A StatefulSet and a Service object for the database component
 To remove the application from the cluster, we can use the following small script:
 
 ```
@@ -139,7 +186,7 @@ kubectl delete statefulset/db
 ```
 Next, we will be streamlining the deployment.
 
-Streamlining the deployment
+# Streamlining the deployment
 So far, we have created four artifacts that needed to be deployed to the cluster. This is only a very simple application, consisting of two components. Imagine having a much more complex application. It would quickly become a maintenance nightmare. Luckily, we have several options as to how we can simplify the deployment. The method that we are going to discuss here is the possibility of defining all the components that make up an application in Kubernetes in a single file.
 
 Other solutions that lie outside of the scope of this book would include the use of a package manager, such as Helm.
