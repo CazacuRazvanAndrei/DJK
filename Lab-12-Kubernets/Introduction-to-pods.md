@@ -67,7 +67,7 @@ $ docker exec -it main /bin/sh
 
 Now, we can test the connection to Nginx running in the **pause**container and listening on port **80**. The following what we get if we use the **wget**utility to do so:
 ```
-wget -q0 - localhost
+wget -qO - localhost1
 ```
 
 Two containers sharing the same network namespace
