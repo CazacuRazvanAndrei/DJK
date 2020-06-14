@@ -299,10 +299,10 @@ In the output, we can see that the claim has implicitly created a volume called 
 apiVersion: v1
 kind: Pod
 metadata:
-  name: web-pod
+  name: web2-pod
 spec:
   containers:
-  - name: web
+  - name: web2
     image: nginx:alpine
     ports:
     - containerPort: 80
