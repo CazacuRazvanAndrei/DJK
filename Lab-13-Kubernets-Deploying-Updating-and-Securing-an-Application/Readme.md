@@ -8,8 +8,8 @@ In this chapter, we will learn how to deploy, update, and scale applications int
 
 - [Deploying a first application](Deploying-a-first-application.md)
 - [Defining liveness and readiness](Defining-liveness-and-readiness.md)
-- Zero downtime deployments
-- Kubernetes secrets
+- [Zero downtime deployments](Zero-downtime-deployments.md)
+- [Kubernetes secrets](Kubernetes-secrets.md)
 
 # Technical requirements
 In this chapter, we're going to use Minikube on our local computer.  Setting Up a Working Environment, for more information on how to install and use Minikube.
