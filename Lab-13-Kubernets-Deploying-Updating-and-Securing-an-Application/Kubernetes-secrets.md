@@ -41,7 +41,22 @@ Creating and describing the Kubernetes secret
 3. In the description of the secret, the values are hidden and only their length is given. So, maybe the secrets are safe now? No, not really. We can easily decode this secret using the **kubectl get** command:
 
 ```
-kubectl get secrets/pets-secrets -o yaml
+kubectl get secrets/pets-secret -o yaml
+apiVersion: v1
+data:
+  password: c0VjcmV0LXBhc1N3MHJECg==
+  username: am9obi5kb2UK
+-----------------------------------------
+kind: Secret
+metadata:
+  creationTimestamp: "2020-06-16T08:52:43Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+....
+
+
+ kubectl get secrets
 ```
 
 Kubernetes secret decoded
@@ -63,17 +78,18 @@ A much safer way to define secrets is to use kubectl. First, we create files con
 
 ```
 wsl
-$ echo "sue-hunter" | base64 > username.txt
-$ echo "123abc456def" | base64 > password.txt
+ echo "sue-hunter" | base64 > username.txt
+ echo "123abc456def" | base64 > password.txt
+exit
 ```
 
 Now, we can use kubectl to create a secret from those files, as follows:
 
 ```
-$ kubectl create secret generic pets-secret-prod \
-    --from-file=./username.txt \
-    --from-file=./password.txt
+$  kubectl create secret generic pets-secret-prod  --from-file=./username.txt --from-file=./password.txt 
 secret "pets-secret-prod" created
+
+kubectl get secret/pets-secret-prod
 ```
 
  The secret can then be used the same way as the manually created secret.
