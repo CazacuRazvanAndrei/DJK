@@ -142,8 +142,12 @@ To roll back the update of the image in case some undetected bug sneaked into th
 ```
 $ kubectl rollout undo deploy/web
 deployment "web"
+
+$Port = kubectl get svc/web -o yaml | ? {$_ -like "*- nodePort*"}
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$Uri = "$($IP):$($Port)"
 curl $Uri/
-Pets Demo Application
 ```
 
 I have also listed the test command using **curl** in the preceding snippet to verify that the rollback indeed happened. If we list the ReplicaSets, we will see the following output:
