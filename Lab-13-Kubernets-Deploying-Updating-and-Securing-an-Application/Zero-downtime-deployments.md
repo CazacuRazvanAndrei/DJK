@@ -77,19 +77,25 @@ $ kubectl set image deployment/web  web=fredysa/web:2.1
 
 If we test the application again, we'll get a confirmation that the update has indeed happened:
 
-Copy
+```
 $ curl -4 ${IP}:${PORT}/
 Pets Demo Application v2
+```
 Now, how do we know that there hasn't been any downtime during this update? Did the update really happen in a rolling fashion? What does rolling update mean at all? Let's investigate. First, we can get a confirmation from Kubernetes that the deployment has indeed happened and was successful by using the rollout status command:
 
-Copy
+```
 $ kubectl rollout status deploy/web
 deployment "web" successfully rolled out
+```
+
 If we describe the deployment web with kubectl describe deploy/web, we get the following list of events at the end of the output:
 
+```
+kubectl describe deploy/web
+```
 
  List of events found in the output of the deployment description of the web component
-The first event tells us that, when we created the deployment, a ReplicaSet called web-769b88f67 with five replicas was created. Then, we executed the update command. The second event in the list tells us that this meant creating a new ReplicaSet called web-55cdf67cd with, initially, one replica only. Thus, at that particular moment, six pods existed on the system: the five initial pods and one pod with the new version. But, since the desired state of the Deployment object states that we want five replicas only, Kubernetes now scales down the old ReplicaSet to four instances, which we can see in the third event.
+The first event tells us that, when we created the deployment, a ReplicaSet called **web-769b88f67** with five replicas was created. Then, we executed the update command. The second event in the list tells us that this meant creating a new ReplicaSet called **web-55cdf67cd** with, initially, one replica only. Thus, at that particular moment, six pods existed on the system: the five initial pods and one pod with the new version. But, since the desired state of the Deployment object states that we want five replicas only, Kubernetes now scales down the old ReplicaSet to four instances, which we can see in the third event.
 
 Then, again, the new ReplicaSet is scaled up to two instances and, subsequently, the old ReplicaSet scaled was down to three instances, and so on, until we had five new instances and all the old instances were decommissioned. Although we cannot see any precise time (other than 3 minutes) when that happened, the order of the events tells us that the whole update happened in a rolling fashion.
 
@@ -97,26 +103,36 @@ During a short time period, some of the calls to the web service would have had 
 
 We can also list the ReplicaSet objects in the cluster and will get confirmation of what I said in the preceding section:
 
+```
+kubectl get ps
+```
 
 Listing all the ReplicaSet objects in the cluster
+
 Here, we can see that the new ReplicaSet has five instances running and that the old one has been scaled down to zero instances. The reason that the old ReplicaSet object is still lingering is that Kubernetes provides us with the possibility of rolling back the update and, in that case, will reuse that ReplicaSet.
 
 To roll back the update of the image in case some undetected bug sneaked into the new code, we can use the rollout undo command: 
 
-Copy
+```
 $ kubectl rollout undo deploy/web
 deployment "web"
 $ curl -4 ${IP}:${PORT}/
 Pets Demo Application
-I have also listed the test command using curl in the preceding snippet to verify that the rollback indeed happened. If we list the ReplicaSets, we will see the following output:
+```
 
+I have also listed the test command using **curl** in the preceding snippet to verify that the rollback indeed happened. If we list the ReplicaSets, we will see the following output:
+
+```
+kubectl get rs
+```
 
 Listing ReplicaSet objects after rollback
-This confirms that the old ReplicaSet (web-769b88f67) object has been reused and that the new one has been scaled down to zero instances.
 
-Sometimes, though, we cannot, or do not want to, tolerate the mixed state of an old version coexisting with the new version. We want an all-or-nothing strategy. This is where blue-green deployments come into play, which we will discuss next.
+This confirms that the old ReplicaSet (**web-769b88f67**) object has been reused and that the new one has been scaled down to zero instances.
 
-Blue-green deployment
+Sometimes, though, we cannot, or do not want to, tolerate the mixed state of an old version coexisting with the new version. We want an **all-or-nothing strategy**. This is where **blue-green deployments** come into play, which we will discuss next.
+
+# Blue-green deployment
 If we want to do a blue-green style deployment for our component web of the pets application, then we can do so by using labels creatively. First, let's remind ourselves how blue-green deployments work. Here is a rough step-by-step instruction:
 
 Deploy the first version of the web component as blue. We will label the pods with a label of color: blue to do so.
