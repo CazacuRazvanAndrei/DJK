@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: probes-demo
-    image: fundamentalsofdocker/probes-demo:2.0
+    image: fredysa/demo:1.0
     livenessProbe:
       exec:
         command:
