@@ -167,8 +167,12 @@ On lines 23 through 33, we define the two environment variables, **PETS_USERNAME
 Note that we don't need a volume anymore; instead, we directly map the individual keys of our **pets-secret** into the corresponding environment variables that are valid inside the container. The following sequence of commands shows that the secret values are indeed available inside the container in the respective environment variables:
 
 ```
-kubectl exec -it web-6cdfb7d565-l8xq8  -- /bin/sh
-echo $PETS_USERNAME && echo $PETS_PASSWORD
+ kubectl exec -it web-6cdfb7d565-l8xq8  -- /bin/sh
+/app # echo $PETS_USERNAME && echo $PETS_PASSWORD
+john.doe       
+sEcret-pasSw0rD
+/app #    
+   
 ```
 
 Secret values are mapped to environment variables
