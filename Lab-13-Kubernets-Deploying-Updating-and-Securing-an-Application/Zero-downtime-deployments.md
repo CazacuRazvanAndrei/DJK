@@ -165,74 +165,105 @@ Sometimes, though, we cannot, or do not want to, tolerate the mixed state of an 
 # Blue-green deployment
 If we want to do a blue-green style deployment for our component web of the pets application, then we can do so by using labels creatively. First, let's remind ourselves how blue-green deployments work. Here is a rough step-by-step instruction:
 
-Deploy the first version of the web component as blue. We will label the pods with a label of color: blue to do so.
-Deploy the Kubernetes service for these pods with the color: blue label in the selector section.
-Now, we can deploy version 2 of the web component, but, this time, the pods have a label of color: green.
-We can test the green version of the service to check that it works as expected.
-Now, we flip traffic from blue to green by updating the Kubernetes service for the web component. We modify the selector so that it uses the color: green label.
+- Deploy the first version of the **web** component as **blue**. We will label the pods with a label of **color: blue** to do so.
+- Deploy the Kubernetes service for these pods with the **color: blue** label in the selector section.
+- Now, we can deploy version 2 of the web component, but, this time, the pods have a label of **color: green**.
+- We can test the green version of the service to check that it works as expected.
+- Now, we flip traffic from blue to green by updating the Kubernetes service for the web component. We modify the selector so that it uses the **color: green** label.
+
 Let's define a Deployment object for version 1, blue:
 
+![zdd](./img/m13-zdd-p2.png)
 
 Specification of the blue deployment for the web component
-The preceding definition can be found in the ~/fod/ch16/web-deploy-blue.yaml file. Please take note of line 4, where we define the name of the deployment as web-blue to distinguish it from the upcoming deployment, web-green. Also, note that we have added the label color: blue on lines 11 and 17. Everything else remains the same as before.
+The preceding definition can be found in the **~/Lab-13.../sample/web-deploy-blue.yaml** file. Please take note of line **4**, where we define the name of the deployment as **web-blue** to distinguish it from the upcoming deployment, **web-green**. Also, note that we have added the label **color: blue** on lines **11** and **17**. Everything else remains the same as before.
 
 Now, we can define the Service object for the web component. It will be the same as the one we used before but with a minor change, as shown in the following screenshot:
 
+![zdd](./img/m13-zdd-p3.png)
 
 Kubernetes service for the web component supporting blue-green deployments
-The only difference regarding the definition of the service we used earlier in this chapter is line 13, which adds the color: blue label to the selector. We can find the preceding definition in the ~/fod/ch16/web-svc-blue-green.yaml file.
+The only difference regarding the definition of the service we used earlier in this chapter is line **13**, which adds the **color: blue**label to the selector. We can find the preceding definition in the **~/Lab-13../sample/web-svc-blue-green.yaml** file.
 
 Then, we can deploy the blue version of the web component with the following command:
 
-Copy
+```
 $ kubectl create -f web-deploy-blue.yaml
 $ kubectl create -f web-svc-blue-green.yaml
+```
 Once the service is up and running, we can determine its IP address and port number and test it:
 
-Copy
-$ PORT=$(kubectl get svc/web -o yaml | grep nodePort | cut -d' ' -f5)
-$ IP=$(minikube ip)
-$ curl -4 ${IP}:${PORT}/
+```
+PS:
+$Port = kubectl get svc/web -o yaml | ? {$_ -like "*- nodePort*"}
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$Uri = "$($IP):$($Port)"
+curl $Uri/
 Pets Demo Application
-As expected, we get the response Pets Demo Application. Now, we can deploy the green version of the web component. The definition of its Deployment object can be found in the ~/fod/ch16/web-deploy-green.yaml file and looks as follows:
+```
 
+As expected, we get the response Pets Demo Application. Now, we can deploy the green version of the web component. The definition of its Deployment object can be found in the **~/Lab-13../sample/web-deploy-green.yaml** file and looks as follows:
+
+![zdd](./img/m13-zdd-p4.png)
 
 Specification of the deployment green for the web component
 The interesting lines are as follows:
 
-Line 4: Named web-green to distinguish it from web-blue and allow for parallel installation
-Lines 11 and 17: Have the color green
-Line 20: Now using version 2.1 of the image
+- Line **4**: Named web-green to distinguish it from web-blue and allow for parallel installation
+- Lines **11** and **17**: Have the color green
+- Line **20:** Now using version 2.1 of the image
+- 
 Now, we're ready to deploy this green version of the service. It should run separately from the blue service:
 
-Copy
+```
 $ kubectl create -f web-deploy-green.yaml
+```
 We can make sure that both deployments coexist like so:
 
+```
+kubectl get deploy 
+```
 
 Displaying the list of Deployment objects running in the cluster
-As expected, we have both blue and green running. We can verify that blue is still the active service:
 
-Copy
-$ curl -4 ${IP}:${PORT}/
+As expected, we have both blue and green running. We can verify that blue is still the active service:
+```
+PS:
+$Port = kubectl get svc/web -o yaml | ? {$_ -like "*- nodePort*"}
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$Uri = "$($IP):$($Port)"
+curl $Uri/
 Pets Demo Application
+```
+
 Now comes the interesting part. We can flip traffic from blue to green by editing the existing service for the web component. To do so, execute the following command:
 
-Copy
+```
 $ kubectl edit svc/web
-Change the value of the label color from blue to green. Then, save and quit the editor. The Kubernetes CLI will automatically update the service. When we now query the web service again, we get this:
+```
 
-Copy
-$ curl -4 ${IP}:${PORT}/
+Change the value of the label color from blue to green. Then, save and quit the editor. The Kubernetes CLI will automatically update the service. When we now query the web service again, we get this:
+```
+PS:
+$Port = kubectl get svc/web -o yaml | ? {$_ -like "*- nodePort*"}
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$Uri = "$($IP):$($Port)"
+curl $Uri/
 Pets Demo Application v2
-This confirms that the traffic has indeed switched to the green version of the web component (note the v2 at the end of the response to the curl command).
+```
+This confirms that the traffic has indeed switched to the green version of the web component (note the **v2** at the end of the response to the **curl** command).
 
 If we realize that something went wrong with our green deployment and the new version has a defect, we can easily switch back to the blue version by editing the service web again and replacing the value of the label color with blue. This rollback is instantaneous and should always work. Then, we can remove the buggy green deployment and fix the component. When we have corrected the problem, we can deploy the green version once again.
 
 Once the green version of the component is running as expected and performing well, we can decommission the blue version:
 
-Copy
+```
 $ kubectl delete deploy/web-blue
-When we're ready to deploy a new version, 3.0, this one becomes the blue version. We update the ~/fod/ch16/web-deploy-blue.yaml file accordingly and deploy it. Then, we flip the service web from green to blue, and so on.
+```
+
+When we're ready to deploy a new version, **3.0**, this one becomes the blue version. We update the **~/Lab-13../sample//web-deploy-blue.yaml** file accordingly and deploy it. Then, we flip the service web from **green** to **blue**, and so on.
 
 We have successfully demonstrated, with our component web of the pets application, how blue-green deployment can be achieved in a Kubernetes cluster.
