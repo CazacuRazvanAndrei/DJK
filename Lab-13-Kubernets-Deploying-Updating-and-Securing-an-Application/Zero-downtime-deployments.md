@@ -38,35 +38,43 @@ spec:
 
 Now, we can create this deployment as usual and also, at the same time, the service that makes our component accessible:
 
-Copy
+```
 $ kubectl create -f web-deploy-rolling-v1.yaml
 $ kubectl create -f web-service.yaml
+```
+
 Once we have deployed the pods and the service, we can test our web component with the following command:
 
-Copy
+```
 $ PORT=$(kubectl get svc/web -o yaml | grep nodePort | cut -d' ' -f5)
 $ IP=$(minikube ip)
 $ curl -4 ${IP}:${PORT}/
 Pets Demo Application
-As we can see, the application is up and running and returns the expected message, Pets Demo Application.
+```
 
-Now. our developers have created a new version, 2.1, of the web component. The code of the new version of the web component can be found in the ~/fod/ch16/web folder, and the only change is located on line 12 of the server.js file:
+As we can see, the application is up and running and returns the expected message, **Pets Demo Application**.
 
+Now. our developers have created a new version, 2.1, of the web component. The code of the new version of the web component can be found in the **~/Lab-13../sample/web**folder, and the only change is located on line 12 of the server.js file:
+
+![zdd](./img/m13-zdd-p1.png)
 
 Code change for version 2.0 of the web component
 The developers have built the new image as follows:
-
-Copy
-$ docker image build -t fundamentalsofdocker/ch16-web:2.1 web
+```
+$ docker image build -t fredysa/web:2.1 .
+```
 Subsequently, they pushed the image to Docker Hub, as follows:
 
-Copy
-$ docker image push fundamentalsofdocker/ch16-web:2.1
+```
+$ docker image push fredysa/web:2.1
+```
 Now, we want to update the image that's used by our pods that are part of the web Deployment object. We can do this by using the set image command of kubectl:
 
-Copy
-$ kubectl set image deployment/web \
-    web=fundamentalsofdocker/ch16-web:2.1
+```
+$ kubectl set image deployment/web  web=fredysa/web:2.1
+
+```
+
 If we test the application again, we'll get a confirmation that the update has indeed happened:
 
 Copy
