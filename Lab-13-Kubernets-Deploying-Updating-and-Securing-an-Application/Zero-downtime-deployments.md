@@ -142,7 +142,7 @@ To roll back the update of the image in case some undetected bug sneaked into th
 ```
 $ kubectl rollout undo deploy/web
 deployment "web"
-$ curl -4 ${IP}:${PORT}/
+curl $Uri/
 Pets Demo Application
 ```
 
