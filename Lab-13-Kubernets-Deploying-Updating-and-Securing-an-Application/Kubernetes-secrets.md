@@ -121,7 +121,9 @@ On lines 27 through 30, we define a volume called secrets from our secret, **pet
 In our case, since we have the **username** and **password** keys in the secret, we will find two files, named username and password, in the **/etc/secrets** folder in the container filesystem. The **username** file should contain the value **john.doe**and the password file should contain the value **sEcret-pasSw0rD**. Here is the confirmation:
 
 ```
-kubectl exec -it web... -- /bin/sh
+kubectl get all
+#Pod
+kubectl exec -it web-8b47b4fd5-snkv8  -- /bin/sh
 cd /etc/secrets
 ls -l
 
@@ -139,6 +141,10 @@ Sometimes, though, applications expect secrets to be available in environment va
 Let's say our web component expects the username in the environment variable, **PETS_USERNAME**, and the password in **PETS_PASSWORD**. If this is the case, we can modify our deployment YAML so that it looks as follows:
 
 ![ks](./img/m13-ks-p2.png)
+
+```
+kubectl create -f web-deploy-secret-env.yaml
+```
 
 Deployment mapping secret values to environment variables
 
