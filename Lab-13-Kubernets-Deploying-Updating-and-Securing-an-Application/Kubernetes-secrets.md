@@ -144,6 +144,20 @@ Let's say our web component expects the username in the environment variable, **
 
 ```
 kubectl create -f web-deploy-secret-env.yaml
+kubectl get all
+
+NAME                       READY   STATUS    RESTARTS   AGE
+pod/web-6cdfb7d565-l8xq8   1/1     Running   0          75s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE 
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   2d3h
+
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/web   1/1     1            1           75s
+
+NAME                             DESIRED   CURRENT   READY   AGE
+replicaset.apps/web-6cdfb7d565   1         1         1       75s
+
 ```
 
 Deployment mapping secret values to environment variables
@@ -153,7 +167,7 @@ On lines 23 through 33, we define the two environment variables, **PETS_USERNAME
 Note that we don't need a volume anymore; instead, we directly map the individual keys of our **pets-secret** into the corresponding environment variables that are valid inside the container. The following sequence of commands shows that the secret values are indeed available inside the container in the respective environment variables:
 
 ```
-kubectl exec -t web... -- /bin/sh
+kubectl exec -t web-6cdfb7d565-l8xq8  -- /bin/sh
 echo $PETS_USERNAME && echo $PETS_PASSWORD
 ```
 
