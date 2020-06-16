@@ -88,7 +88,10 @@ Let's try this out:
 Navigate to the **~/Lab-13-.../sample/probes** folder and build the Docker image with the following command:
 
 ```
-$ docker image build -t fredysa/demo:1.0 .
+docker image build -t fredysa/demo:1.0 .
+
+docker pull fredysa/demo:1.0
+
 ```
 
 Use kubectl to deploy the sample pod that's defined in probes-demo.
