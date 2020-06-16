@@ -39,7 +39,7 @@ kubectl create -f pets-secret.yaml
 
 Creating and describing the Kubernetes secret
 3. In the description of the secret, the values are hidden and only their length is given. So, maybe the secrets are safe now? No, not really. We can easily decode this secret using the **kubectl get** command:
-1. 
+
 ```
 kubectl get secrets/pets-secrets -o yaml
 ```
