@@ -109,32 +109,72 @@ $ kubectl describe pods/probes-demo
 
 During the first half minute or so, you should get the following output:
 
+```
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  35s   default-scheduler  Successfully assigned default/probes-demo to minikube
+  Normal  Pulled     34s   kubelet, minikube  Container image "fredysa/demo:1.0" already present on machine
+  Normal  Created    34s   kubelet, minikube  Created container probes-demo
+  Normal  Started    34s   kubelet, minikube  Started container probes-demo
 
+```
 
 Log output of the healthy pod
 Wait at least 30 seconds and then describe the pod again. This time, you should see the following output:
 
-Log output of the pod after it has changed its state to Unhealthy
+```
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  68s                default-scheduler  Successfully assigned default/probes-demo to minikube
+  Normal   Pulled     67s                kubelet, minikube  Container image "fredysa/demo:1.0" already present on machine
+  Normal   Created    67s                kubelet, minikube  Created container probes-demo
+  Normal   Started    67s                kubelet, minikube  Started container probes-demo
+  Warning  Unhealthy  24s (x3 over 34s)  kubelet, minikube  Liveness probe failed: cat: /app/healthy: No such file or directory
+  Normal   Killing    24s                kubelet, minikube  Container probes-demo failed liveness probe, will be restarted
+```
+
+Log output of the pod after it has changed its state to **Unhealthy**
 The last two lines are indicating the failure of the probe and the fact that the pod is going to be restarted.
+
+```
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  2m32s                default-scheduler  Successfully assigned default/probes-demo to minikube
+  Normal   Pulling    2m32s                kubelet, minikube  Pulling image "fredysa/demo:1.0"
+  Normal   Pulled     2m23s                kubelet, minikube  Successfully pulled image "fredysa/demo:1.0"
+  Normal   Created    71s (x2 over 2m22s)  kubelet, minikube  Created container probes-demo
+  Normal   Started    71s (x2 over 2m22s)  kubelet, minikube  Started container probes-demo
+  Normal   Pulled     71s                  kubelet, minikube  Container image "fredysa/demo:1.0" already present on machine
+  Warning  Unhealthy  26s (x6 over 111s)   kubelet, minikube  Liveness probe failed: cat: /app/healthy: No such file or directory
+  Normal   Killing    26s (x2 over 101s)   kubelet, minikube  Container probes-demo failed liveness probe, will be restarted
+```
+
+
 
 If you get the list of pods, you will see that the pod has been restarted a number of times:
 
-Copy
+```
 $ kubectl get pods
 NAME         READY   STATUS    RESTARTS   AGE
 probes-demo  1/1     Running   5          7m22s
+```
+
 When you're done with the sample, delete the pod with the following command:
 
-Copy
+```
 $ kubectl delete pods/probes-demo
+```
 Next, we will have a look at the Kubernetes readiness probe.
 
-Kubernetes readiness probe
+# Kubernetes readiness probe
 Kubernetes uses a readiness probe to decide when a service instance, that is, a container, is ready to accept traffic. Now, we all know that Kubernetes deploys and runs pods and not containers, so it only makes sense to talk about the readiness of a pod. Only if all containers in a pod report to be ready is the pod considered to be ready itself. If a pod reports not to be ready, then Kubernetes removes it from the service load balancers.
 
-Readiness probes are defined exactly the same way as liveness probes: just switch the livenessProbe key in the pod spec to readinessProbe. Here is an example using our prior pod spec:
+Readiness probes are defined exactly the same way as liveness probes: just switch the **livenessProbe** key in the pod spec to **readinessProbe**. Here is an example using our prior pod spec:
 
-Copy
+```
  ...
 spec:
  containers:
@@ -152,16 +192,18 @@ spec:
        port: 5432
      initialDelaySeconds: 10
      periodSeconds: 5
-Note that, in this example, we don't really need an initial delay for the liveness probe anymore since we now have a readiness probe. Thus, I have replaced the initial delay entry for the liveness probe with an entry called failureThreshold, which is indicating how many times Kubernetes should repeat probing in case of a failure until it assumes that the container is unhealthy.
+```
 
-Kubernetes startup probe
+Note that, in this example, we don't really need an initial delay for the liveness probe anymore since we now have a readiness probe. Thus, I have replaced the initial delay entry for the liveness probe with an entry called **failureThreshold**, which is indicating how many times Kubernetes should repeat probing in case of a failure until it assumes that the container is unhealthy.
+
+# Kubernetes startup probe
 It is often helpful for Kubernetes to know when a service instance has started. If we define a startup probe for a container, then Kubernetes does not execute the liveness or readiness probes, as long as the container's startup probe does not succeed. Once again, Kubernetes looks at pods and starts executing liveness and readiness probes on its containers if the startup probes of all the pod's containers succeed.
 
 When would we use a startup probe, given the fact that we already have the liveness and readiness probes? There might be situations where we have to account for exceptionally long startup and initialization times, such as when containerizing a legacy application. We could technically configure the readiness or the liveness probes to account for this fact, but that would defeat the purpose of these probes. The latter probes are meant to provide quick feedback to Kubernetes on the health and availability of the container. If we configure for long initial delays or periods, then this would counter the desired outcome.
 
 Unsurprisingly, the startup probe is defined exactly the same way as the readiness and liveness probes. Here is an example:
 
-Copy
+```
 spec:
   containers:
     ..
@@ -171,6 +213,8 @@ spec:
       failureThreshold: 30
       periodSeconds: 5
   ...
-Make sure that you define the failureThreshold * periodSeconds product so that it's big enough to account for the worst startup time.
+```
 
-In our example, the max startup time should not exceed 150 seconds.
+Make sure that you define the **failureThreshold * periodSeconds** product so that it's big enough to account for the worst startup time.
+
+**NOTE:** In our example, the max startup time should not exceed 150 seconds.
