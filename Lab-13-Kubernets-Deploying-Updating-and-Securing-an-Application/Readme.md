@@ -23,3 +23,15 @@ minikube start
 The code for this chapter can be found here: cd .\Lab-13-Kubernets-Deploying-Updating-and-Securing-an-Application\sample
 
 In your Terminal, navigate to the **~/Lab-13-Kubernets-Deploying-Updating-and-Securing-an-Application/sample** folder.
+
+# Summary
+In this chapter, we have learned how to deploy an application into a Kubernetes cluster and how to set up application-level routing for this application. Furthermore, we have learned how to update application services running in a Kubernetes cluster without causing any downtime. Finally, we used secrets to provide sensitive information to application services running in the cluster.
+
+In the next chapter, we are going to learn about different techniques that are used to monitor an individual service or a whole distributed application running on a Kubernetes cluster.
+
+# Further reading
+Here are a few links that provide additional information on the topics that were discussed in this chapter:
+
+Performing a rolling update: https://bit.ly/2o2okEQ
+Blue-green deployment: https://bit.ly/2r2IxNJ 
+Secrets in Kubernetes: https://bit.ly/2C6hMZF
