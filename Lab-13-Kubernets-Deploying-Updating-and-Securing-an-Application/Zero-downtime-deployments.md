@@ -46,9 +46,12 @@ $ kubectl create -f web-service.yaml
 Once we have deployed the pods and the service, we can test our web component with the following command:
 
 ```
-$ PORT=$(kubectl get svc/web -o yaml | grep nodePort | cut -d' ' -f5)
-$ IP=$(minikube ip)
-$ curl -4 ${IP}:${PORT}/
+PS:
+$Port = kubectl get svc/web -o yaml | ? {$_ -like "*- nodePort*"}
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$Uri = "$($IP):$($Port)"
+curl $Uri/
 Pets Demo Application
 ```
 
@@ -78,7 +81,12 @@ $ kubectl set image deployment/web  web=fredysa/web:2.1
 If we test the application again, we'll get a confirmation that the update has indeed happened:
 
 ```
-$ curl -4 ${IP}:${PORT}/
+PS:
+$Port = kubectl get svc/web -o yaml | ? {$_ -like "*- nodePort*"}
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$Uri = "$($IP):$($Port)"
+curl $Uri/
 Pets Demo Application v2
 ```
 Now, how do we know that there hasn't been any downtime during this update? Did the update really happen in a rolling fashion? What does rolling update mean at all? Let's investigate. First, we can get a confirmation from Kubernetes that the deployment has indeed happened and was successful by using the rollout status command:
@@ -92,6 +100,21 @@ If we describe the deployment web with kubectl describe deploy/web, we get the f
 
 ```
 kubectl describe deploy/web
+
+....
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  13m    deployment-controller  Scaled up replica set web-65b854c76b to 5
+  Normal  ScalingReplicaSet  2m43s  deployment-controller  Scaled up replica set web-844bc97664 to 2
+  Normal  ScalingReplicaSet  2m43s  deployment-controller  Scaled down replica set web-65b854c76b to 4
+  Normal  ScalingReplicaSet  2m43s  deployment-controller  Scaled up replica set web-844bc97664 to 3
+  Normal  ScalingReplicaSet  2m38s  deployment-controller  Scaled down replica set web-65b854c76b to 3
+  Normal  ScalingReplicaSet  2m38s  deployment-controller  Scaled up replica set web-844bc97664 to 4
+  Normal  ScalingReplicaSet  2m37s  deployment-controller  Scaled down replica set web-65b854c76b to 2
+  Normal  ScalingReplicaSet  2m37s  deployment-controller  Scaled up replica set web-844bc97664 to 5
+  Normal  ScalingReplicaSet  2m36s  deployment-controller  Scaled down replica set web-65b854c76b to 1
+  Normal  ScalingReplicaSet  2m36s  deployment-controller  Scaled down replica set web-65b854c76b to 0
 ```
 
  List of events found in the output of the deployment description of the web component
@@ -104,7 +127,10 @@ During a short time period, some of the calls to the web service would have had 
 We can also list the ReplicaSet objects in the cluster and will get confirmation of what I said in the preceding section:
 
 ```
-kubectl get ps
+kubectl get rs
+NAME             DESIRED   CURRENT   READY   AGE
+web-65b854c76b   0         0         0       16m
+web-844bc97664   5         5         5       6m9s
 ```
 
 Listing all the ReplicaSet objects in the cluster
