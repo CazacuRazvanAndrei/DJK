@@ -1,16 +1,17 @@
 # Zero downtime deployments
 In a mission-critical environment, it is important that the application is always up and running. These days, we cannot afford any downtime anymore. Kubernetes gives us various means of achieving this. Performing an update on an application in the cluster that causes no downtime is called a zero downtime deployment. In this section, we will present two ways of achieving this. These are as follows:
 
-Rolling updates
-Blue-green deployments
+- Rolling updates
+- Blue-green deployments
+
 Let's start by discussing rolling updates.
 
-Rolling updates
+# Rolling updates
 In the previous chapter, we learned that the Kubernetes Deployment object distinguishes itself from the ReplicaSet object in that it adds rolling updates and rollbacks on top of the latter's functionality. Let's use our web component to demonstrate this. Evidently, we will have to modify the manifest or description of the deployment for the web component.
 
-We will use the same deployment definition as in the previous section, with one important difference – we will have five replicas of the web component running. The following definition can also be found in the ~/fod/ch16/web-deploy-rolling-v1.yaml file:
+We will use the same deployment definition as in the previous section, with one important difference – we will have five replicas of the web component running. The following definition can also be found in the **~\Lab-13-...\sample\web-deploy-rolling-v1.yaml**file:
 
-Copy
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,11 +29,13 @@ spec:
         service: web
     spec:
       containers:
-      - image: fundamentalsofdocker/ch11-web:2.0
+      - image: fredysa/web:1.0
         name: web
         ports:
         - containerPort: 3000
           protocol: TCP
+```
+
 Now, we can create this deployment as usual and also, at the same time, the service that makes our component accessible:
 
 Copy
