@@ -21,3 +21,4 @@ Here is a list of articles that contain more detailed information about the vari
 - The Raft Consensus Algorithm: https://raft.github.io/
 - Docker Compose and Kubernetes with Docker for Desktop: https://dockr.ly/2G8Iqb9
 - Kubernetes Documentation: https://kubernetes.io/docs/home/
+- Kubernets CheatSheet - https://kubernetes.io/docs/reference/kubectl/cheatsheet/

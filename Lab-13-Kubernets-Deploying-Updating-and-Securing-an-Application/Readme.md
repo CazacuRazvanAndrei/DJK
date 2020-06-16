@@ -7,7 +7,7 @@ In this chapter, we will learn how to deploy, update, and scale applications int
 # This chapter covers the following topics:
 
 - [Deploying a first application](Deploying-a-first-application.md)
-- Defining liveness and readiness
+- [Defining liveness and readiness](Defining-liveness-and-readiness.md)
 - Zero downtime deployments
 - Kubernetes secrets
 
