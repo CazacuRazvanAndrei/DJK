@@ -110,6 +110,10 @@ In the **~/Lab-13-.../sample/web-deploy-secret.yaml** file, we can find the defi
 
 ![KS](./img/m13-zdd-p5.png)
 
+```
+kubectl create -f web-deploy-secret.yaml
+```
+
 Deployment object for the web component with a secret
 
 On lines 27 through 30, we define a volume called secrets from our secret, **pets-secret**. Then, we use this volume in the container, as described on lines 23 through 26. We mount the secrets in the container filesystem at **/etc/secrets** and we mount the volume in read-only mode. Thus, the secret values will be available to the container as files in the said folder. The names of the files will correspond to the key names, and the content of the files will be the values of the corresponding keys. The values will be provided in unencrypted form to the application running inside the container.
