@@ -281,6 +281,10 @@ prometheus-svc   NodePort    10.110.239.245   <none>        9090:31962/TCP   77m
 
 In my case, the .NET API is mapped to port **30822** , and the Node API to port **31713**. Your ports may differ.
 
+! If failing on downloading image check external network for minikube
+
+![km](./img/m14-UPMDA-p8.png)
+
 Use PS to access the /metrics endpoint for both services:
 
 dotnet-api-svc
