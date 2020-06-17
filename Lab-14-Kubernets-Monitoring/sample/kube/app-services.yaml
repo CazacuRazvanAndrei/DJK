@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: dotnet-api
-        image: fundamentalsofdocker/ch17-dotnet-api:2.0
+        image: fredysa/dotnet-api:1.0
 ---
 kind: Service
 apiVersion: v1
@@ -56,7 +56,7 @@ spec:
     spec:
       containers:
       - name: node-api
-        image: fundamentalsofdocker/ch17-node-api:2.0
+        image: fredysa/node-api:1.0
 ---
 kind: Service
 apiVersion: v1
