@@ -8,7 +8,7 @@ The chapter covers the following topics:
 
 - [Monitoring an individual service](Monitoring-an-individual-service.md)
 - [Using Prometheus to monitor your distributed application](Using-Prometheus-to-monitor-your-distributed-application.md)
-- Troubleshooting a service running in production
+- [Troubleshooting a service running in production](Troubleshooting-a-service-running-in-production.md)
 
 Technical requirements
 In this chapter, we're going to use Minikube on our local computer. Please refer to  Setting Up a Working Environment, for more information on how to install and use Minikube.
