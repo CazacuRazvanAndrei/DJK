@@ -156,11 +156,11 @@ Let's start by creating a simple .NET Core microservice based on the Web API tem
 ```
 mkdir dotnet
 cd dotnet
-choco install dotnetcore -y
+choco install dotnetcore-sdk -y
 ```
 2. Use the **dotnet** tool to scaffold a new microservice called **sample-api**:
 ```
-$ dotnet new webapi --output sample-api
+dotnet new webapi --output sample-api2
 ```
 
 3. We will use the Prometheus adapter for .NET, which is available to us as a NuGet package called prometheus-net.AspNetCore. Add this package to the sample-api project, with the following command:
