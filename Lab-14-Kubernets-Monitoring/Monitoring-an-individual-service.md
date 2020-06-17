@@ -176,6 +176,7 @@ code .
 Locate the **Startup.cs** file, and open it. At the beginning of the file, add a **using**statement:
 ```
 using Prometheus; 
+
 ```
 Then in the Configure method add the endpoints.MapMetrics() statement to the mapping of the endpoints. Your code should look as follows:
 
