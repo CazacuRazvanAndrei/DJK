@@ -292,8 +292,8 @@ dotnet-api-svc
 $Port = kubectl get service/dotnet-api-svc -o yaml | ? {$_ -like "*nodePort:*"} 
 $Port = $port.Substring("14","5")
 $IP=minikube ip
-$Uri = "http://$($IP):$($Port)"
-start $Uri/metrics
+$dotnet-api-svc = "http://$($IP):$($Port)"
+start $dotnet-api-svc/metrics
 ```
 
 node-api-svc 
@@ -301,9 +301,9 @@ node-api-svc
 $Port = kubectl get service/node-api-svc -o yaml | ? {$_ -like "*nodePort:*"} 
 $Port = $port.Substring("14","5")
 $IP=minikube ip
-$Uri = "http://$($IP):$($Port)"
-start $Uri/metrics
-node-api-svc
+$node-api-svc  = "http://$($IP):$($Port)"
+start $node-api-svc/metrics
+
 ```
 ```
 start http://localhost:30822/metrics
@@ -335,10 +335,10 @@ Prometheus showing all targets are up and running
 
 ```
 # access the /weatherforecast endpoint in the .NET service
-start http://localhost:31713/weatherforecast
+start start $dotnet-api-svc/weatherforecast
 
 # and access the /hello endpoint in the Node service 
-start http://localhost:30822/hello
+start $node-api-svc/hello
 ```
 
 The last step is to deploy Grafana to Kubernetes so that we have the ability to create sophisticated and graphically appealing dashboards displaying key metrics of our application services and/or infrastructure components.
