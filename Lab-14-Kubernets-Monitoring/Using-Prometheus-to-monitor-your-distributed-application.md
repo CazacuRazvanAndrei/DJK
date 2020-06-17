@@ -157,7 +157,7 @@ $Port = kubectl get service/prometheus-svc -o yaml | ? {$_ -like "*nodePort:*"}
 $Port = $port.Substring("14","5")
 $IP=minikube ip
 $Uri = "http://$($IP):$($Port)"
-start $Uri/
+start $Uri/tragets
 ```
 ![km](./img/m14-UPMDA-p2.png)
 
