@@ -21,3 +21,10 @@ In your Terminal, navigate to the **~lab-14-Kubernets-Monitoring\sample**
 In this chapter, you learned some techniques used to monitor an individual service or a whole distributed application running on a Kubernetes cluster. Furthermore, you investigated troubleshooting an application service that is running in production without having to alter the cluster or the cluster nodes on which the service is running.
 
 In the next and final chapter of this book, you will gain an overview of some of the most popular ways of running containerized applications in the cloud. The chapter includes samples on how to self-host and use hosted solutions and discuss their pros and cons. Fully managed offerings of vendors such as Microsoft Azure and Google Cloud Engine are briefly discussed.
+
+# Further reading
+Here are a few links that provide additional information on the topics discussed in this chapter:
+
+- Kubernetes Monitoring with Prometheus: https://sysdig.com/blog/kubernetes-monitoring-prometheus/
+- Prometheus Client Libraries: https://prometheus.io/docs/instrumenting/clientlibs/
+- The netshoot container: https://github.com/nicolaka/netshoot
