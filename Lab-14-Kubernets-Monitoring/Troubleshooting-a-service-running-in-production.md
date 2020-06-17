@@ -12,23 +12,19 @@ Nicola Kabar, a former Docker employee, has created a handy Docker image called 
 
 "Purpose: Docker and Kubernetes network troubleshooting can become complex. With proper understanding of how Docker and Kubernetes networking works and the right set of tools, you can troubleshoot and resolve these networking issues. The netshoot container has a set of powerful networking troubleshooting tools that can be used to troubleshoot Docker networking issues."- Nicola Kabar
 
-- https://hub.docker.com/r/nicolaka/netshoot (Downlod dockerfile)
-```
-docker build -t fredysa/netshoot:1.0 .
-docker pull fredysa/netshoot:1.0
-
-```
+- https://hub.docker.com/r/nicolaka/netshoot 
+- 
 To use this container for debugging purposes, we can proceed as follows:
 
 - Spin up a throwaway bastion container for debugging on Kubernetes, using the following command:
 ```
 $ kubectl run tmp-shell --generator=run-pod/v1 --rm -i --tty `
-     --image fredysa/netshoot:1.0 `
+     --image nicolaka/netshoot `
      --command -- bash
  
  bash-5.0#
 ```
-- You can now use tools such as **ip**from within this container:
+- You can now use tools such as **ip** from within this container:
 ```
 bash-5.0# ip a
 ```
@@ -52,7 +48,7 @@ bash-5.0# ip a
 ```
 kubectl run tmp-shell --generator=run-pod/v1 --rm -i --tty `
      --overrides='{"spec": {"hostNetwork": true}}' `
-     --image fredysa/netshoot:1.0 `
+     --image nicolaka/netshoot `
      --command -- bash
 ```
 

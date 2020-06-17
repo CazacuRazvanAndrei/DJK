@@ -72,7 +72,6 @@ RUN wget https://github.com/gcla/termshark/releases/download/v${TERMSHARK_VERSIO
 
 
 # Settings
-ADD motd /etc/motd
-ADD profile  /etc/profile
+
 
 CMD ["/bin/bash","-l"]
