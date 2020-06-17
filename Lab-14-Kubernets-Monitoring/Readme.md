@@ -7,7 +7,7 @@ In this chapter, you will learn the different techniques used to monitor an indi
 The chapter covers the following topics:
 
 - [Monitoring an individual service](Monitoring-an-individual-service.md)
-- Using Prometheus to monitor your distributed application
+- [Using Prometheus to monitor your distributed application](Using-Prometheus-to-monitor-your-distributed-application.md)
 - Troubleshooting a service running in production
 
 Technical requirements
