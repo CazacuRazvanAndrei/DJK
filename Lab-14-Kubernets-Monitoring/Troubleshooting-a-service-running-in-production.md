@@ -8,29 +8,33 @@ We may be tempted to SSH into the given cluster node and run some diagnostic too
 A better solution is to have the cluster admin run a so-called bastion container on behalf of the developers. This bastion or troubleshoot container has all the tools installed that we need to pinpoint the root cause of the bug in the application service. It is also possible to run the bastion container in the host's network namespace; thus, it will have full access to all the network traffic of the container host.
 
 # The netshoot container
-Nicola Kabar, a former Docker employee, has created a handy Docker image called nicolaka/netshoot that field engineers at Docker use all the time to troubleshoot applications running in production on Kubernetes or Docker Swarm. We created a copy of the image for this book, available at fundamentalsofdocker/netshoot. The purpose of this container in the words of the creator is as follows:
+Nicola Kabar, a former Docker employee, has created a handy Docker image called **nicolaka/netshoot**that field engineers at Docker use all the time to troubleshoot applications running in production on Kubernetes or Docker Swarm. We created a copy of the image for this book, available at **fredysa/netshoot:1.0**. The purpose of this container in the words of the creator is as follows:
 
 "Purpose: Docker and Kubernetes network troubleshooting can become complex. With proper understanding of how Docker and Kubernetes networking works and the right set of tools, you can troubleshoot and resolve these networking issues. The netshoot container has a set of powerful networking troubleshooting tools that can be used to troubleshoot Docker networking issues."- Nicola Kabar
 
-- https://hub.docker.com/r/nicolaka/netshoot
+- https://hub.docker.com/r/nicolaka/netshoot (Downlod dockerfile)
 ```
 docker build -t fredysa/netshoot:1.0 .
+docker pull fredysa/netshoot:1.0
+
 ```
 To use this container for debugging purposes, we can proceed as follows:
 
-Spin up a throwaway bastion container for debugging on Kubernetes, using the following command:
-Copy
-$ kubectl run tmp-shell --generator=run-pod/v1 --rm -i --tty \
-     --image fundamentalsofdocker/netshoot \
+- Spin up a throwaway bastion container for debugging on Kubernetes, using the following command:
+```
+$ kubectl run tmp-shell --generator=run-pod/v1 --rm -i --tty `
+     --image fredysa/netshoot:1.0 `
      --command -- bash
  
  bash-5.0#
-You can now use tools such as ip from within this container:
-Copy
+```
+- You can now use tools such as **ip**from within this container:
+```
 bash-5.0# ip a
-On my machine, this results in an output similar to the following if I run the pod on Docker for Windows:
+```
+- On my machine, this results in an output similar to the following if I run the pod on Docker for Windows:
 
-Copy
+```
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
      link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
      inet 127.0.0.1/8 scope host lo
@@ -41,12 +45,17 @@ Copy
      link/ether 52:52:9d:1d:fd:cc brd ff:ff:ff:ff:ff:ff link-netnsid 0
      inet 10.1.0.71/16 scope global eth0
         valid_lft forever preferred_lft forever
-To leave this troubleshoot container, just press Ctrl + D or type exit and then hit Enter.
-If we need to dig a bit deeper and run the container in the same network namespace as the Kubernetes host, then we can use this command instead:
-Copy
-$ kubectl run tmp-shell --generator=run-pod/v1 --rm -i --tty \
-     --overrides='{"spec": {"hostNetwork": true}}' \
-     --image fundamentalsofdocker/netshoot \
+```
+
+- To leave this troubleshoot container, just press Ctrl + D or type **exit** and then hit Enter.
+- If we need to dig a bit deeper and run the container in the same network namespace as the Kubernetes host, then we can use this command instead:
+```
+kubectl run tmp-shell --generator=run-pod/v1 --rm -i --tty `
+     --overrides='{"spec": {"hostNetwork": true}}' `
+     --image fredysa/netshoot:1.0 `
      --command -- bash
-If we run ip again in this container, we will see everything that the container host sees too, for example, all the veth endpoints. 
-The netshoot container has all the usual tools installed that an engineer ever needs to troubleshoot network-related problems. Some of the more familiar ones are ctop, curl, dhcping, drill, ethtool, iftop, iperf, and iproute2.
+```
+
+- If we run **ip** again in this container, we will see everything that the container host sees too, for example, all the **veth** endpoints. 
+
+The **netshoot** container has all the usual tools installed that an engineer ever needs to troubleshoot network-related problems. Some of the more familiar ones are **ctop**, **curl**, **dhcping**, **drill**, **ethtool**, **iftop**, **iperf**, and **iproute2**.
