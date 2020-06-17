@@ -152,21 +152,31 @@ Now that we know how to instrument a Node Express application, let's do the same
 # Instrumenting a .NET Core-based service
 Let's start by creating a simple .NET Core microservice based on the Web API template.
 
-Create a new dotnet folder, and navigate to it:
-Copy
-$ mkdir dotnet && cd dotnet
-Use the dotnet tool to scaffold a new microservice called sample-api:
-Copy
+1. Create a new dotnet folder, and navigate to it:
+```
+mkdir dotnet
+cd dotnet
+choco install dotnetcore -y
+```
+2. Use the **dotnet** tool to scaffold a new microservice called **sample-api**:
+```
 $ dotnet new webapi --output sample-api
-We will use the Prometheus adapter for .NET, which is available to us as a NuGet package called prometheus-net.AspNetCore. Add this package to the sample-api project, with the following command:
-Copy
-$ dotnet add sample-api package prometheus-net.AspNetCore
-Open the project in your favorite code editor; for example, when using VS Code execute the following:
-Copy
-$ code .
-Locate the Startup.cs file, and open it. At the beginning of the file, add a using statement:
-Copy
+```
+
+3. We will use the Prometheus adapter for .NET, which is available to us as a NuGet package called prometheus-net.AspNetCore. Add this package to the sample-api project, with the following command:
+
+```
+ dotnet add sample-api package prometheus-net.AspNetCore
+```
+
+4. Open the project in your favorite code editor; for example, when using VS Code execute the following:
+```
+code .
+```
+Locate the **Startup.cs** file, and open it. At the beginning of the file, add a **using**statement:
+```
 using Prometheus; 
+```
 Then in the Configure method add the endpoints.MapMetrics() statement to the mapping of the endpoints. Your code should look as follows:
 Copy
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -178,16 +188,23 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         endpoints.MapMetrics();
     });
 }
+
+- **Tip:**
 Note that the above is valid for version 3.x of .NET Core. If you're on an earlier version, the configuration looks slightly different. Consult the following repo for more details, at https://github.com/prometheus-net/prometheus-net.
-With this, the Prometheus component will start publishing the request metrics of ASP.NET Core. Let's try it. First, start the application with the following:
-Copy
-$ dotnet run --project sample-api
+
+
+7. With this, the Prometheus component will start publishing the request metrics of ASP.NET Core. Let's try it. First, start the application with the following:
+
+```
+dotnet run --project sample-api
 
 info: Microsoft.Hosting.Lifetime[0]
       Now listening on: https://localhost:5001 
 info: Microsoft.Hosting.Lifetime[0]
       Now listening on: http://localhost:5000 
 ...
+```
+
 The preceding output tells us that the microservice is listening at https://localhost:5001.
 
 We can now use curl to call the metrics endpoint of the service:
