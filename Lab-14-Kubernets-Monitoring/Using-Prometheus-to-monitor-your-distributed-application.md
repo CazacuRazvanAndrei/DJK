@@ -206,7 +206,7 @@ ENTRYPOINT ["dotnet", "sample-api.dll"]
 ```
 
 - Create a Docker image by using this command from within the dotnet/sample-api project folder:
-- 
+
 ```
 docker image build -t fredysa/dotnet-api:1.0 .
 ```
@@ -220,7 +220,7 @@ docker image push fredysa/dotnet-api:1.0
 Now we do the same with the Node sample API:
 
 - Add **Dockerfile** with the following content to the **~/node** project folder:
-- 
+
 ```
 FROM node:13.5-alpine
 WORKDIR /app
