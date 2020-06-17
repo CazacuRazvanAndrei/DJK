@@ -156,7 +156,7 @@ Keep a close eye on the list of pods, and make sure they are all up and running.
 $Port = kubectl get service/prometheus-svc -o yaml | ? {$_ -like "*- nodePort*"}
 $Port = $port.Substring("14","5")
 $IP=minikube ip
-$Uri = "$($IP):$($Port)"
+$Uri = "http://$($IP):$($Port)"
 start $Uri/
 ```
 ![km](./img/m14-UPMDA-p2.png)
