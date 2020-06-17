@@ -158,15 +158,15 @@ mkdir dotnet
 cd dotnet
 choco install dotnetcore-sdk -y
 ```
-2. Use the **dotnet** tool to scaffold a new microservice called **sample-api**:
+2. Use the **dotnet** tool to scaffold a new microservice called **test-api**:
 ```
-dotnet new webapi --output sample-api
+dotnet new webapi --output test-api
 ```
 
-3. We will use the Prometheus adapter for .NET, which is available to us as a NuGet package called prometheus-net.AspNetCore. Add this package to the sample-api project, with the following command:
+3. We will use the Prometheus adapter for .NET, which is available to us as a NuGet package called prometheus-net.AspNetCore. Add this package to the test-api project, with the following command:
 
 ```
- dotnet add sample-api package prometheus-net.AspNetCore
+ dotnet add test-api package prometheus-net.AspNetCore
 ```
 
 4. Open the project in your favorite code editor; for example, when using VS Code execute the following:
@@ -197,7 +197,7 @@ Note that the above is valid for version 3.x of .NET Core. If you're on an earli
 7. With this, the Prometheus component will start publishing the request metrics of ASP.NET Core. Let's try it. First, start the application with the following:
 
 ```
-dotnet run --project sample-api
+dotnet run --project test-api
 
 info: Microsoft.Hosting.Lifetime[0]
       Now listening on: https://localhost:5001 
@@ -255,7 +255,7 @@ public IEnumerable<WeatherForecast> Get()
 ```
 Restart the microservice.
 ```
-dotnet run --project sample-api
+dotnet run --project test-api
 ```
 Call the /weatherforecast endpoint a couple of times using curl:
 ```
