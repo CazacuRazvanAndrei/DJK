@@ -232,17 +232,18 @@ What we get is a list of system metrics for our microservice. That was easy: we 
 
 What if we want to add our own (functional) metrics? This is equally straightforward. Assume we want to measure the number of concurrent accesses to our **/weatherforecas**t endpoint. To do this, we define a gauge and use it to wrap the logic in the appropriate endpoint with this **gauge**. We can do this by following these steps:
 
-Locate the **Controllers/WeatherForecastController.cs** class.
-Add using Prometheus; to the top of the file.
-Define a private instance variable of the Gauge type in the WeatherForecastController class:
+1. Locate the **Controllers/WeatherForecastController.cs** class.
+2. Add **using Prometheus;** to the top of the file.
+3. Define a private instance variable of the **Gauge** type in the **WeatherForecastController** class:
 
 ```
 private static readonly Gauge weatherForecastsInProgress = Metrics
     .CreateGauge("myapp_weather_forecasts_in_progress", 
                  "Number of weather forecast operations ongoing.");
 ```
-Wrap the logic of the Get method with a using statement:
-Copy
+4. Wrap the logic of the Get method with a using statement:
+
+```
 [HttpGet]
 public IEnumerable<WeatherForecast> Get()
 {
@@ -251,19 +252,27 @@ public IEnumerable<WeatherForecast> Get()
         ...
     }
 }
+```
 Restart the microservice.
+```
+dotnet run --project sample-api
+```
 Call the /weatherforecast endpoint a couple of times using curl:
-Copy
-$ curl --insecure https://localhost:5001/weatherforecast
+```
+start https://localhost:5001/weatherforecast
+```
 Use curl to get the metrics, as earlier in this section:
-Copy
-$ curl --insecure https://localhost:5001/metrics 
-
+```
+start https://localhost:5001/metrics 
+```
+```
 # HELP myapp_weather_forecasts_in_progress Number of weather forecast operations ongoing.
 # TYPE myapp_weather_forecasts_in_progress gauge
 myapp_weather_forecasts_in_progress 0
 ...
-You will notice that there is now a new metric called myapp_weather_forecasts_in_progress available in the list. Its value will be zero, since currently you are not running any requests against the tracked endpoint, and a gauge type metric is only measuring the number of ongoing requests.
+```
+
+You will notice that there is now a new metric called **myapp_weather_forecasts_in_progress**available in the list. Its value will be zero, since currently you are not running any requests against the tracked endpoint, and a gauge type metric is only measuring the number of ongoing requests.
 
 Congratulations, you have just defined your first functional metric. This is only a start; many more sophisticated possibilities are readily available to you.
 

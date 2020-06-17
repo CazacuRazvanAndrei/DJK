@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prometheus;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,10 @@ namespace sample_api2.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+	
+	private static readonly Gauge weatherForecastsInProgress = Metrics
+    		.CreateGauge("myapp_weather_forecasts_in_progress", 
+                 "Number of weather forecast operations ongoing.");
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
@@ -25,15 +30,18 @@ namespace sample_api2.Controllers
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+        {	
+		using(weatherForecastsInProgress.TrackInProgress())
+    		{
+            		var rng = new Random();
+            		return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            		{
+                	Date = DateTime.Now.AddDays(index),
+                	TemperatureC = rng.Next(-20, 55),
+                	Summary = Summaries[rng.Next(Summaries.Length)]
+            		})
+            		.ToArray();
+        		}
+		}
     }
 }
