@@ -29,7 +29,7 @@ npm install --save express
 ```
 
 4. Now we need to install the Prometheus adapter for Node Express with the following:
-1. 
+ 
 ```
 $ npm install --save prom-client
 ```
