@@ -419,6 +419,16 @@ prometheus-svc   NodePort    10.104.205.217  <none>        9090:31246/TCP   16m
 ```
 Open a new browser tab, and navigate to `**http://localhost:<port>**` where **<port>** is the port you identified in the previous step, and in my case is **32379**. You should see something like this:
 
+grafana-svc 
+```
+$Port = kubectl get service/grafana-svc -o yaml | ? {$_ -like "*nodePort:*"} 
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$grafana  = "http://$($IP):$($Port)"
+start $grafana/
+
+```
+
 ![KM](./img/m14-UPMDA-p5.png)
 
 Login screen of Grafana
