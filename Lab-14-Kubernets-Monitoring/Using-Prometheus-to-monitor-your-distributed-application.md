@@ -335,7 +335,7 @@ Prometheus showing all targets are up and running
 
 ```
 # access the /weatherforecast endpoint in the .NET service
-start start $dotnetapi/weatherforecast
+start $dotnetapi/weatherforecast
 
 # and access the /hello endpoint in the Node service 
 start $nodeapi/hello
