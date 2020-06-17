@@ -119,7 +119,7 @@ kubectl create configmap prometheus-cm  --from-file config/prometheus.yml
 ```
 
 - We can now deploy Prometheus to our Kubernetes server with the following:
-- 
+
 ```
 $ kubectl apply -f prometheus.yaml
 deployment.apps/prometheus-deployment created
@@ -127,7 +127,7 @@ service/prometheus-svc created
 ```
 
 - Let's double-check that the deployment succeeded:
-- 
+
 ```
  kubectl get all
 ```
