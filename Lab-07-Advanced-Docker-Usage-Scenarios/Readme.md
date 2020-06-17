@@ -46,7 +46,7 @@ On production or production-like systems, you should abstain from the preceding 
 $ docker volume rm <volume-name>
 ```
 
-I should also mention that there is a command to prune Docker networks. But since we have not yet officially introduced networks, I will defer this to chapter 10, Single-Host Networking.
+I should also mention that there is a command to prune Docker networks. But since we have not yet officially introduced networks, I will defer this to chapter 10, Single-Host Networking .
 
 # Formatting the output of common Docker commands
 Have you at times wished that your Terminal window was infinitely wide since the output of a Docker command such as docker container ps is scrambled across several lines per item? Worry not, as you can customize the output to your liking. Almost all commands that produce an output have a --format argument, which accepts a so-called Go template as a parameter.
