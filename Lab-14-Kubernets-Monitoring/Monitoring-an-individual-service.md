@@ -160,7 +160,7 @@ choco install dotnetcore-sdk -y
 ```
 2. Use the **dotnet** tool to scaffold a new microservice called **sample-api**:
 ```
-dotnet new webapi --output sample-api2
+dotnet new webapi --output sample-api
 ```
 
 3. We will use the Prometheus adapter for .NET, which is available to us as a NuGet package called prometheus-net.AspNetCore. Add this package to the sample-api project, with the following command:
@@ -178,7 +178,8 @@ Locate the **Startup.cs** file, and open it. At the beginning of the file, add a
 using Prometheus; 
 ```
 Then in the Configure method add the endpoints.MapMetrics() statement to the mapping of the endpoints. Your code should look as follows:
-Copy
+
+```
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     ...
@@ -188,7 +189,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         endpoints.MapMetrics();
     });
 }
-
+```
 - **Tip:**
 Note that the above is valid for version 3.x of .NET Core. If you're on an earlier version, the configuration looks slightly different. Consult the following repo for more details, at https://github.com/prometheus-net/prometheus-net.
 
@@ -205,12 +206,13 @@ info: Microsoft.Hosting.Lifetime[0]
 ...
 ```
 
-The preceding output tells us that the microservice is listening at https://localhost:5001.
+The preceding output tells us that the microservice is listening at **https://localhost:5001**.
 
 We can now use curl to call the metrics endpoint of the service:
-Copy
-$ curl --insecure https://localhost:5001/metrics 
-
+```
+start https://localhost:5001/metrics 
+```
+```
 # HELP process_private_memory_bytes Process private memory size
 # TYPE process_private_memory_bytes gauge
 process_private_memory_bytes 55619584
@@ -224,17 +226,21 @@ process_working_set_bytes 105537536
 dotnet_collection_count_total{generation="1"} 0
 dotnet_collection_count_total{generation="0"} 0
 dotnet_collection_count_total{generation="2"} 0
+```
+
 What we get is a list of system metrics for our microservice. That was easy: we only needed to add a NuGet package and a single line of code to get our service instrumented!
 
-What if we want to add our own (functional) metrics? This is equally straightforward. Assume we want to measure the number of concurrent accesses to our /weatherforecast endpoint. To do this, we define a gauge and use it to wrap the logic in the appropriate endpoint with this gauge. We can do this by following these steps:
+What if we want to add our own (functional) metrics? This is equally straightforward. Assume we want to measure the number of concurrent accesses to our **/weatherforecas**t endpoint. To do this, we define a gauge and use it to wrap the logic in the appropriate endpoint with this **gauge**. We can do this by following these steps:
 
-Locate the Controllers/WeatherForecastController.cs class.
+Locate the **Controllers/WeatherForecastController.cs** class.
 Add using Prometheus; to the top of the file.
 Define a private instance variable of the Gauge type in the WeatherForecastController class:
-Copy
+
+```
 private static readonly Gauge weatherForecastsInProgress = Metrics
     .CreateGauge("myapp_weather_forecasts_in_progress", 
                  "Number of weather forecast operations ongoing.");
+```
 Wrap the logic of the Get method with a using statement:
 Copy
 [HttpGet]

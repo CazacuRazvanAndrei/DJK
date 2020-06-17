@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\TS-Home\\OneDrive\\Cursuri-Prezentare\\DevOps-Fundamentals\\Repository\\Lab-14-Kubernets-Monitoring\\sample\\dotnet\\sample-api2\\sample-api2.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\TS-Home\\OneDrive\\Cursuri-Prezentare\\DevOps-Fundamentals\\Repository\\Lab-14-Kubernets-Monitoring\\sample\\dotnet\\sample-api2\\sample-api2.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\TS-Home\\OneDrive\\Cursuri-Prezentare\\DevOps-Fundamentals\\Repository\\Lab-14-Kubernets-Monitoring\\sample\\dotnet\\sample-api2\\sample-api2.csproj",
+        "projectName": "sample-api2",
+        "projectPath": "C:\\Users\\TS-Home\\OneDrive\\Cursuri-Prezentare\\DevOps-Fundamentals\\Repository\\Lab-14-Kubernets-Monitoring\\sample\\dotnet\\sample-api2\\sample-api2.csproj",
+        "packagesPath": "C:\\Users\\TS-Home\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\TS-Home\\OneDrive\\Cursuri-Prezentare\\DevOps-Fundamentals\\Repository\\Lab-14-Kubernets-Monitoring\\sample\\dotnet\\sample-api2\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\TS-Home\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "prometheus-net.AspNetCore": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
