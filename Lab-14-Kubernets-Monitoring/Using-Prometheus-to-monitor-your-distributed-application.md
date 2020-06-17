@@ -281,7 +281,26 @@ prometheus-svc   NodePort    10.110.239.245   <none>        9090:31962/TCP   77m
 
 In my case, the .NET API is mapped to port **30822** , and the Node API to port **31713**. Your ports may differ.
 
-Use curl to access the /metrics endpoint for both services:
+Use PS to access the /metrics endpoint for both services:
+
+dotnet-api-svc
+```
+$Port = kubectl get service/dotnet-api-svc -o yaml | ? {$_ -like "*nodePort:*"} 
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$Uri = "http://$($IP):$($Port)"
+start $Uri/metrics
+```
+
+node-api-svc 
+```
+$Port = kubectl get service/node-api-svc -o yaml | ? {$_ -like "*nodePort:*"} 
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$Uri = "http://$($IP):$($Port)"
+start $Uri/metrics
+node-api-svc
+```
 ```
 start http://localhost:30822/metrics
 # HELP process_working_set_bytes Process working set
