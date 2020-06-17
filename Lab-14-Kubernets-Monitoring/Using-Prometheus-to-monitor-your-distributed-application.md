@@ -153,7 +153,7 @@ Keep a close eye on the list of pods, and make sure they are all up and running.
 
 - We can now access the web UI of Prometheus. Open a new browser tab, and navigate to **`http://localhost:<port>/targets`** where **<port>** in my case is **31962**. You should see something like this:
 ```
-$Port = kubectl get service/prometheus-svc -o yaml | ? {$_ -like "*- nodePort*"}
+$Port = kubectl get service/prometheus-svc -o yaml | ? {$_ -like "*nodePort:*"} 
 $Port = $port.Substring("14","5")
 $IP=minikube ip
 $Uri = "http://$($IP):$($Port)"
