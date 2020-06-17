@@ -18,9 +18,7 @@ To use this container for debugging purposes, we can proceed as follows:
 
 - Spin up a throwaway bastion container for debugging on Kubernetes, using the following command:
 ```
-$ kubectl run tmp-shell --generator=run-pod/v1 --rm -i --tty `
-     --image nicolaka/netshoot `
-     --command -- bash
+kubectl run --generator=run-pod/v1 tmp-shell --rm -i --tty --image nicolaka/netshoot -- /bin/bash
  
  bash-5.0#
 ```
@@ -46,10 +44,7 @@ bash-5.0# ip a
 - To leave this troubleshoot container, just press Ctrl + D or type **exit** and then hit Enter.
 - If we need to dig a bit deeper and run the container in the same network namespace as the Kubernetes host, then we can use this command instead:
 ```
-kubectl run tmp-shell --generator=run-pod/v1 --rm -i --tty `
-     --overrides='{"spec": {"hostNetwork": true}}' `
-     --image nicolaka/netshoot `
-     --command -- bash
+kubectl run tmp-shell --generator=run-pod/v1 --rm -i --tty --overrides='{"spec": {"hostNetwork": true}}' --image nicolaka/netshoot -- /bin/bash
 ```
 
 - If we run **ip** again in this container, we will see everything that the container host sees too, for example, all the **veth** endpoints. 
