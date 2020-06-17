@@ -72,7 +72,7 @@ app.get('/metrics', (req, res) => {
 ```
 $ npm start
 
-> node@1.0.0 start C:\Users\Gabriel\fod\ch17\node
+> node@1.0.0 start ~lab-14-..\sample\node
 > node server.js
 
 Example api is listening on http://localhost:3000
