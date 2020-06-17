@@ -149,8 +149,16 @@ replicaset.apps/prometheus-deployment-779677977f  2        2        2      24s
 
 Keep a close eye on the list of pods, and make sure they are all up and running. Please also note the port mapping of the **prometheus-svc** object. In my case, the **9090** port is mapped to the **31962** host port. In your case, the latter may be different, but it will also be in the **3xxxx** range. 
 
-- We can now access the web UI of Prometheus. Open a new browser tab, and navigate to **`http://localhost:<port>/targets`** where **<port>** in my case is **31962**. You should see something like this:
 
+
+- We can now access the web UI of Prometheus. Open a new browser tab, and navigate to **`http://localhost:<port>/targets`** where **<port>** in my case is **31962**. You should see something like this:
+```
+$Port = kubectl get service/prometheus-svc -o yaml | ? {$_ -like "*- nodePort*"}
+$Port = $port.Substring("14","5")
+$IP=minikube ip
+$Uri = "$($IP):$($Port)"
+start $Uri/
+```
 ![km](./img/m14-UPMDA-p2.png)
 
 Prometheus web UI showing the configured targets

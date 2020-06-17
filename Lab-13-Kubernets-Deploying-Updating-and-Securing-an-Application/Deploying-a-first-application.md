@@ -82,7 +82,7 @@ If we want to test this deployment, we need to find out what IP address Minikube
 
 ```
 $ip = minikube ip
-curl http://$($ip):30284
+start http://$($ip):30284
 
 
 StatusCode        : 200
