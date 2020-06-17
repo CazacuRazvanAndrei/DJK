@@ -10,8 +10,14 @@ The chapter covers the following topics:
 - [Using Prometheus to monitor your distributed application](Using-Prometheus-to-monitor-your-distributed-application.md)
 - [Troubleshooting a service running in production](Troubleshooting-a-service-running-in-production.md)
 
-Technical requirements
+# Technical requirements
 In this chapter, we're going to use Minikube on our local computer. Please refer to  Setting Up a Working Environment, for more information on how to install and use Minikube.
 
 The code for this chapter can be found at : **~lab-14-Kubernets-Monitoring** 
 In your Terminal, navigate to the **~lab-14-Kubernets-Monitoring\sample** 
+
+
+# Summary
+In this chapter, you learned some techniques used to monitor an individual service or a whole distributed application running on a Kubernetes cluster. Furthermore, you investigated troubleshooting an application service that is running in production without having to alter the cluster or the cluster nodes on which the service is running.
+
+In the next and final chapter of this book, you will gain an overview of some of the most popular ways of running containerized applications in the cloud. The chapter includes samples on how to self-host and use hosted solutions and discuss their pros and cons. Fully managed offerings of vendors such as Microsoft Azure and Google Cloud Engine are briefly discussed.
