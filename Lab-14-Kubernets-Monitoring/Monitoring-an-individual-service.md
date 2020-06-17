@@ -131,13 +131,21 @@ curl localhost:3000/hello?name=Sue
 
 ```
 $ curl localhost:3000/metrics
+PS:
+(curl http://localhost:3000/metrics).content
 ...
 # HELP my_hello_counter Counts the number of hello requests 
 # TYPE my_hello_counter counter
 my_hello_counter 2
 ```
+Build\Run Docker
+```
+cd ~...\sample\node
+docker build -t fredysa/nodeks:1.0 .
+docker run --rm --name hellocounters -p 3000:3000 fredysa/nodeks:1.0
+```
 
-The counter we defined in code clearly works and is output with the **HELP**text we added.
+The counter we defined in code clearly works and is output with the **HELP** text we added.
 
 Now that we know how to instrument a Node Express application, let's do the same for a .NET Core-based microservice.
 
