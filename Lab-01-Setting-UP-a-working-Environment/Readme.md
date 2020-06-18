@@ -15,7 +15,8 @@ This chapter covers the following topics:
 - [Choosing and installing a code editor](Choosing-and-installing-a-code-editor.md)
 - [Installing Docker for Desktop on macOS or Windows](Installing-Docker-for-Desktop-on-macOS-or-Windows.md)
 - [Installing Docker Toolbox](Installing-Docker-Toolbox.md)
-- [Installing Minikube]()
+- [Run Docker Cli](Run-Docker-Cli.md)
+- [Installing Minikube](Installing-Minikube.md)
 
 
 # Technical requirements
@@ -23,7 +24,18 @@ For this chapter, you will need a laptop or a workstation with either macOS or W
 
 It is also possible to follow along with this book if you have a Linux distribution as your operating system, such as Ubuntu 18.04 or newer. I will try to indicate where commands and samples differ significantly from the ones on macOS or Windows.
 
+# Summary
+In this chapter, we set up and configured our personal or working environment so that we can productively work with Docker containers. This equally applies for developers, DevOps, and operations engineers. In that context, we make sure that we use a good editor, have Docker for macOS or Docker for Windows installed, and can use docker-machine to create VMs in VirtualBox or Hyper-V, which we can then use to run and test containers.
 
+In the next chapter, we're going to learn all of the important facts about containers. For example, we will explore how we can run, stop, list, and delete containers, but more than that, we will also dive deep into the anatomy of containers. 
+
+# Further reading
+Consider the following links for further reading:
+
+- Chocolatey - The Package Manager for Windows at https://chocolatey.org/
+- Install Docker Toolbox on Windows: https://dockr.ly/2nuZUkU
+- Run Docker on Hyper-V with Docker Machine at http://bit.ly/2HGMPiI
+- Developing inside a Container at https://code.visualstudio.com/docs/remote/containers
 
 
 

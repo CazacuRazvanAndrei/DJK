@@ -4,13 +4,14 @@
 
 ## Help
 
-```dockerfile
+```
 docker image ls
 docker container ls --all
 docker --help
 docker container --help
 docker container ls --help
 docker run --help
+docker volume --help 
 ```
 
 ### Run
@@ -19,4 +20,11 @@ docker run --help
 docker version
 docker run hello-world
 ```
+# Build
+```
+docker build -t name .
+docker push name
+```
+
+![cli](./img/cli-cheat.png)
 
