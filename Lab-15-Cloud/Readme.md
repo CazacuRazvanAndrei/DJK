@@ -6,7 +6,7 @@ In this chapter, we will give an overview of some of the most popular ways of ru
 Here are the topics we will be discussing in this chapter:
 
 - [Deploying and using Docker Enterprise Edition (EE) on Amazon Web Services (AWS)](Deploying-and-using-Docker-Enterprise-Edition.md)
-- Exploring Microsoft's Azure Kubernetes Service (AKS)
+- [Exploring Microsoft's Azure Kubernetes Service (AKS)](ExploringMicrosoft-s-Azure-Kubernetes-Service-AKS.md)
 - Understanding Google Kubernetes Engine (GKE)
 
 # Technical requirements

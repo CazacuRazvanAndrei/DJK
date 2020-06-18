@@ -15,7 +15,7 @@ spec:
         service: web
     spec:
       containers:
-      - image: fodanimalsacr.azurecr.io/ch11-web:2.0
+      - image: fredysa.azurecr.io/web:1.0
         name: web
         ports:
         - containerPort: 3000
@@ -52,7 +52,7 @@ spec:
     spec:
       containers:
       - name: db
-        image: fodanimalsacr.azurecr.io/ch11-db:2.0
+        image: fredysa.azurecr.io/db:1.0
         ports:
         - containerPort: 5432
 ---
