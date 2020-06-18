@@ -89,6 +89,7 @@ Once you are done playing with the application, delete the cluster and the proje
 
 ```
 gcloud container clusters delete animal-cluster
+gcloud projects delete animal-cluster
 ```
 We have created a hosted Kubernetes cluster in GKE. We have then used Cloud Shell, provided through the GKE portal, to first clone our **labs** GitHub repository and then the **kubectl** tool to deploy the animals application into the Kubernetes cluster. 
 
