@@ -33,44 +33,63 @@ It has pretty much the same content as the same file we used in the previous cha
 Also, note that we are not using Google Container Registry to host the container images but are instead directly pulling them from Docker Hub. It is very easy, and similar to what we have learned in the section about AKS, to create such a container registry in Google Cloud.
 
 Before we can continue, we need to set up **gcloud** and **kubectl** credentials:
+
 Open  https://console.developers.google.com/projectcreate?
 Create animal-cluster project
+
 - https://console.developers.google.com/apis/library/cloudresourcemanager.googleapis.com?project=animal-cluster
-- 
-- gcloud auth activate-service-account animal --key-file key.json 
+- https://console.developers.google.com/apis/library/container.googleapis.com?project=animal-cluster
+- create Service Accounts
+- create key (download key to your github, update project)
+
 
 ```
-gcloud config set project animals-cluster
+#gcloud auth activate-service-account [Acount]  --key-file key.json
+gcloud auth activate-service-account animal@animal-cluster.iam.gserviceaccount.com --key-file key.json
+
+gcloud config set project animal-cluster
 gcloud config set compute/zone europe-west1-b
-gcloud container clusters create animals-cluster --num-nodes=2
-gcloud container clusters get-credentials animals-cluster --zone europe-west1-b
+gcloud container clusters create animal-cluster --num-nodes=2
+```
+
+![gks](./img/l15-gks-p3.png)
+
+```
+gcloud container clusters get-credentials animal-cluster --zone europe-west1-b
 Fetching cluster endpoint and auth data.
 kubeconfig entry generated for animals-cluster.
 ```
 
 Having done that, it's time to deploy the application:
 
-Copy
-$ kubectl create -f animals.yaml
+```
+kubectl create -f animals.yaml
 
 deployment.apps/web created
 service/web created
 deployment.apps/db created
 service/db created
+```
+
 Once the objects have been created, we can observe the LoadBalancer service web until it is assigned a public IP address:
 
-Copy
-$ kubectl get svc/web --watch
+```
+ kubectl get svc/web --watch
 
 NAME   TYPE           CLUSTER-IP   EXTERNAL-IP     PORT(S)          AGE
 web    LoadBalancer   10.0.5.222   <pending>       3000:32139/TCP   32s
 web    LoadBalancer   10.0.5.222   146.148.23.70   3000:32139/TCP   39s
-The second line in the output is showing the situation while the creation of the load balancer is still pending, and the third one gives the final state. Press Ctrl + C to quit the watch command. Apparently, we got the public IP address 146.148.23.70 assigned and the port is 3000.
+```
 
-We can then use this IP address and navigate to http://<IP address>:3000/pet, and we should be greeted by the familiar animal image.
+The second line in the output is showing the situation while the creation of the load balancer is still pending, and the third one gives the final state. Press Ctrl + C to quit the watch command. Apparently, we got the public IP address **146.148.23.70** assigned and the port is **3000**.
+
+We can then use this IP address and navigate to **`http://<IP address>:3000/pet`**, and we should be greeted by the familiar animal image.
 
 Once you are done playing with the application, delete the cluster and the project in the Google Cloud console to avoid any unnecessary costs.
 
-We have created a hosted Kubernetes cluster in GKE. We have then used Cloud Shell, provided through the GKE portal, to first clone our labs GitHub repository and then the kubectl tool to deploy the animals application into the Kubernetes cluster. 
+```
+gcloud container clusters delete animal-cluster
+```
+We have created a hosted Kubernetes cluster in GKE. We have then used Cloud Shell, provided through the GKE portal, to first clone our **labs** GitHub repository and then the **kubectl** tool to deploy the animals application into the Kubernetes cluster. 
 
 When looking into a hosted Kubernetes solution, GKE is a compelling offering. It makes it very easy to start, and since Google is the main driving force behind Kubernetes, we can rest assured that we will always be able to leverage the full functionality of Kubernetes.
