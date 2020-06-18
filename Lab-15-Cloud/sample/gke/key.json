@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "animal-cluster",
+  "private_key_id": "b195223d6f94e2439187fc73ab370555eb2f19ba",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCcK/x/fDWqo43n\nOyegdI89qcHtWDBpmpBHZ3180aqbTta9RWpsbdbDjsSBkZ+WnafNve/x9sy8sNG/\nOM8HZTxGFxvww28+wXwDzVE9L5j7Z5M4rZ92vGU8Qc9WpKvmh7vzCCUhEAa0fDwz\ntdjtIy59jjRCD9wOeaNdgVwhqBdls7GK6z+OM6bfm6FAc5R294sAHndK4FouNDU7\nAE7r9dxbQ1O71EpT/MgxJ48ov6+cGL82khnR9HGob7XpTzMywidCZJsnlw/ri510\n8oHBv+LxqCYFKGZ35FdGlx/WdSAt+UiqgJF96t8TfvEG+zUZKRnlJXTe8+EFa3Cs\n74PemPZpAgMBAAECggEADPyzcL6Zj+kuAc6viu5mgxA86kntLLsHyIhYrSqab3Ps\n86x0HzQ7KeQTf1rm1JWjwL5M1+hYOlDSAH7u6ISIsKN3VVxLQgLBF2fZm6b7p9yD\nJ7F4k10zZgFrBp+HFBKxlJJW1BsLE7NJJlu3AHFuik5rFhtPh3yiE0KQsNPTrkdT\n22MRjcCzH/d4eEHQx0f8Xw2LIJ46WLZAYiYd59waSOlXFtHuK4UTyYnxNUmZ49oR\nyoFatAWcdDtNnnjX1jwg/IIpMWfSZNaUmgqqR7dKHBwPBK2sJYWSXSDCrLdxvn7V\n6E55RvN7/7dTV5XwDVaUVZLpmtmQAlcI4ma9SjG/qQKBgQDZThChuOxfBX+hVmGB\nkbvKmBZgc/L68FgIqY+H/7JwO+Y4pB6QsywmVDP2XCpgsxnmMZc0Z6SCLQZlETYa\npkndqnr0FKQ4A8q869TOEVU3xHkBNr7GLFVpxs3IX2sn4z4d5zPCUmrwcEcmI0P3\nU+z9QQGFKIzeteNhuq4GBAemYwKBgQC3+ySZ2U5hF4V6tpNLHfC0tVowSoKC5YYR\nrloiPQ4+IsNpb2gUf7AQ4Ii/EiiPAZxpApPgLwSpyEUPYAPBgUrCwKGEVbIf7hiN\n1bcxXpxfrEik0ZMEYmZxXXGbOU+/1XXpIrruqyKZp6pDAJc5G3JVYHECgz3SHxnN\nrlnuizqzwwKBgCwjrz0qUtj6RPKAmU24TGzad7Ef3DsclsUrq/vz9ErX3+uhapP5\n0P34HJXuIq2Bs8EOUahTZRcMDkB5PoQrQtXDyzXI+5JlMsktHgy9eJHbVrjoZdfb\nKX5S43nP5/QyNGveiqTuGMq+A7W7dBLI+Vp32dcyZWrXh1hSkwalyugBAoGBAIPu\nYGzC2+XcDCfXTQCM09OCSM5gX/6lwOJk+NWcmt4L571v2l74wbUYjncV+meybAsR\ngiE9Fkb6CivgWlEk+gt2P1y6ZyVmg80R+HA6vEAPN3iZoKeAOJ4KuDDrhDi4RfmM\noigMKJ+vD/VEMy0MdYyrv95hZq+LBeHsqSjaRpopAoGBAIQU7b2mFw1TYBpbRaST\ni6sFWZiP7Zuu5eEP/8Q2sDP94EjcGRmQ5v5wMjVOnykKLz9oc9wPTWL5Lswxk0nV\nfcS1jGcDhP9jI5fs7fNQg0DJSr6lKfQX1wYEnP0aESGHMs3blOIGQ28hOPQiHWDs\nLsIAmzwMGIvSzqDtKYIwld/p\n-----END PRIVATE KEY-----\n",
+  "client_email": "animal@animal-cluster.iam.gserviceaccount.com",
+  "client_id": "103192269087063396165",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/animal%40animal-cluster.iam.gserviceaccount.com"
+}
