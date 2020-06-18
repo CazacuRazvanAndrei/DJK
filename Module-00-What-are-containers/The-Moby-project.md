@@ -1,0 +1,10 @@
+# The Moby project
+Originally, when Docker (the company) introduced Docker containers, everything was open source. Docker didn't have any commercial products at this time. The Docker engine that the company developed was a monolithic piece of software. It contained many logical parts, such as the container runtime, a network library, a **RESTful (REST) API**, a command-line interface, and much more.
+
+Other vendors or projects such as Red Hat or Kubernetes were using the Docker engine in their own products, but most of the time, they were only using part of its functionality. For example, Kubernetes did not use the Docker network library for the Docker engine but provided its own way of networking. Red Hat, in turn, did not update the Docker engine frequently and preferred to apply unofficial patches to older versions of the Docker engine, yet they still called it the Docker engine.
+
+Out of all these reasons, and many more, the idea emerged that Docker had to do something to clearly separate the Docker open source part from the Docker commercial part. Furthermore, the company wanted to prevent competitors from using and abusing the name Docker for their own gains. This was the main reason why the Moby project was born. It serves as an umbrella for most of the open source components Docker developed and continues to develop. These open source projects do not carry the name Docker in them anymore.
+
+The Moby project provides components that are used for image management, secret management, configuration management, and networking and provisioning, to name just a few. Also, part of the Moby project is special Moby tools that are, for example, used to assemble components into runnable artifacts.
+
+Some components that technically belong to the Moby project have been donated by Docker to the **Cloud-Native Computing Foundation (CNCF)** and thus do not appear in the list of components anymore. The most prominent ones are notary, containerd, and runc, where the first is used for content trust and the latter two form the container runtime.

@@ -1,4 +1,4 @@
-# [What Are Containers and Why Should I Use Them?]
+# What Are Containers and Why Should I Use Them?
 
 This first chapter will introduce you to the world of containers and their orchestration. This book starts from the very beginning, in that it assumes that you have no prior knowledge of containers, and will give you a very practical introduction to the topic.
 
@@ -7,21 +7,16 @@ In this chapter, we will focus on the software supply chain and the friction wit
 - [What are containers?](What-are-containers.md)
 - [Why are containers important?](Why-are-containers-important.md)
 - [What's the benefit for me or for my company?](What-s-the-benefit-for-me-or-for-my-company.md)
-- [The Moby project]()
-- [Docker products]()
-- [Container architecture]()
+- [The Moby project](The-Moby-project.md)
+- [Docker products](Docker-products.md)
+- [Container architecture](Container-architecture.md)
 
 
 
-Originally, when Docker (the company) introduced Docker containers, everything was open source. Docker didn't have any commercial products at this time. The Docker engine that the company developed was a monolithic piece of software. It contained many logical parts, such as the container runtime, a network library, a RESTful (REST) API, a command-line interface, and much more.
+# Summary
+In this chapter, we looked at how containers can massively reduce friction in the software supply chain and, on top of that, make the supply chain much more secure.
 
-
-## Docker Version 
-
-Docker currently separates its product lines into two segments. There is the **Community Edition (CE)**, which is closed-source yet completely free, and then there is the **Enterprise Edition (EE)**, which is also closed-source and needs to be licensed on a yearly basis. These enterprise products are backed by 24/7 support and are supported by bug fixes.
-
-- [Docker CE](Docker_CE.md)
-- [Docker EE](Docker_EE.md)
+In the next chapter, we will learn how to prepare our personal or working environment such as that we can work efficiently and effectively with Docker. So, stay tuned.
 
 
 ## Links 
@@ -32,32 +27,3 @@ Docker currently separates its product lines into two segments. There is the **C
 - Cloud-Native Computing Foundation: https://www.cncf.io/ (Free Trainings)
 - containerd – an industry-standard container runtime: https://containerd.io/
 
-
-# Setting Up a Working Environment
-
-In this chapter, we are going to prepare our personal or working environment to work efficiently and effectively with Docker. We will discuss in detail how to set up an ideal environment for developers, DevOps, and operators that can be used when working with Docker containers.
-
-For this chapter, you will need a laptop or a workstation with either macOS or Windows, preferably Windows 10 Professional, installed. You should also have free internet access to download applications and permission to install those applications on your laptop.
-
-It is also possible to follow along with this book if you have a Linux distribution as your operating system, such as Ubuntu 18.04 or newer. I will try to indicate where commands and samples differ significantly from the ones on macOS or Windows.
-
-
-
-- The Linux command shell
-- PowerShell for Windows
-- Installing and using a package manager
-- Installing Git and cloning the code repository
-- Choosing and installing a code editor
-- Installing Docker for Desktop on macOS or Windows
-- Installing Docker Toolbox
-- Installing Minikube
-
-## Links 
-- Linux Command Line Cheat Sheet by Dave Child at http://bit.ly/2mTQr8l
-- PowerShell Basic Cheat Sheet at http://bit.ly/2EPHxze
-
-# Docker cleanup all unused local images
-
-```bash
-docker system prune -a
-```
