@@ -35,3 +35,5 @@ data/sven.txt
 $ sudo docker run --rm --volumes-from DATA -v `pwd`:/backup busybox ls /data
 sven.txt
 ```
+
+# See - Saving and loading image Lab-02-Containers

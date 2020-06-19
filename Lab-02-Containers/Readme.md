@@ -21,8 +21,8 @@ We learned so far  what containers are and how to run, stop, remove, list, and i
 
 
 - [What are images?](What-are-images.md)
-- [Creating images]()
-- [Lift and shift: Containerizing a legacy app]()
+- [Creating images](Creating-images.md)
+- [Lift and shift: Containerizing a legacy app](Lift-and-shift-Containerizing-a-legacy-app.md)
 - [Sharing or shipping images]()
 
 
