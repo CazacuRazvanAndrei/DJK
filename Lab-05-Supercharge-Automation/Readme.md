@@ -8,7 +8,15 @@ This is a quick overview of all of the subjects we are going to touch on in this
 - [Cheat-Sheet Docker](Cheat-Sheet-Docker.md)
 - [Executing simple admin tasks in a container](Executing-simple-admin-tasks-in-a-container.md)
 - [Using test containers](Using-test-containers.md)
-- [Using Docker to power a CI/CD pipeline](Using-Docker-to-power-a-CI-CD-pipeline.md)
+
 
 # Technical requirements
 In this section, if you want to follow along with the code, you need Docker for Desktop on your macOS or Windows machine and a code editor, preferably Visual Studio Code. The sample will also work on a Linux machine with Docker and VS Code installed.
+
+# Summary
+In this chapter, we learned how to use Docker containers to optimize various kinds of automation tasks, from running a simple one-off task to building up a containerized CI/CD pipeline.
+
+In the next chapter, we will introduce advanced tips, tricks, and concepts useful when containerizing complex distributed applications or when using Docker to automate sophisticated tasks.
+
+# Further reading
+Write Maintainable Integration Tests with Docker at https://www.docker.com/blog/maintainable-integration-tests-with-docker/ 

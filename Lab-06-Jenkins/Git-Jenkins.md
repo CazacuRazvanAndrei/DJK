@@ -80,7 +80,7 @@ pipeline {
         }
     }
 }
-
+```
 Now, we are ready to roll. Use git to commit your changes and push them to your repository:
 
 ```
@@ -92,18 +92,15 @@ git push origin master
 
 
 ## Commit node to Docker Hub
-### Built docker file from ./npm
+### Built docker file from ./jenkins-pipeline
+https://github.com/Fredy-SSA/jenkins-pipeline
+
 ```
 docker image build -t fredysa/node-docker .
-
 docker image ls
-
 docker container run --rm -it fredysa/node-docker /bin/sh
-
 docker container run --rm -it fredysa/sample:1.5 /bin/sh
-
 docker commit -m "Added Node Server" -a "node" node fredysa/node:latest
-
 docker push fredysa/node-docker:latest
 
 ```
@@ -112,7 +109,7 @@ docker push fredysa/node-docker:latest
 
 Once the code is pushed to GitHub, go back to Jenkins.
 
-Select your sample-pipeline project and click Build now in the main menu. Jenkins will start to build the pipeline. If everything goes well, you should see something like this:
+Select your sample-pipeline project and click Build now in the main menu. Jenkins will start to build the pipeline. 
 
 
  
