@@ -6,10 +6,10 @@ In this chapter, we're going to introduce techniques commonly used to allow a de
 Here is a list of the topics we're going to discuss:
 
 - [Evolving and testing code running in a container](Evolving-and-testing-code-running-in-a-container.md)
-- [Auto restarting code upon changes]()
-- [Line-by-line code debugging inside a container]()
-- [Instrumenting your code to produce meaningful logging information]()
-- [Using Jaeger to monitor and troubleshoot]()
+- [Auto restarting code upon changes](Auto-restarting-code-upon-changes.md)
+- [Line-by-line code debugging inside a container](Line-by-line-code-debugging-inside-a-container.md)
+- [Instrumenting your code to produce meaningful logging information](Instrumenting-your-code-to-produce-meaningful-logging-information.md)
+- [Using Jaeger to monitor and troubleshoot](Using-Jaeger-to-monitor-and-troubleshoot.md)
 
 # Technical requirements
 In this chapter, if you want to follow along with the code, you need Docker for Desktop on macOS or Windows and a code editor—preferably Visual Studio Code. The sample will also work on a Linux machine with Docker and VS Code installed.
