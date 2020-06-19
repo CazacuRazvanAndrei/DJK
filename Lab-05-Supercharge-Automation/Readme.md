@@ -1,60 +1,14 @@
-# Using Docker to Supercharge Automation
+# **Using Docker to Supercharge Automation**
+In the last chapter, we introduced techniques commonly used to allow a developer to evolve, modify, debug, and test their code while running in a container. We also learned how to instrument applications so that they generate logging information that can help us to do root cause analysis of failures or misbehaviors of applications or application services that are running in production.
 
-### Executing simple admin tasks in a container
+In this chapter, we will show how you can use tools to perform administrative tasks without having to install those tools on the host computer. We will also illustrate the use of containers that host and run test scripts or code used to test and validate application services running in containers. Finally, we will guide the reader through the task of building a simple Docker-based CI/CD pipeline.
 
-! We need  to run a perl script  , but this do not exist on local machine !!
-```c
-cat sample.txt | perl -lpe 's/^\s*//'
-```
+This is a quick overview of all of the subjects we are going to touch on in this chapter:
 
-### Create prerequisite
+- [Cheat-Sheet Docker](Cheat-Sheet-Docker.md)
+- [Executing simple admin tasks in a container](Executing-simple-admin-tasks-in-a-container.md)
+- [Using test containers]()
+- [Using Docker to power a CI/CD pipeline]()
 
-```bash
-mkdir code
-cd ./code
-
-echo '1234567890'>> sample.txt 
-echo '  This is some text '>> sample.txt
-echo '   another line of text '>> sample.txt
-echo ' more text '>> sample.txt
-echo '     final line '>> sample.txt
-
-```
-
-## Run in Docker (PS)
-```PowerShell
-docker container run --rm -it `
-    -v $pwd/code:/usr/src/app `
-    -w /usr/src/app `
-    perl:slim sh -c "cat sample.txt | perl -lpe 's/^\s*//'"
-```
-
-## If you use Mac  , this method can be use to run old perl scripts
-```bash
-docker container run -it --rm \
-    -v $(pwd):/usr/src/app \
-    -w /usr/src/app \
-    perl:<old-version> perl your-old-perl-script.pl
-```
-
-**Tip:** A lot of people use quick and dirty Python scripts or mini apps to automate tasks that are not easily coded with, say, Bash. Now if the Python script has been written in **Python 3.7** and you only happen to have **Python 2.7** installed, or no version at all on your machine, then the easiest solution is to execute the script inside a container.
-
-## Run docker with python
-
-```powershell
-docker container run --rm -it -v $pwd/code:/usr/src/app -w /usr/src/app python:3.7.4-alpine python stats.py sample.txt
-docker container run --rm -it -v $pwd/code:/usr/src/app -w /usr/src/app python:3.7.4-alpine python stats.py sample2.txt
-```
-
-### The beauty of this approach is that this Python script will now run on any computer with any OS installed, as long as the machine is a Docker host and, hence, can run containers.
-
-# Using Docker to power a CI/CD pipeline
-For each serious software project out there, it is highly recommended to have plenty of tests in place. There are various test categories such as unit tests, integration tests, stress and load tests, and end-to-end tests. I have tried to visualize the different categories in the following screenshot:
-
-![CI](./img/L5-ci_1.png)
-
-
-- Run a tool not available on the host in a container
-- Use a container to run test scripts or code against an application service
-- Build a simple CI/CD pipeline using Docker 
-
+# Technical requirements
+In this section, if you want to follow along with the code, you need Docker for Desktop on your macOS or Windows machine and a code editor, preferably Visual Studio Code. The sample will also work on a Linux machine with Docker and VS Code installed.
