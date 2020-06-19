@@ -1,12 +1,13 @@
-# Volume
+# **Data Volumes and Configuration**
+In the last chapter, we learned how to build and share our own container images. Particular focus was placed on how to build images that are as small as possible by only containing artifacts that are really needed by the containerized application.
 
-# Tehnical
+In this chapter, we are going to learn how we can work with stateful containers—that is, containers that consume and produce data. We will also learn how to configure our containers at runtime and at image build time, using environment variables and config files.
 
-# Links
-- Use volumes, at http://dockr.ly/2EUjTml
-- Manage data in Docker, at http://dockr.ly/2EhBpzD
-- Docker volumes on Play with Docker (PWD), at http://bit.ly/2sjIfDj
-- nsenter —Linux man page, at https://bit.ly/2MEPG0n
-- Set environment variables, at https://dockr.ly/2HxMCjS
-- Understanding how ARG and FROM interact, at https://dockr.ly/2OrhZgx
+Here is a list of the topics we're going to discuss:
+
+Creating and mounting data volumes
+Sharing data between containers
+Using host volumes
+Defining volumes in images
+Configuring containers
 

@@ -23,7 +23,7 @@ We learned so far  what containers are and how to run, stop, remove, list, and i
 - [What are images?](What-are-images.md)
 - [Creating images](Creating-images.md)
 - [Lift and shift: Containerizing a legacy app](Lift-and-shift-Containerizing-a-legacy-app.md)
-- [Sharing or shipping images]()
+- [Sharing or shipping images](Sharing-or-shipping-images.md)
 
 
 # Further reading
@@ -33,3 +33,8 @@ The following articles give you some more information related to the topics we d
 - Getting started with containers at http://dockr.ly/2gmxKWB
 - Isolating containers with a user namespace at http://dockr.ly/2gmyKdf
 - Limiting a container's resources at http://dockr.ly/2wqN5Nn
+- Best practices for writing Dockerfiles, at http://dockr.ly/22WiJiO
+- Using multi-stage builds, at http://dockr.ly/2ewcUY3
+- About storage drivers, at http://dockr.ly/1TuWndC
+- Graphdriver plugins, at http://dockr.ly/2eIVCab
+- User-guided caching in Docker for Mac, at http://dockr.ly/2xKafPf
