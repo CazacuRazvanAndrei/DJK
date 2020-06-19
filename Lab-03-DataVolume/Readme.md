@@ -5,9 +5,11 @@ In this chapter, we are going to learn how we can work with stateful containersâ
 
 Here is a list of the topics we're going to discuss:
 
-Creating and mounting data volumes
-Sharing data between containers
-Using host volumes
-Defining volumes in images
-Configuring containers
+- [Creating and mounting data volumes](Creating-and-mounting-data-volumes.md)
+- [Sharing data between containers]()
+- [Using host volumes]()
+- [Defining volumes in images]()
+- [Configuring containers]()
 
+# Technical requirements
+For this chapter, you need either Docker Toolbox installed on your machine or access to a Linux virtual machine (VM) running Docker on your laptop or in the cloud. Furthermore, it is advantageous to have Docker for Desktop installed on your machine. There is no code accompanying this chapter.

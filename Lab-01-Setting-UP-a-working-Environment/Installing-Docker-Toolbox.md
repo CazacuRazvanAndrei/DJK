@@ -82,8 +82,13 @@ Listing the running VMs in Docker Toolbox
 If, for some reason, you don't have a default VM or you have accidentally deleted it, you can create it using the following command:
 
 ```
-docker-machine create --driver virtualbox default
+docker-machine create — driver hyperv — hyperv-virtual-switch 
+"External Virtual Switch" manager1
 ```
+
+- https://docs.docker.com/machine/drivers/hyper-v/
+- https://rominirani.com/docker-machine-windows-10-hyper-v-troubleshooting-tips-367c1ea73c24
+
 This will generate the following output:
 
 ![IDT](./img/L01-ID-p9.png)
