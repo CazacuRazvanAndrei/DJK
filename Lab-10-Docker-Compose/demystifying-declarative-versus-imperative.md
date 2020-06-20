@@ -1,4 +1,4 @@
-# Demystifying declarative versus imperative
+# **Demystifying declarative versus imperative**
 
 Docker Compose is a tool provided by Docker that is mainly used where you need to run and orchestrate containers running on a single Docker host. This includes, but is not limited to, development, **continuous integration (CI)**, automated testing, manual QA, or demos.
 

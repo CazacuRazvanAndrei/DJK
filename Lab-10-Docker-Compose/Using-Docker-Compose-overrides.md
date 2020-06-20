@@ -1,9 +1,13 @@
-# Using Docker Compose overrides
+# **Using Docker Compose overrides**
 
 Sometimes, we want to run our applications in different environments that need specific configuration settings. Docker Compose provides a handy capability to address exactly this issue.
 
 Let's make a specific sample. We can define a base Docker Compose file and then define environment-specific overrides. Let's assume we have a file called **docker-compose.base.yml** with the following content:
 
+Navigate to : 
+```
+cd c:\DJK\Lab-10-Docker-Compose\sample\ci-project\
+```
 ```
 version: "2.4"
 services:

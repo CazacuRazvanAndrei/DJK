@@ -1,40 +1,28 @@
-# Docker Compose
+# **Docker Compose**
 
 This chapter introduces the concept of an application consisting of multiple services, each running in a container, and how Docker Compose allows us to easily build, run, and scale such an application using a declarative approach.
 
 ## This chapter covers the following topics:
 
-- Demystifying declarative versus imperative
-- Running a multi-service application
-- Scaling a service
-- Building and pushing an application
-- Using Docker Compose overrides
-
-
-## Build web and db container
-
-```
- cd ~\docker-compose\database\
- docker image build -t fredysa/db:1.0 .
-
- cd ~\docker-compose\web
-docker image build -t fredysa/web:1.0 .
-
-docker image ls
-
-
-```
-## You need to have **docker-compose** installed on your system. 
-
-This is automatically the case if you have installed Docker for Desktop or Docker Toolbox on your Windows or macOS computer. 
-
-Otherwise, you can find detailed installation instructions here: https://docs.docker.com/compose/install/
-
 - [Demystifying declarative versus imperative](demystifying-declarative-versus-imperative.md)
 - [Running a multi-service application](running-a-multi-service-application.md)
 - [Building and pushing an application](building-and-pushing-an-application.md)
+- [Scaling a service](Scaling-a-service.md)
 - [Using Docker Compose overrides](Using-Docker-Compose-overrides.md)
 
+
+# Technical requirements
+The code accompanying this chapter can be found at https://github.com/fredy-ssa/DJK
+```
+# Download code
+git pull https://github.com/Fredy-SSA/jenkins-pipeline.git
+
+cd c:\DJK\Lab-10-Docker-Compose\sample\docker-compose
+```
+
+You need to have docker-compose installed on your system. This is automatically the case if you have installed Docker for Desktop or Docker Toolbox on your Windows or macOS computer. Otherwise, you can find detailed installation instructions here: https://docs.docker.com/compose/install/
+
+# Links
 The following links provide additional information on the topics discussed in this chapter:
 
 - The official YAML website: http://www.yaml.org/
