@@ -32,7 +32,8 @@ When executed, this outputs a big chunk of detailed information about the networ
 We saw the `ID`, `Name`, `Driver`, and `Scope` values when we listed all the networks, so that is nothing new. But let's have a look at the **IP address management (IPAM)** block. IPAM is a piece of software that is used to track IP addresses that are used on a computer. The important part of the **IPAM** block is the **Config** node with its values for **Subnet** and **Gateway**. The subnet for the bridge network is defined by default as **172.17.0.0/16**. This means that all containers attached to this network will get an IP address assigned by Docker that is taken from the given range, which  is **172.17.0.2** to **172.17.255.255**. The **172.17.0.1** address is reserved for the router of this network whose role in this type of network is taken by the Linux bridge. We can expect that the very first container that will be attached to this network by Docker will get the **172.17.0.2** address. All subsequent containers will get a higher number; the following diagram illustrates this fact:
 
 ![SHN](./img/l9_shn-07.png)
-#### The bridge network
+
+The bridge network
 
 In the preceding diagram, we can see the network namespace of the host, which includes the host's **eth0** endpoint, which is typically a NIC if the Docker host runs on bare metal or a virtual NIC if the Docker host is a VM. All traffic to the host comes through **eth0**. The **Linux bridge** is responsible for routing the network traffic between the host's network and the subnet of the bridge network.
 
@@ -302,6 +303,10 @@ docker network connect sample-net c4
 docker container run --name c5 -d --network somelocal-net alpine:latest ping 127.0.0.1
 docker network connect sample-net c5
 ```
+
+The answer in both cases confirms to us that the communication between containers attached to the same network is working as expected. The fact that we can even use the name of the container we want to connect to shows us that the name resolution provided by the Docker DNS service works inside this network.
+
+Now, we want to make sure that the bridge and the test-net networks are firewalled from each other. 
 
 ## Clean up
 

@@ -1,4 +1,8 @@
-# The host and the null network
+# **The host and the null network**
+
+In this section, we are going to look at two predefined and somewhat unique types of networks, the host and the null networks. Let's start with the former.
+
+# The host network
 
 There are occasions where we want to run a container in the network namespace of the host. This can be necessary when we need to run some software in a container that is used to analyze or debug the host networks' traffic. But keep in mind that these are very specific scenarios. When running business software in containers, there is no good reason to ever run the respective containers attached to the host's network. For security reasons, it is strongly recommended that you do not run any such container attached to the host network on a production or production-like environment.
 

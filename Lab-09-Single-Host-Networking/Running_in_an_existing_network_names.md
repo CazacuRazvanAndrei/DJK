@@ -1,4 +1,4 @@
-# Running in an existing network names
+# **Running in an existing network names**
 
 
 The network namespace of the container corresponds to the sandbox of the container network model we described earlier on. As we attach the container to a network, we define an endpoint that connects the container network namespace with the actual network. This way, we have one container per network namespace.
@@ -11,7 +11,7 @@ Multiple containers running in a single network namespace
 
 #  Running in a existing network name
 
-In the preceding diagram, we can see that in the leftmost Network Namespace, we have two containers. The two containers, since they share the same namespace, can communicate on localhost with each other. The network namespace (and not the individual containers) is then attached to**Network 1.**
+In the preceding diagram, we can see that in the leftmost Network Namespace, we have two containers. The two containers, since they share the same namespace, can communicate on localhost with each other. The network namespace (and not the individual containers) is then attached to **Network 1.**
 
 This is useful when we want to debug the network of an existing container without running additional processes inside that container. We can just attach a special utility container to the network namespace of the container to inspect. This feature is also used by Kubernetes when it creates a pod. We will learn more about Kubernetes and pods in, Introduction to Kubernetes. 
 

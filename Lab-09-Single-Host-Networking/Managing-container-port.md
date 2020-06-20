@@ -1,4 +1,4 @@
-# Managing container port
+# **Managing container port**
 
 Now that we know how we can isolate firewall containers from each other by placing them on different networks, and that we can have a container attached to more than one network, we have one problem that remains unsolved. How can we expose an application service to the outside world? Imagine a container running a web server hosting our webAPI from before. We want customers from the internet to be able to access this API. We have designed it to be a publicly accessible API. To achieve this, we have to, figuratively speaking, open a gate in our firewall through which we can funnel external traffic to our API. For security reasons, we don't just want to open the doors wide; we want to have a single controlled gate that traffic flows through.
 
@@ -42,13 +42,14 @@ CONTAINER ID    IMAGE         ...   PORTS                  NAMES
 56e46a14b6f7    nginx:alpine  ...   0.0.0.0:32768->80/tcp  web
 ```
 
-Please note that in the preceding output, the /tcp part tells us that the port has been opened for communication with the TCP protocol, but not for the UDP protocol. TCP is the default, and if we want to specify that we want to open the port for UDP, then we have to specify this explicitly. 0.0.0.0 in the mapping tells us that traffic from any host IP address can now reach container port 80 of the web container.
-Sometimes, we want to map a container port to a very specific host port. We can do this by using the -p parameter (or --publish). Let's look at how this is done with the following command:
+- **Note**: Please note that in the preceding output, the **/tcp** part tells us that the port has been opened for communication with the TCP protocol, but not for the UDP protocol. TCP is the default, and if we want to specify that we want to open the port for UDP, then we have to specify this explicitly. **0.0.0.0** in the mapping tells us that traffic from any host IP address can now reach container port **80** of the web container.
+- 
+Sometimes, we want to map a container port to a very specific host port. We can do this by using the **-p** parameter (or **--publish**). Let's look at how this is done with the following command:
 
 
 ```
 $ docker container run --name web2 -p 8080:80 -d nginx:alpine
 ```
-The value of the -p parameter is in the form of **<host port>:<container port>**. Therefore, in the preceding case, we map container port 80 to host port 8080. Once the web2 container runs, we can test it in the browser by navigating to **localhost:8080**, and we should be greeted by the same nginx welcome page that we saw in the previous example that dealt with automatic port mapping.
+The value of the -p parameter is in the form of **`<host port>:<container port>`**. Therefore, in the preceding case, we map container port **80**to host port **8080**. Once the **web2**container runs, we can test it in the browser by navigating to **localhost:8080**, and we should be greeted by the same nginx welcome page that we saw in the previous example that dealt with automatic port mapping.
 
-When using the UDP protocol for communication over a certain port, the publish parameter will look like **-p 3000:4321/udp**. Note that if we want to allow communication with both TCP and UDP protocols over the same port, then we have to map each protocol separately.
+When using the UDP protocol for communication over a certain port, the publish parameter will look like **`-p 3000:4321/udp`**. Note that if we want to allow communication with both TCP and UDP protocols over the same port, then we have to map each protocol separately.
