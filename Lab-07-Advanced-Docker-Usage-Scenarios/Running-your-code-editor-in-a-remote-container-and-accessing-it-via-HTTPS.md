@@ -34,12 +34,15 @@ Code Server is using self-signed certificates to secure communication, so we can
 
 
 Login page of Code Server
-Enter the password that you noted down before and click ENTER IDE. Now you will be able to use Visual Studio Code remotely via your browser over a secure HTTPS connection:
 
+- Enter the password that you noted down before and click ENTER IDE. Now you will be able to use Visual Studio Code remotely via your browser over a secure HTTPS connection:
+
+![rycr](./img/L7-RYCR-p3.png)
 
 Visual Studio Code running in the browser over HTTPS
-Now you can do your development from, for example, a Chrome Book or a locked-down workstation, without restrictions. But wait a minute, you may say now! What does this have to do with containers? You're right—so far, there are no containers involved. I could say, though, that if your remote VM has Docker installed, you can use Code Server to do any container-specific development, and I would have saved the day. But that would be a cheap answer.
-Let's run Code Server itself in a container. That should be easy, shouldn't it? Try using this command, which maps the internal port 8080 to the host port 4200 and mounts host folders containing Code Server settings and possibly your projects into the container:
+
+- Now you can do your development from, for example, a Chrome Book or a locked-down workstation, without restrictions. But wait a minute, you may say now! What does this have to do with containers? You're right—so far, there are no containers involved. I could say, though, that if your remote VM has Docker installed, you can use Code Server to do any container-specific development, and I would have saved the day. But that would be a cheap answer.
+- Let's run Code Server itself in a container. That should be easy, shouldn't it? Try using this command, which maps the internal port 8080 to the host port 4200 and mounts host folders containing Code Server settings and possibly your projects into the container:
 
 ```
 $ docker container run -it \
@@ -50,11 +53,15 @@ $ docker container run -it \
 ```
 Note, the preceding command runs Code Server in insecure mode as indicated in the output:
 
-Copy
+```
 info Server listening on http://0.0.0.0:8080
 info - No authentication
 info - Not serving HTTPS
-You can now access Visual Studio Code in your browser at http://<public IP>:4200. Please note the HTTP in the URL instead of HTTPS! Similarly to when running Code Server natively on the remote VM, you can now use Visual Studio Code from within your browser:
+```
+
+- You can now access Visual Studio Code in your browser at **`http://<public IP>:4200`**. Please note the **HTTP** in the URL instead of **HTTPS**! Similarly to when running Code Server natively on the remote VM, you can now use Visual Studio Code from within your browser:
+
+![rycr](./img/L7-RYCR-p4.png)
 
  Developing within your browser
 With this, I hope you have got a feel for the near-unlimited possibilities that the use of containers offers to you.
