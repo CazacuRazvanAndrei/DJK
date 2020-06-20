@@ -23,9 +23,9 @@ az appservice plan create -n $planName -g $resourceGroup `
                           -l $location --is-linux --sku S1 
 
 # we need a unique name for the servwer
-$mysqlServerName = "mysql-fredysa"
+$mysqlServerName = "mysql-name"
 $adminUser = "wpadmin"
-$adminPassword = "Distrus#2020@Me"
+$adminPassword = "Pass"
 
 az mysql server create -g $resourceGroup -n $mysqlServerName `
             --admin-user $adminUser --admin-password "$adminPassword" `

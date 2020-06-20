@@ -1,4 +1,4 @@
-# What are orchestrators and why do we need them?
+# **What are orchestrators and why do we need them?**
 
 Similar to what Docker did with containers—standardizing the packaging and shipping of software with the introduction of those containers—we would like to have some tool or infrastructure software that handles all or most of the challenges mentioned. This software turns out to be what we call container orchestrators or, as we also call them, orchestration engines.
 
@@ -10,3 +10,4 @@ Instead of musicians, we now have containers, and instead of different instrumen
 
 I hope that you can now see more clearly what a container orchestrator is, and why we need one. Assuming that you confirm this question, we can now ask ourselves how the orchestrator is going to achieve the expected outcome, namely, to make sure that all the containers in the cluster play with each other in harmony. Well, the answer is, the orchestrator has to execute very specific tasks, similar to the way in which the conductor of an orchestra also has a set of tasks that they execute in order to tame and, at the same time, elevate the orchestra. 
 
+![orc](./img/orchestration.png)

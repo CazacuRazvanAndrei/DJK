@@ -1,4 +1,4 @@
-# Orchestrators
+# **Orchestrators**
 
 This chapter introduces the concept of orchestrators. It teaches us why orchestrators are needed, and how they work conceptually. This chapter will also provide an overview of the most popular orchestrators and list a few of their pros and cons.
 
@@ -9,7 +9,11 @@ This chapter introduces the concept of orchestrators. It teaches us why orchestr
 - [Overview of popular orchestrators](Overview-of-popular-orchestrators.md)
 - After finishing this chapter, you will be able to do the following:
 
-# Links 
+# Summary
+This chapter demonstrated why orchestrators are needed in the first place, and how they conceptually work. It pointed out which orchestrators are the most prominent ones at the time of writing, and discussed the main commonalities and differences between the various orchestrators.
+
+# Further reading
+The following links provide some deeper insight into orchestration-related topics:
 
 - Kubernetes—production-grade orchestration: https://kubernetes.io/.
 - An overview of Docker Swarm mode: https://docs.docker.com/engine/swarm/.
