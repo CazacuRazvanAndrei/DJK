@@ -22,7 +22,11 @@ cd c:\DJK\Lab-10-Docker-Compose\sample\docker-compose
 
 You need to have docker-compose installed on your system. This is automatically the case if you have installed Docker for Desktop or Docker Toolbox on your Windows or macOS computer. Otherwise, you can find detailed installation instructions here: https://docs.docker.com/compose/install/
 
-# Links
+# Summary
+In this chapter, we introduced the **docker-compose tool**. This tool is mostly used to run and scale multi-service applications on a single Docker host. Typically, developers and CI servers work with single hosts and those two are the main users of Docker Compose. The tool is using YAML files as input that contain the description of the application in a declarative way.
+
+
+# Further reading
 The following links provide additional information on the topics discussed in this chapter:
 
 - The official YAML website: http://www.yaml.org/
