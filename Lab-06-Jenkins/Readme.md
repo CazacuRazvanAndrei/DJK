@@ -19,5 +19,7 @@ Jenkins offers a simple way to set up a continuous integration or **continuous d
 - **Jenkins Tutorial Overview at https://jenkins.io/doc/tutorials**
 - Write Maintainable Integration Tests with Docker at https://www.docker.com/blog/maintainable-integration-tests-with-docker/ 
 - Jenkins on Docker Hub at https://hub.docker.com/_/jenkins/
+- Cheat sheet: https://www.edureka.co/blog/cheatsheets/jenkins-cheat-sheet/
+
 
 
