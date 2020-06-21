@@ -4,6 +4,7 @@ Jenkins offers a simple way to set up a continuous integration or **continuous d
 
 “Don’t break the nightly build!” is a cardinal rule in software development shops that post a freshly built daily product version every morning for their testers. Before Jenkins, the best a developer could do to avoid breaking the nightly build was to build and test carefully and successfully on a local machine before committing the code. But that meant testing one’s changes in isolation, without everyone else’s daily commits. There was no firm guarantee that the nightly build would survive one’s commit.
 
+
 - [Prepare / Install Jenkins ](install-jenkins.md)
 - [Prepare GIT](Git-Jenkins.md)
 
@@ -13,4 +14,3 @@ Jenkins offers a simple way to set up a continuous integration or **continuous d
 - Jenkins on Docker Hub at https://hub.docker.com/_/jenkins/
 - Jenkins Tutorial Overview at https://jenkins.io/doc/tutorials/
 
-#
