@@ -8,7 +8,7 @@ Docker, Jenkins, Kubernets - Fundamentals
 - [Lab-03-DataVolume](./Lab-03-DataVolume/Readme.md)
 - [Lab-04-Debugging](./Lab-04-Debugging/Readme.md)
 - [Lab-05-Supercharge-Automation](./Lab-05-Supercharge-Automation/Readme.md)
-- [Lab-06-Jenkins]](./Lab-06-Jenkins/Readme.md)
+- [Lab-06-Jenkins](./Lab-06-Jenkins/Readme.md)
 - [Lab-07-Advanced-Docker-Usage-Scenarios](./Lab-07-Advanced-Docker-Usage-Scenarios/Readme.md)
 - [Lab-08-Distributed-Application-Architecture](./Lab-08-Distributed-Application-Architecture/Readme.md)
 - [Lab-09-Single-Host-Networking](./Lab-09-Single-Host-Networking/Readme.md)
