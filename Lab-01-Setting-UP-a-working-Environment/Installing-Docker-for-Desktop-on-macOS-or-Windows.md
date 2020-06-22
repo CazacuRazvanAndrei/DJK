@@ -68,6 +68,7 @@ If all goes well, your output should look similar to the preceding figure.
 ```
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --set-version ubuntu 2
 wsl --set-default-version 2
 ```
 ## Install your Linux distribution of choice from Microsoft store
