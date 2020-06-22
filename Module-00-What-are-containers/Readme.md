@@ -6,7 +6,6 @@ In this chapter, we will focus on the software supply chain and the friction wit
 
 - [What are containers?](What-are-containers.md)
 - [Why are containers important?](Why-are-containers-important.md)
-- [What's the benefit for me or for my company?](What-s-the-benefit-for-me-or-for-my-company.md)
 - [The Moby project](The-Moby-project.md)
 - [Docker products](Docker-products.md)
 - [Container architecture](Container-architecture.md)
