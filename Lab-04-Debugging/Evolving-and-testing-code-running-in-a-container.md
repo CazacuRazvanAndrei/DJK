@@ -170,7 +170,7 @@ $ docker container run --rm -it \
 ```
 ```
  docker container run --rm -it `
-    --volume $pwd/:/app `
+    --volume $pwd/npm2/:/app/ `
     -p 3000:3000 sample-app 
 ```
 
