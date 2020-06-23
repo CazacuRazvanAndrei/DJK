@@ -168,8 +168,9 @@ $ docker container run --rm -it \
     --volume $(pwd):/app \
     -p 3000:3000 sample-app \
 ```
+```
  docker container run --rm -it `
-    --volume $pwd:/app `
+    --volume $pwd/:/app `
     -p 3000:3000 sample-app 
 ```
 
