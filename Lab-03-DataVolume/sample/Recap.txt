@@ -1,4 +1,7 @@
 # Recap Sample 
+
+git pull https://github.com/Fredy-SSA/DJK
+
 docker container run -it --name comtest alpine:3.10 /bin/sh
 echo "ceva" > test.txt
 apk update && apk add iputils
