@@ -91,8 +91,7 @@ Luckily not; I have prepared a **fundamentalsofdocker/nsenter** utility containe
 
 - We need to run this container in privileged mode to get access to this protected part of the filesystem, like this:
 ```
-$ docker run -it --rm --privileged --pid=host \
-    fundamentalsofdocker/nsenter
+$ docker run -it --rm --privileged --pid=host fundamentalsofdocker/nsenter
 / #
 ```
 
