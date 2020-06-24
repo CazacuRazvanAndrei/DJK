@@ -10,3 +10,8 @@ docker run --name my-mongo -d mongo:3.7
 docker inspect --format '{{json .Mounts}}' my-mongo | jq .
 
 docker volume create sample 
+docker volume inspect sample 
+
+docker container run --name test -it -v sample:/data  alpine /bin/sh
+cd /data
+echo "Some more data" > data2.txt 
