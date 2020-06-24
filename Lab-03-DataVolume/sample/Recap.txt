@@ -9,6 +9,10 @@ echo "ceva" > test.txt
 apk update && apk add iputils
 
 docker container diff comtest
+docker container commit comtest containerulmeu
+
+docker image ls
+
 docker container commit comtest fredysa/my-alpine
 
 # Volume for DB
