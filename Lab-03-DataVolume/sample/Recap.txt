@@ -22,7 +22,7 @@ cd /data
 echo "Some more data" > data2.txt 
 
 $ docker container rm test2
-$ docker container run --name test2 -it -v my-data:/app/data  centos:7 /bin/bash
+$ docker container run --name test2 -it -v sample:/app/data  centos:7 /bin/bash
 
 
 docker run -it --rm --privileged --pid=host  fundamentalsofdocker/nsenter
