@@ -17,6 +17,9 @@ docker container commit comtest fredysa/my-alpine
 
 # Volume for DB
 docker run --name my-mongo -d mongo:3.7
+
+choco install jq -y
+
 docker inspect --format '{{json .Mounts}}' my-mongo | jq .
 
 # Volume
