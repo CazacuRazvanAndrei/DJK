@@ -3,4 +3,4 @@ $AllImages | % {
 docker images rm $_ --force
 }
 
-docker images --format "{{.ID}}: {{.Repository}}"
+#docker images --format "{{.ID}}: {{.Repository}}"
