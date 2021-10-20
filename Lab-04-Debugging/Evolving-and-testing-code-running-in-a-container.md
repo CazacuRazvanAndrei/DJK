@@ -103,6 +103,7 @@ $ docker container run --rm -it \
     -p 3000:3000 \
     sample-app
 ```
+docker container run --rm -it --name my-sample-app -p 3000:3000  sample-app
 
  The preceding command runs a container with the name **my-sample-app** from the container image **sample-app** and maps the container port **3000** to the equivalent host port. The port mapping is necessary; otherwise, we could not access the application running inside the container from outside the container. We will learn more about port mapping in , **Single-Host Networking**.
 
@@ -165,8 +166,14 @@ If we now want to run a container from our sample-app container image, and, if w
 ```
 $ docker container run --rm -it \
     --volume $(pwd):/app \
-    -p 3000:3000 \
+    -p 3000:3000 sample-app \
 ```
+```
+ docker container run --rm -it `
+    --volume $pwd/npm2/:/app/ `
+    -p 3000:3000 sample-app 
+```
+
 
 Please note the **$(pwd)** in place of the host folder path. **$(pwd)** evaluates to the absolute path of the current folder, which comes in very handy.
 

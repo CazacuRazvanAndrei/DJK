@@ -1,7 +1,7 @@
 # Volume 
 
 
-```dockerfile
+```
 VOLUME /app/data 
 VOLUME /app/data, /app/profiles, /app/config 
 VOLUME ["/app/data", "/app/profiles", "/app/config"]
@@ -17,12 +17,12 @@ docker image inspect --format='{{json .ContainerConfig.Volumes}}'  mongo:3.7 | j
 ```
 
 ### **Start Mongo DB**
-```dockerfile
-cker run --name my-mongo -d mongo:3.7
+```
+docker run --name my-mongo -d mongo:3.7
 ```
 
 ### **See the volume**
-```dockerfile
+```
 docker inspect --format '{{json .Mounts}}' my-mongo | jq .``
 ```
 

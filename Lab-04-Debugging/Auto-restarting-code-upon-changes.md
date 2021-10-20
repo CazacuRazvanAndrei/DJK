@@ -72,12 +72,10 @@ We'll run a container like this:
 
 ```
 $ docker container run --rm -it \
-   -v $(pwd):/app \
    -p 3000:3000 \
    sample-app-dev
 
 PS>  docker container run --rm -it `
-   -v $pwd/node:/app `
    -p 3000:3000 `
    sample-app-dev
 

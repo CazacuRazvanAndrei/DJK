@@ -91,8 +91,7 @@ Luckily not; I have prepared a **fundamentalsofdocker/nsenter** utility containe
 
 - We need to run this container in privileged mode to get access to this protected part of the filesystem, like this:
 ```
-$ docker run -it --rm --privileged --pid=host \
-    fundamentalsofdocker/nsenter
+$ docker run -it --rm --privileged --pid=host fundamentalsofdocker/nsenter
 / #
 ```
 
@@ -122,9 +121,7 @@ Once we have created a named volume, we can mount it into a container by followi
 
 - For this, we can use the -v parameter in the docker container run command, like this:
 ```
-$ docker container run --name test -it \
-    -v sample:/data \
-    alpine /bin/sh
+$ docker container run --name test -it -v sample:/data  alpine /bin/sh
 Unable to find image 'alpine:latest' locally
 latest: Pulling from library/alpine
 050382585609: Pull complete
@@ -145,8 +142,7 @@ Inside the container, we can now create files in the /data folder and then exit,
 If we navigate to the host folder that contains the data of the volume and list its content, we should see the two files we just created inside the container (remember: we need to use the **fundamentalsofdocker/nsenter** tool container to do so), as follows:
 
 ```
-$ docker run -it --rm --privileged --pid=host \
- fundamentalsofdocker/nsenter
+$ docker run -it --rm --privileged --pid=host  fundamentalsofdocker/nsenter
 / # cd /mnt/sda1/var/lib/docker/volumes/sample/_data
 / # ls -l  
 total 8 
@@ -168,10 +164,8 @@ Exit the tool container by pressing Ctrl + D.
 Now, let's delete the test container, and run another one based on CentOS. This time, we are even mounting our volume to a different container folder, /app/data, like this:
 
 ```
-$ docker container rm test
-$ docker container run --name test2 -it \
-    -v my-data:/app/data \
-    centos:7 /bin/bash
+$ docker container rm test2
+$ docker container run --name test2 -it -v my-data:/app/data  centos:7 /bin/bash
 
 Unable to find image 'centos:7' locally
 7: Pulling from library/centos
